@@ -1,0 +1,7 @@
+//Ignorowanie konkretenego folderu
+
+/majkowski/introduction/build
+
+//Ignororwane wszystkich folderów o zadanej nazwie
+
+cmake-build-debug
