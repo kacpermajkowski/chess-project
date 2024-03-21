@@ -1,0 +1,5 @@
+#Global path to single directory
+/placek/introduction/build
+
+#All cmake-build-debug directiories
+cmake-build-debug
