@@ -5,3 +5,4 @@
 //Ignororwane wszystkich folderów o zadanej nazwie
 
 cmake-build-debug
+.idea
