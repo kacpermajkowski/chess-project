@@ -10,11 +10,11 @@ Client::Client(std::string firstName, std::string lastName, std::string personal
     lastName(lastName),
     personalID(personalID)
 {
-    std::cout << "Konstruktor klasy Client został wywołany z parametrami. " << getInfo() << std::endl;
+    //
 }
 
 Client::~Client(){
-    std::cout << "Dekonstrutor klasy Client został wywołany. " << getInfo() << std::endl;
+    //
 }
 
 std::string Client::getInfo() {

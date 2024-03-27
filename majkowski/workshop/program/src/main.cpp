@@ -1,7 +1,6 @@
 // Introduction project.
 
 #include <iostream>
-#include "math_helpers.h"
 #include "model/Client.h"
 
 using namespace std;
