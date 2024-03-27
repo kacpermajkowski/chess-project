@@ -11,12 +11,18 @@ private:
 
     std::string firstName;
     std::string lastName;
-    std::string personalID;
+    const std::string personalID;
 public:
     Client(std::string firstName, std::string lastName, std::string personalID);
     ~Client();
 
     std::string getInfo();
+    std::string getFirstName();
+    std::string getLastName();
+    std::string getPerosnalID();
+
+    void setFirstName(std::string firstName);
+    void setLastName(std::string lastName);
 };
 
 
