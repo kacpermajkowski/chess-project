@@ -13,7 +13,6 @@ private:
     std::string lastName;
     std::string personalID;
 public:
-    Client();
     Client(std::string firstName, std::string lastName, std::string personalID);
     ~Client();
 

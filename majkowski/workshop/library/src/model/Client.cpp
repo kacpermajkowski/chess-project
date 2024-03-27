@@ -5,21 +5,16 @@
 #include <iostream>
 #include "../../include/model/Client.h"
 
-
-Client::Client(){
-    std::cout << "Konstruktor klasy Client został wywołany" << std::endl;
-}
-
 Client::Client(std::string firstName, std::string lastName, std::string personalID) :
     firstName(firstName),
     lastName(lastName),
     personalID(personalID)
 {
-    std::cout << "Konstruktor klasy Client został wywołany z parametrami" << std::endl;
+    std::cout << "Konstruktor klasy Client został wywołany z parametrami. " << getInfo() << std::endl;
 }
 
 Client::~Client(){
-    std::cout << "Dekonstrutor klasy Client został wywołany" << std::endl;
+    std::cout << "Dekonstrutor klasy Client został wywołany. " << getInfo() << std::endl;
 }
 
 std::string Client::getInfo() {
