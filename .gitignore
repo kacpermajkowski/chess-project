@@ -1,6 +1,6 @@
 //Ignorowanie konkretenego folderu
 
-/majkowski/introduction/build
+/majkowski/workshop/build
 /placek/introduction/build
 
 //Ignororwane wszystkich folderów o zadanej nazwie
