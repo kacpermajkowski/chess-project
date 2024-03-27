@@ -1,6 +1,7 @@
 //introduction project
 
 #include <iostream>
+#include "MATH_HELPERS.H"
 using namespace std;
 
 int main(){
