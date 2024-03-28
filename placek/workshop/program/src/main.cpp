@@ -1,12 +1,16 @@
-//introduction project
+//CarRental project
 
 #include <iostream>
-#include "MATH_HELPERS.H"
+#include "model/Client.h"
+
+
 using namespace std;
 
 int main(){
+    Client cl1;
+    Client* cl2 = new Client();
 
-	cout << "hello world" << endl;
-	cout << "factorial(5) = " << factorial(5) << endl;
+    cout << cl1.getInfo();
+
 	return 0;
 }
