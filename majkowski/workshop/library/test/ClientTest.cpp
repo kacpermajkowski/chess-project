@@ -3,18 +3,21 @@
 
 BOOST_AUTO_TEST_SUITE(TestSuiteClient)
 
+    ///@brief Example assertion tests
     BOOST_AUTO_TEST_CASE(AssertionsTests) {
         BOOST_TEST(1.0/3.0 == 0.333, boost::test_tools::tolerance(0.0011));
         BOOST_TEST(true);
     }
 
     Client client("Kacper", "Majkowski", "251578");
+    ///@brief Checks if Client getters return expected values after setting them via constructor
     BOOST_AUTO_TEST_CASE(ClientConstrutorTests){
         BOOST_TEST(client.getFirstName() == "Kacper");
         BOOST_TEST(client.getLastName() == "Majkowski");
         BOOST_TEST(client.getPerosnalID() == "251578");
     }
 
+    ///@brief Checks if using setters changes value returned by getters
     BOOST_AUTO_TEST_CASE(ClientSettersTests){
         client.setFirstName("Robert");
         client.setLastName("Rządziński");
@@ -22,6 +25,7 @@ BOOST_AUTO_TEST_SUITE(TestSuiteClient)
         BOOST_TEST(client.getLastName() == "Rządziński");
     }
 
+    ///@brief Checks if getters still return the same value after using setters with empty string param
     BOOST_AUTO_TEST_CASE(ClientSettersEmptyStringTests){
         std::string firstName = client.getFirstName();
         std::string lastName = client.getLastName();
