@@ -12,10 +12,6 @@ int main(){
     cout << cl1.getInfo() << endl;
     cout << cl2->getInfo() << endl;
 
-    cl1.setFirstName("");
-
-    cout << cl1.getInfo() << endl;
-
     delete cl2;
 	return 0;
 }

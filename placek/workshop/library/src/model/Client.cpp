@@ -1,19 +1,14 @@
 #include "../../include/model/Client.h"
 #include <iostream>
 
-
     Client::Client(std::string firstName, std::string lastName, std::string personalID)
     :
         firstName(firstName),
         lastName(lastName),
         personalID(personalID)
-    {
-        std::cout << "Konstruktor z parametrami '" << getInfo() << "' zostal wywolany" << std::endl;
-    }
+    {}
 
-    Client::~Client(){
-        std::cout << "Destruktor zostal wywolany: " << getInfo() << std::endl;
-    }
+    Client::~Client(){}
 
     std::string Client::getInfo(){
         return firstName + " " +  lastName + " " + personalID;
