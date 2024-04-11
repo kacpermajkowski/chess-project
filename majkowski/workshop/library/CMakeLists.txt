@@ -3,6 +3,7 @@ project(Library)
 
 set(SOURCE_FILES
         src/model/Client.cpp
+        src/model/Address.cpp
 )
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(Library ${SOURCE_FILES})
@@ -20,6 +21,7 @@ include_directories(
 set(SOURCE_TEST_FILES
         test/master.cpp
         test/ClientTest.cpp
+        test/AddressTest.cpp
 )
 add_executable (LibraryTester ${SOURCE_TEST_FILES})
 
