@@ -5,10 +5,11 @@
 #include <iostream>
 #include "../../include/model/Client.h"
 
-Client::Client(std::string firstName, std::string lastName, std::string personalID) :
+Client::Client(std::string firstName, std::string lastName, std::string personalID, Address* address) :
     firstName(firstName),
     lastName(lastName),
-    personalID(personalID)
+    personalID(personalID),
+    address(address)
 {
     //
 }
@@ -18,7 +19,7 @@ Client::~Client(){
 }
 
 std::string Client::getInfo() {
-    return firstName + " " + lastName + " " + personalID;
+    return firstName + " " + lastName + " " + personalID + " " + address->getInfo();
 }
 
 std::string Client::getFirstName() {
@@ -32,6 +33,11 @@ std::string Client::getLastName() {
 std::string Client::getPerosnalID(){
     return Client::personalID;
 }
+
+Address* Client::getAddress(){
+    return Client::address;
+}
+
 void Client::setFirstName(std::string firstName){
     if(firstName != ""){
         Client::firstName = firstName;
@@ -41,6 +47,12 @@ void Client::setFirstName(std::string firstName){
 void Client::setLastName(std::string lastName){
     if(lastName != "") {
         Client::lastName = lastName;
+    }
+}
+
+void Client::setAddress(Address *address) {
+    if(address != nullptr){
+        Client::address = address;
     }
 }
 
