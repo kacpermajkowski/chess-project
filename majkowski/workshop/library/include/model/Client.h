@@ -40,7 +40,7 @@ public:
     std::string getLastName();
 
     /// @return get unique client identifier
-    std::string getPerosnalID();
+    std::string getPersonalID();
 
     /// @return get postal address
     Address* getAddress();

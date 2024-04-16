@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "../../include/model/Client.h"
+#include "model/Client.h"
 
 Client::Client(std::string firstName, std::string lastName, std::string personalID, Address* address) :
     firstName(firstName),
@@ -30,7 +30,7 @@ std::string Client::getLastName() {
     return Client::lastName;
 }
 
-std::string Client::getPerosnalID(){
+std::string Client::getPersonalID(){
     return Client::personalID;
 }
 
