@@ -43,7 +43,7 @@ public:
     std::string getPersonalID();
 
     /// @return get postal address
-    Address* getAddress();
+    const Address * getAddress() const;
 
     /// @brief sets client's first name to a new value if it's a non-empty string
     /// @param firstName - new value of firstName. Has to be a non-empty string.

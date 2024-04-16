@@ -15,7 +15,7 @@ Client::Client(std::string firstName, std::string lastName, std::string personal
 }
 
 Client::~Client(){
-    //
+
 }
 
 std::string Client::getInfo() {
@@ -34,7 +34,7 @@ std::string Client::getPersonalID(){
     return Client::personalID;
 }
 
-Address* Client::getAddress(){
+const Address * Client::getAddress() const{
     return Client::address;
 }
 
