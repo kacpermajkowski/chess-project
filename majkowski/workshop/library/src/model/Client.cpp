@@ -5,7 +5,7 @@
 #include <iostream>
 #include "model/Client.h"
 
-Client::Client(std::string firstName, std::string lastName, std::string personalID, Address* address) :
+Client::Client(const std::string & firstName, const std::string & lastName, const std::string & personalID, Address* address) :
     firstName(firstName),
     lastName(lastName),
     personalID(personalID),
@@ -22,15 +22,15 @@ std::string Client::getInfo() {
     return firstName + " " + lastName + " " + personalID + " " + address->getInfo();
 }
 
-std::string Client::getFirstName() {
+const std::string &Client::getFirstName() const{
     return Client::firstName;
 }
 
-std::string Client::getLastName() {
+const std::string &Client::getLastName() const {
     return Client::lastName;
 }
 
-std::string Client::getPersonalID(){
+const std::string &Client::getPersonalID() const{
     return Client::personalID;
 }
 
@@ -38,13 +38,13 @@ const Address * Client::getAddress() const{
     return Client::address;
 }
 
-void Client::setFirstName(std::string firstName){
+void Client::setFirstName(const std::string &firstName){
     if(firstName != ""){
         Client::firstName = firstName;
     }
 
 }
-void Client::setLastName(std::string lastName){
+void Client::setLastName(const std::string &lastName){
     if(lastName != "") {
         Client::lastName = lastName;
     }

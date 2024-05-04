@@ -25,7 +25,7 @@ public:
      * @param personalID - unique identifier
      * @param address - physical postal address
      */
-    Client(std::string firstName, std::string lastName, std::string personalID, Address* address);
+    Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, Address* address);
 
     /// @brief destructor
     ~Client();
@@ -34,24 +34,24 @@ public:
     std::string getInfo();
 
     /// @return get first legal name
-    std::string getFirstName();
+    const std::string &getFirstName() const;
 
     /// @return get last legal name
-    std::string getLastName();
+    const std::string &getLastName() const;
 
     /// @return get unique client identifier
-    std::string getPersonalID();
+    const std::string &getPersonalID() const;
 
     /// @return get postal address
     const Address * getAddress() const;
 
     /// @brief sets client's first name to a new value if it's a non-empty string
     /// @param firstName - new value of firstName. Has to be a non-empty string.
-    void setFirstName(std::string firstName);
+    void setFirstName(const std::string &firstName);
 
     /// @brief sets client's last name to a new value if it's a non-empty string
     /// @param lastName - new value of lastName. Has to be a non-empty string.
-    void setLastName(std::string lastName);
+    void setLastName(const std::string &lastName);
 
     /// @brief sets client's postal address to a new value if it's a non-empty string
     /// @param address - new value of address. Has to be a non-empty string.
