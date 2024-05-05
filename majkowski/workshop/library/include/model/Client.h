@@ -6,8 +6,12 @@
 #define CARRENTAL_CLIENT_H
 
 #include "Address.h"
+#include "Rent.h"
+#include <vector>
 
 /// @brief Represents a real-world client
+class Rent;
+
 class Client {
 
 private:
@@ -15,6 +19,7 @@ private:
     std::string lastName;
     const std::string personalID;
     Address* address;
+    std::vector<Rent*> currentRents;
 
 public:
     /**
@@ -45,6 +50,9 @@ public:
     /// @return get postal address
     const Address * getAddress() const;
 
+    /// @return get vector with pointers to current rents
+    const std::vector<Rent *> &getCurrentRents() const;
+
     /// @brief sets client's first name to a new value if it's a non-empty string
     /// @param firstName - new value of firstName. Has to be a non-empty string.
     void setFirstName(const std::string &firstName);
@@ -56,6 +64,12 @@ public:
     /// @brief sets client's postal address to a new value if it's a non-empty string
     /// @param address - new value of address. Has to be a non-empty string.
     void setAddress(Address* address);
+
+    void addNewRent(Rent * newRent);
+
+    void removeRent(unsigned int rentID);
+
+
 };
 
 

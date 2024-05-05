@@ -25,6 +25,7 @@ set(SOURCE_TEST_FILES
         test/ClientTest.cpp
         test/AddressTest.cpp
         test/VehicleTest.cpp
+        test/RentTest.cpp
 )
 add_executable (LibraryTester ${SOURCE_TEST_FILES})
 

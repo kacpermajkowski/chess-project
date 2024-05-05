@@ -4,11 +4,12 @@
 
 #include "model/Rent.h"
 
-Rent::Rent(const unsigned int id, const Client *client, const Vehicle *vehicle) :
+Rent::Rent(const unsigned int id, Client *client, Vehicle *vehicle) :
     id(id),
     client(client),
-    vehicle(vehicle) {
-
+    vehicle(vehicle)
+{
+    client->addNewRent(this);
 }
 
 const unsigned int Rent::getId() const {

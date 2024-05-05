@@ -56,3 +56,28 @@ void Client::setAddress(Address *address) {
     }
 }
 
+const std::vector<Rent *> &Client::getCurrentRents() const {
+    return currentRents;
+}
+
+void Client::addNewRent(Rent *newRent) {
+    if(newRent->getClient() == this){
+        for(Rent* rent:currentRents){
+            if(rent->getId() == newRent->getId())
+                return;
+        }
+        //If the loop finishes and code still executes, newRent is not contained in the vector, so we can safely add it
+        currentRents.push_back(newRent);
+    }
+}
+
+void Client::removeRent(unsigned int rentID) {
+    std::vector<Rent*>::iterator it;
+    for(it = currentRents.begin(); it != currentRents.end(); it++){
+        if((*it)->getId() == rentID) {
+            currentRents.erase(it);
+            return;
+        }
+    }
+}
+
