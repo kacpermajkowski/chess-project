@@ -10,6 +10,7 @@ Rent::Rent(const unsigned int id, Client *client, Vehicle *vehicle) :
     vehicle(vehicle)
 {
     client->addNewRent(this);
+    vehicle->setRented(true);
 }
 
 const unsigned int Rent::getId() const {

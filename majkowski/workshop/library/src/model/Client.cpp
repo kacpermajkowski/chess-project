@@ -19,7 +19,17 @@ Client::~Client(){
 }
 
 const std::string Client::getInfo() const {
-    return firstName + " " + lastName + " " + personalID + " " + address->getInfo();
+    std::string info = firstName + " " + lastName + " " + personalID + " " + address->getInfo();
+
+    return info;
+}
+
+const std::string Client::getFullInfo() const {
+    std::string info = getInfo();
+    for(Rent* r: currentRents){
+        info += " " + r->getInfo();
+    }
+    return std::string();
 }
 
 const std::string &Client::getFirstName() const{

@@ -26,7 +26,7 @@ struct TestSuiteRentFixture{
 
 BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
 
-    ///@brief Checks if Rent getters return expected values after setting them via constructor and if Rent* is added to currentRents of Client
+    ///@brief Checks if constructor initializes Vehicle fields correctly and modifies Client and Vehicle objects accordingly
     BOOST_AUTO_TEST_CASE(RentConstrutorTests){
         Rent rent(rentID, client, vehicle);
         BOOST_TEST(rent.getClient() == client);
@@ -40,6 +40,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
             }
         }
         BOOST_TEST(hasPointerBeenAddedToCurrentRentsOfClient);
+
+        BOOST_TEST(vehicle->isRented());
     }
 
 BOOST_AUTO_TEST_SUITE_END()

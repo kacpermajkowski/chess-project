@@ -38,6 +38,9 @@ public:
     /// @return all field values concatenated into one string
     const std::string getInfo() const;
 
+    /// @return all field values concatenated into one string
+    const std::string getFullInfo() const;
+
     /// @return get first legal name
     const std::string &getFirstName() const;
 
