@@ -36,10 +36,10 @@ public:
     ~Client();
 
     /// @return all field values directly contained in Client concatenated into one string
-    const std::string getInfo() const;
+    std::string getInfo() const;
 
     /// @return same as Client.getInfo() plus getInfo() of all objects contained within currentRents
-    const std::string getFullInfo() const;
+    std::string getFullInfo() const;
 
     /// @return get first legal name
     const std::string &getFirstName() const;

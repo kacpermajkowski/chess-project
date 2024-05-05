@@ -37,6 +37,6 @@ void Vehicle::setRented(bool rented) {
     Vehicle::rented = rented;
 }
 
-const std::string Vehicle::getInfo() const {
+std::string Vehicle::getInfo() const {
     return plateNumber + " " + std::to_string(basePrice);
 }

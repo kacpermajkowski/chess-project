@@ -36,7 +36,7 @@ public:
     const Vehicle *getVehicle() const;
 
     /// @return string containing concatenated fields of this objects and objects contained within
-    const std::string getInfo() const;
+    std::string getInfo() const;
 
 };
 

@@ -18,7 +18,7 @@ Address::~Address() {
     //
 }
 
-const std::string Address::getInfo() const {
+std::string Address::getInfo() const {
     return city + ", " + street + " " + number;
 }
 

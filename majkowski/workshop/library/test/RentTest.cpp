@@ -28,7 +28,9 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
 
     ///@brief Checks if constructor initializes Vehicle fields correctly and modifies Client and Vehicle objects accordingly
     BOOST_AUTO_TEST_CASE(RentConstrutorTests){
+        BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
         Rent rent(rentID, client, vehicle);
+        BOOST_TEST(rent.getId() == rentID);
         BOOST_TEST(rent.getClient() == client);
         BOOST_TEST(rent.getVehicle() == vehicle);
 

@@ -27,7 +27,7 @@ public:
     ~Address();
 
     /// @return all field values concatenated into one string
-    const std::string getInfo() const;
+    std::string getInfo() const;
 
     /// @return get city name
     const std::string & getCity() const;

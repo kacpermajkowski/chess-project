@@ -27,7 +27,7 @@ public:
     const unsigned int getBasePrice() const;
     ///
     /// @return all field values contatenated into single string
-    const std::string getInfo() const;
+    std::string getInfo() const;
     ///
     /// @return whether vehicle is rented or not
     bool isRented() const;

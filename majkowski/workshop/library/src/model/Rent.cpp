@@ -25,6 +25,6 @@ const Vehicle *Rent::getVehicle() const {
     return vehicle;
 }
 
-const std::string Rent::getInfo() const{
+std::string Rent::getInfo() const{
     return std::to_string(Rent::id) + " " + Rent::client->getInfo() + " " + Rent::vehicle->getInfo();
 }
