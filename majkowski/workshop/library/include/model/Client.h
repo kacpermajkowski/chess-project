@@ -2,8 +2,8 @@
 // Created by majkosia on 23.03.2024.
 //
 
-#ifndef START_CLIENT_H
-#define START_CLIENT_H
+#ifndef CARRENTAL_CLIENT_H
+#define CARRENTAL_CLIENT_H
 
 #include "Address.h"
 
@@ -31,7 +31,7 @@ public:
     ~Client();
 
     /// @return all field values concatenated into one string
-    std::string getInfo();
+    const std::string getInfo() const;
 
     /// @return get first legal name
     const std::string &getFirstName() const;
@@ -59,4 +59,4 @@ public:
 };
 
 
-#endif //START_CLIENT_H
+#endif //CARRENTAL_CLIENT_H

@@ -3,10 +3,10 @@
 //
 
 #include <iostream>
-#include "../../include/model/Address.h"
+#include "model/Address.h"
 
 
-Address::Address(std::string city, std::string street, std::string number) :
+Address::Address(const std::string &city, const std::string &street, const std::string &number) :
         city(city),
         street(street),
         number(number)
@@ -18,27 +18,27 @@ Address::~Address() {
     //
 }
 
-std::string Address::getInfo() {
+const std::string Address::getInfo() const {
     return city + ", " + street + " " + number;
 }
 
-std::string Address::getCity() {
+const std::string & Address::getCity() const {
     return Address::city;
 }
 
-std::string Address::getStreet() {
+const std::string & Address::getStreet() const {
     return Address::street;
 }
 
-std::string Address::getNumber(){
+const std::string & Address::getNumber() const {
     return Address::number;
 }
-void Address::setCity(std::string city){
+void Address::setCity(const std::string &city){
     Address::city = city;
 }
-void Address::setStreet(std::string street){
+void Address::setStreet(const std::string &street){
     Address::street = street;
 }
-void Address::setNumber(std::string number){
+void Address::setNumber(const std::string &number){
     Address::number = number;
 }

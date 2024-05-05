@@ -18,7 +18,7 @@ Client::~Client(){
 
 }
 
-std::string Client::getInfo() {
+const std::string Client::getInfo() const {
     return firstName + " " + lastName + " " + personalID + " " + address->getInfo();
 }
 
