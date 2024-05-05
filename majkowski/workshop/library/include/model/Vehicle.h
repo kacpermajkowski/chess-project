@@ -14,24 +14,35 @@ private:
     unsigned int basePrice;
     bool rented = false;
 public:
-    void setRented(bool rented);
-
-public:
+    ///
+    /// @param plateNumber license plate number
+    /// @param basePrice base rental price
+    ///
+    Vehicle(const std::string &plateNumber, unsigned int basePrice);
+    ///
+    /// @return license plate number
+    const std::string &getPlateNumber() const;
+    ///
+    /// @return base rental price
+    const unsigned int getBasePrice() const;
+    ///
+    /// @return all field values contatenated into single string
+    const std::string getInfo() const;
+    ///
+    /// @return whether vehicle is rented or not
     bool isRented() const;
 
-public:
-    const std::string &getPlateNumber() const;
-    const unsigned int getBasePrice() const;
-    const std::string getInfo() const {
-        return plateNumber + " " + std::to_string(basePrice);
-    }
-
+    /// @brief sets new license plate number
+    /// @param plateNumber new license plate number
     void setPlateNumber(const std::string &plateNumber);
+
+    /// @brief sets new base rental price
+    /// @param basePrice new base rental price
     void setBasePrice(unsigned int basePrice);
 
-
-public:
-    Vehicle(const std::string &plateNumber, unsigned int basePrice);
+    /// @brief sets rental status of vehicle
+    /// @param rented represents whethever vehicle is currently rented(true) or not(false)
+    void setRented(bool rented);
 
 };
 

@@ -22,6 +22,7 @@ BOOST_AUTO_TEST_SUITE(TestSuiteVehicle)
         BOOST_TEST(vehicle.getPlateNumber() == plateNumber2);
     }
 
+    ///@brief Checks if string values remain unchanged if set to empty string.
     BOOST_AUTO_TEST_CASE(VehicleSettersEmptyStringTests){
         vehicle.setPlateNumber("");
         BOOST_TEST(vehicle.getPlateNumber() == plateNumber2);

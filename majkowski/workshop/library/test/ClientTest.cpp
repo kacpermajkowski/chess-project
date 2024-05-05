@@ -12,24 +12,22 @@ struct TestSuiteClientFixture{
     Address *testAddress;
     Address *newTestAddress;
 
+    Vehicle* testVehicle;
+
     TestSuiteClientFixture(){
         testAddress = new Address("Warszawa", "Srebrna", "17");
         newTestAddress = new Address("Łódź", "al. Politechniki", "22");
+        testVehicle = new Vehicle("EZD 10000", 1234);
     }
 
     ~TestSuiteClientFixture(){
         delete testAddress;
         delete newTestAddress;
+        delete testVehicle;
     }
 };
 
 BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
-
-    ///@brief Example assertion tests
-    BOOST_AUTO_TEST_CASE(AssertionsTests) {
-        BOOST_TEST(1.0/3.0 == 0.333, boost::test_tools::tolerance(0.0011));
-        BOOST_TEST(true);
-    }
 
     ///@brief Checks if Client getters return expected values after setting them via constructor
     BOOST_AUTO_TEST_CASE(ClientConstrutorTests){
@@ -60,6 +58,20 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
         client.setLastName("");
         BOOST_TEST(client.getFirstName() == firstName);
         BOOST_TEST(client.getLastName() == lastName);
+    }
+
+    ///@brief checks if accessors of vector<Rent*> currentRents work as expected
+    BOOST_AUTO_TEST_CASE(ClientCurrentRentsAccessorsTests){
+        Client* client = new Client(testFirstName, testLastName, testPersonalID, testAddress);
+        Rent rent(132, client, testVehicle);
+        client->removeRent(&rent);
+        BOOST_TEST(client->getCurrentRents().size() == 0);
+        Rent rent2(133, client, testVehicle);
+        BOOST_TEST(client->getCurrentRents().size() == 1);
+        BOOST_TEST(client->getCurrentRents()[0]->getId() == 133);
+        client->removeRent(rent2.getId());
+        BOOST_TEST(client->getCurrentRents().size() == 0);
+        delete client;
     }
 
 BOOST_AUTO_TEST_SUITE_END()

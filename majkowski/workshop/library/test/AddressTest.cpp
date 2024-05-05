@@ -11,7 +11,7 @@ BOOST_AUTO_TEST_SUITE(TestSuiteAddress)
         BOOST_TEST(address.getNumber() =="17");
     }
 
-    ///@brief Checks if using setters changes value returned by getters
+    ///@brief Checks if using Client setters changes value returned by getters
     BOOST_AUTO_TEST_CASE(AddressSettersTests){
         address.setCity("Warszawa");
         address.setStreet("Srebrna");

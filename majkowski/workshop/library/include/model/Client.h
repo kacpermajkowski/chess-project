@@ -28,17 +28,17 @@ public:
      * @param firstName - first legal name
      * @param lastName - last legal name
      * @param personalID - unique identifier
-     * @param address - physical postal address
+     * @param address - physical postal address pointer
      */
     Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, Address* address);
 
     /// @brief destructor
     ~Client();
 
-    /// @return all field values concatenated into one string
+    /// @return all field values directly contained in Client concatenated into one string
     const std::string getInfo() const;
 
-    /// @return all field values concatenated into one string
+    /// @return same as Client.getInfo() plus getInfo() of all objects contained within currentRents
     const std::string getFullInfo() const;
 
     /// @return get first legal name
@@ -68,10 +68,17 @@ public:
     /// @param address - new value of address. Has to be a non-empty string.
     void setAddress(Address* address);
 
+    /// @brief pushes provided Rent* at the end of currentRents vector
+    /// @param newRent - pointer to be added.
     void addNewRent(Rent * newRent);
 
+    /// @brief removes Rent* from currentRents if found object with matching ID
+    /// @param rentID - id of Rent object whose pointer will be removed
     void removeRent(unsigned int rentID);
 
+    /// @brief removes provided Rent* pointer from currentRents if found
+    /// @param rentToRemove - Rent pointer to be removed
+    void removeRent(Rent * rentToRemove);
 
 };
 

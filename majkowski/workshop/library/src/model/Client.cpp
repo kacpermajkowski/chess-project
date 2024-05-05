@@ -91,3 +91,7 @@ void Client::removeRent(unsigned int rentID) {
     }
 }
 
+void Client::removeRent(Rent *rentToRemove) {
+    removeRent(rentToRemove->getId());
+}
+
