@@ -49,6 +49,17 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
         BOOST_TEST(vehicle->isRented());
     }
 
+    BOOST_AUTO_TEST_CASE(EndRentTests){
+        BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
+        BOOST_REQUIRE_EQUAL(client->getCurrentRents().size(), 0);
+        Rent rent(rentID, client, vehicle, pt::not_a_date_time);
+        BOOST_REQUIRE_EQUAL(vehicle->isRented(), true);
+        BOOST_REQUIRE_EQUAL(client->getCurrentRents().size(), 1);
+        rent.endRent(pt::not_a_date_time);
+        BOOST_TEST(vehicle->isRented() == false);
+        BOOST_TEST(client->getCurrentRents().size() == 0);
+    }
+
     BOOST_AUTO_TEST_CASE(ConstructorValidTimeTests){
         BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
         pt::ptime now = pt::second_clock::local_time();
@@ -63,6 +74,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
         // This time endTime will be set manually, but beginTime will be in the future;
         pt::ptime customBeginTimeInTheFuture = now + pt::hours(1);
         pt::ptime customEndTimeInTheFuture = now + pt::hours(5);
+        BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
         Rent rent2(rentID, client, vehicle, customBeginTimeInTheFuture);
         BOOST_TEST(rent2.getBeginTime() == customBeginTimeInTheFuture);
         rent2.endRent(customEndTimeInTheFuture);
@@ -82,11 +94,61 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
 
     //@brief We're checking if system allows to change rent time, which it shouldn't
     BOOST_AUTO_TEST_CASE(DoubleEndRentTests){
+        BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
         Rent rent(rentID, client, vehicle, pt::not_a_date_time);
         rent.endRent(pt::not_a_date_time);
         pt::ptime endTime = rent.getEndTime();
         rent.endRent(pt::second_clock::local_time() + pt::hours(3));
         BOOST_TEST(endTime == rent.getEndTime());
+    }
+
+    BOOST_AUTO_TEST_CASE(GetRentDaysTests){
+        pt::ptime now = pt::second_clock::local_time();
+
+        BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
+        Rent rentCancelled(rentID, client, vehicle, now);
+        BOOST_TEST(rentCancelled.getRentDays() == 0);
+        rentCancelled.endRent(now - pt::hours(1));
+        BOOST_TEST(rentCancelled.getRentDays() == 0);
+
+        BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
+        Rent rentFor59Seconds(rentID, client, vehicle, now);
+        rentFor59Seconds.endRent(now + pt::seconds(59));
+        BOOST_TEST(rentFor59Seconds.getRentDays() == 0);
+
+        BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
+        Rent rentForAMinute(rentID, client, vehicle, now);
+        rentForAMinute.endRent(now + pt::seconds(60));
+        BOOST_TEST(rentForAMinute.getRentDays() == 1);
+
+        BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
+        Rent rentForSixHours(rentID, client, vehicle, now);
+        rentForSixHours.endRent(now + pt::hours(6));
+        BOOST_TEST(rentForSixHours.getRentDays() == 1);
+
+        BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
+        Rent rentForAlmostADay(rentID, client, vehicle, now);
+        rentForSixHours.endRent(now + pt::hours(23) + pt::minutes(59) + pt::seconds(59));
+        BOOST_TEST(rentForSixHours.getRentDays() == 1);
+
+        BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
+        Rent rentFor24Hours(rentID, client, vehicle, now);
+        rentFor24Hours.endRent(now + pt::hours(24));
+        BOOST_TEST(rentFor24Hours.getRentDays() == 2);
+    }
+
+    BOOST_AUTO_TEST_CASE(GetRentCostTests){
+        pt::ptime now = pt::second_clock::local_time();
+
+        BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
+        Rent rentFor59Seconds(rentID, client, vehicle, now);
+        rentFor59Seconds.endRent(now + pt::seconds(59));
+        BOOST_TEST(rentFor59Seconds.getRentCost() == 0);
+
+        Rent rentForSixHours(rentID, client, vehicle, now);
+        rentForSixHours.endRent(now + pt::hours(6));
+        BOOST_TEST(rentForSixHours.getRentCost() == vehicle->getBasePrice());
+
     }
 
 BOOST_AUTO_TEST_SUITE_END()
