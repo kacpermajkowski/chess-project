@@ -29,7 +29,7 @@ struct TestSuiteClientFixture{
 
 BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 
-    ///@brief Checks if Client getters return expected values after setting them via constructor
+    ///@brief Checks if Client getters return expected values after setting them via constructor.
     BOOST_AUTO_TEST_CASE(ClientConstrutorTests){
         Client client(testFirstName, testLastName, testPersonalID, testAddress);
         BOOST_TEST(client.getFirstName() == testFirstName);
@@ -38,7 +38,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
         BOOST_TEST(client.getAddress() == testAddress);
     }
 
-    ///@brief Checks if using setters changes value returned by getters
+    ///@brief Checks if using setters changes value returned by getters.
     BOOST_AUTO_TEST_CASE(ClientSettersTests){
         Client client(testFirstName, testLastName, testPersonalID, testAddress);
         client.setFirstName(newTestFirstName);
@@ -49,7 +49,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
         BOOST_TEST(client.getAddress() == newTestAddress);
     }
 
-    ///@brief Checks if getters still return the same value after using setters with empty string param
+    ///@brief Checks if getters still return the same value after using setters with empty string param.
     BOOST_AUTO_TEST_CASE(ClientSettersEmptyStringTests){
         Client client(testFirstName, testLastName, testPersonalID, testAddress);
         std::string firstName = client.getFirstName();
@@ -60,7 +60,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
         BOOST_TEST(client.getLastName() == lastName);
     }
 
-    ///@brief checks if accessors of vector<Rent*> currentRents work as expected
+    ///@brief checks if accessors of vector<Rent*> currentRents work as expected.
     BOOST_AUTO_TEST_CASE(ClientCurrentRentsAccessorsTests){
         Client* client = new Client(testFirstName, testLastName, testPersonalID, testAddress);
         Rent rent(132, client, testVehicle, pt::not_a_date_time);

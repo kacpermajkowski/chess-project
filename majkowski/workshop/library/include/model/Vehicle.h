@@ -8,6 +8,7 @@
 
 #include <string>
 
+/// @brief Represent a rentable vehicle
 class Vehicle {
 private:
     std::string plateNumber;
@@ -32,15 +33,15 @@ public:
     /// @return whether vehicle is rented or not
     bool isRented() const;
 
-    /// @brief sets new license plate number
+    /// @brief sets new license plate number.
     /// @param plateNumber new license plate number
     void setPlateNumber(const std::string &plateNumber);
 
-    /// @brief sets new base rental price
+    /// @brief sets new base rental price.
     /// @param basePrice new base rental price
     void setBasePrice(unsigned int basePrice);
 
-    /// @brief sets rental status of vehicle
+    /// @brief sets rental status of vehicle.
     /// @param rented represents whethever vehicle is currently rented(true) or not(false)
     void setRented(bool rented);
 

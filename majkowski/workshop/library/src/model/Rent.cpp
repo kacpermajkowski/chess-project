@@ -4,7 +4,6 @@
 
 #include "model/Rent.h"
 
-
 Rent::Rent(const unsigned int id, Client* client, Vehicle* vehicle, pt::ptime beginTime) :
     id(id),
     client(client),

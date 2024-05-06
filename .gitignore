@@ -1,4 +1,4 @@
-//Ignorowanie konkretenego folderu
+# Ignorowanie konkretenego folderu
 
 /majkowski/workshop/build
 /majkowski/introduction/build
@@ -6,7 +6,8 @@
 /placek/introduction/build
 
 
-//Ignororwane wszystkich folderów o zadanej nazwie
+# Ignororwane wszystkich folderów o zadanej nazwie
 
 cmake-build-debug
+exportToHTML
 .idea

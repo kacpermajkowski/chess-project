@@ -26,7 +26,7 @@ struct TestSuiteRentFixture{
 
 BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
 
-    ///@brief Checks if constructor initializes Vehicle fields correctly and modifies Client and Vehicle objects accordingly
+    ///@brief Checks if constructor initializes Vehicle fields correctly and modifies Client and Vehicle objects accordingly.
     BOOST_AUTO_TEST_CASE(ConstrutorDefaultTests){
         BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
         Rent rent(rentID, client, vehicle, pt::not_a_date_time);
@@ -45,10 +45,10 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
             }
         }
         BOOST_TEST(hasPointerBeenAddedToCurrentRentsOfClient);
-
         BOOST_TEST(vehicle->isRented());
     }
 
+    ///@brief checks if Vehicle and Client objects states are updated after ending a rent( endRent() method ).
     BOOST_AUTO_TEST_CASE(EndRentTests){
         BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
         BOOST_REQUIRE_EQUAL(client->getCurrentRents().size(), 0);
@@ -60,6 +60,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
         BOOST_TEST(client->getCurrentRents().size() == 0);
     }
 
+    ///@brief checks if rent time is calculated properly when provided endTime - provided beginTime is a positive integer.
     BOOST_AUTO_TEST_CASE(ConstructorValidTimeTests){
         BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
         pt::ptime now = pt::second_clock::local_time();
@@ -82,6 +83,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
 
     }
 
+    ///@brief checks if rent time is calculated properly when provided endTime - provided beginTime is a a negative integer.
     BOOST_AUTO_TEST_CASE(ConstructorInvalidTimeTests){
         BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
         pt::ptime now = pt::second_clock::local_time();
@@ -92,7 +94,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
         BOOST_TEST(rent.getEndTime() == rent.getBeginTime());
     }
 
-    //@brief We're checking if system allows to change rent time, which it shouldn't
+    //@brief checks if system allows to change rent time, which it shouldn't
     BOOST_AUTO_TEST_CASE(DoubleEndRentTests){
         BOOST_REQUIRE_EQUAL(vehicle->isRented(), false);
         Rent rent(rentID, client, vehicle, pt::not_a_date_time);
@@ -102,6 +104,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
         BOOST_TEST(endTime == rent.getEndTime());
     }
 
+    ///@brief checks if rent days are calculated properly as per business logic requirements.
     BOOST_AUTO_TEST_CASE(GetRentDaysTests){
         pt::ptime now = pt::second_clock::local_time();
 
@@ -137,6 +140,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
         BOOST_TEST(rentFor24Hours.getRentDays() == 2);
     }
 
+    ///@brief checks if rent cost is calculated properly as per business logic requirements
     BOOST_AUTO_TEST_CASE(GetRentCostTests){
         pt::ptime now = pt::second_clock::local_time();
 
