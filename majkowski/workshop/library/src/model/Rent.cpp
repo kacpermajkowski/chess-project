@@ -4,7 +4,7 @@
 
 #include "model/Rent.h"
 
-Rent::Rent(const unsigned int id, Client* client, Vehicle* vehicle, pt::ptime beginTime) :
+Rent::Rent(const unsigned int id, ClientPtr client, VehiclePtr vehicle, pt::ptime beginTime) :
     id(id),
     client(client),
     vehicle(vehicle)
@@ -23,11 +23,11 @@ const unsigned int Rent::getId() const {
     return id;
 }
 
-const Client *Rent::getClient() const {
+const ClientPtr Rent::getClient() const {
     return client;
 }
 
-const Vehicle *Rent::getVehicle() const {
+const VehiclePtr Rent::getVehicle() const {
     return vehicle;
 }
 

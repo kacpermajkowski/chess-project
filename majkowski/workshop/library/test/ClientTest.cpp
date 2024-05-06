@@ -9,10 +9,10 @@ struct TestSuiteClientFixture{
     const std::string newTestFirstName = "Robert";
     const std::string newTestLastName = "Rządziński";
 
-    Address *testAddress;
-    Address *newTestAddress;
+    AddressPtr testAddress;
+    AddressPtr newTestAddress;
 
-    Vehicle* testVehicle;
+    VehiclePtr testVehicle;
 
     TestSuiteClientFixture(){
         testAddress = new Address("Warszawa", "Srebrna", "17");
@@ -60,9 +60,9 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
         BOOST_TEST(client.getLastName() == lastName);
     }
 
-    ///@brief checks if accessors of vector<Rent*> currentRents work as expected.
+    ///@brief checks if accessors of vector<RentPtr> currentRents work as expected.
     BOOST_AUTO_TEST_CASE(ClientCurrentRentsAccessorsTests){
-        Client* client = new Client(testFirstName, testLastName, testPersonalID, testAddress);
+        ClientPtr client = new Client(testFirstName, testLastName, testPersonalID, testAddress);
         Rent rent(132, client, testVehicle, pt::not_a_date_time);
         client->removeRent(&rent);
         BOOST_TEST(client->getCurrentRents().size() == 0);

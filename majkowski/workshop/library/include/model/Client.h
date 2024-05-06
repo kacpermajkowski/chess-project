@@ -7,6 +7,7 @@
 
 #include "Address.h"
 #include "Rent.h"
+#include "typedefs.h"
 #include <vector>
 
 /// @brief Represents a real-world client
@@ -18,7 +19,7 @@ private:
     std::string firstName;
     std::string lastName;
     const std::string personalID;
-    Address* address;
+    AddressPtr address;
     std::vector<Rent*> currentRents;
 
 public:
@@ -30,7 +31,7 @@ public:
      * @param personalID - unique identifier
      * @param address - physical postal address pointer
      */
-    Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, Address* address);
+    Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, AddressPtr address);
 
     /// @brief destructor
     ~Client();
@@ -51,10 +52,10 @@ public:
     const std::string &getPersonalID() const;
 
     /// @return get postal address
-    const Address * getAddress() const;
+    const AddressPtr getAddress() const;
 
     /// @return get vector with pointers to current rents
-    const std::vector<Rent *> &getCurrentRents() const;
+    const std::vector<RentPtr> & getCurrentRents() const;
 
     /// @brief sets client's first name to a new value if it's a non-empty string
     /// @param firstName - new value of firstName. Has to be a non-empty string.
@@ -66,11 +67,11 @@ public:
 
     /// @brief sets client's postal address to a new value if it's a non-empty string
     /// @param address - new value of address. Has to be a non-empty string.
-    void setAddress(Address* address);
+    void setAddress(AddressPtr address);
 
     /// @brief pushes provided Rent* at the end of currentRents vector
     /// @param newRent - pointer to be added.
-    void addNewRent(Rent * newRent);
+    void addNewRent(RentPtr newRent);
 
     /// @brief removes Rent* from currentRents if found object with matching ID
     /// @param rentID - id of Rent object whose pointer will be removed
@@ -78,7 +79,7 @@ public:
 
     /// @brief removes provided Rent* pointer from currentRents if found
     /// @param rentToRemove - Rent pointer to be removed
-    void removeRent(Rent * rentToRemove);
+    void removeRent(RentPtr rentToRemove);
 
 };
 

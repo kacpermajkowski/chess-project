@@ -4,9 +4,9 @@
 #include "model/Vehicle.h"
 
 struct TestSuiteRentFixture{
-    Address* address;
-    Client* client;
-    Vehicle* vehicle;
+    AddressPtr address;
+    ClientPtr client;
+    VehiclePtr vehicle;
     unsigned int rentID;
 
     TestSuiteRentFixture() {
@@ -38,7 +38,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
         BOOST_TEST(rent.getEndTime().is_not_a_date_time());
 
         bool hasPointerBeenAddedToCurrentRentsOfClient = false;
-        for(Rent* r: client->getCurrentRents()){
+        for(RentPtr r: client->getCurrentRents()){
             if(r->getId() == rentID){
                 hasPointerBeenAddedToCurrentRentsOfClient = true;
                 break;
