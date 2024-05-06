@@ -63,10 +63,10 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
     ///@brief checks if accessors of vector<Rent*> currentRents work as expected
     BOOST_AUTO_TEST_CASE(ClientCurrentRentsAccessorsTests){
         Client* client = new Client(testFirstName, testLastName, testPersonalID, testAddress);
-        Rent rent(132, client, testVehicle);
+        Rent rent(132, client, testVehicle, pt::not_a_date_time);
         client->removeRent(&rent);
         BOOST_TEST(client->getCurrentRents().size() == 0);
-        Rent rent2(133, client, testVehicle);
+        Rent rent2(133, client, testVehicle, pt::not_a_date_time);
         BOOST_TEST(client->getCurrentRents().size() == 1);
         BOOST_TEST(client->getCurrentRents()[0]->getId() == 133);
         client->removeRent(rent2.getId());

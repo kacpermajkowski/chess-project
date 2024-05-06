@@ -4,6 +4,9 @@
 #include "model/Client.h"
 #include "model/Address.h"
 
+#include <boost/date_time.hpp>
+
+namespace pt = boost::posix_time;
 using namespace std;
 
 int main()
@@ -43,8 +46,13 @@ int main()
     Address* address = new Address("Łódź", "Piotrkowska", "17");
     Client* client = new Client("Kacper", "Majkowski", "251578", address);
     Vehicle* vehicle = new Vehicle("EZD 10000", 1234);
-    Rent* rent = new Rent(1, client, vehicle);
-    cout << rent->getInfo();
+    pt::ptime now = pt::second_clock::local_time();
+    Rent* rent = new Rent(1, client, vehicle, pt::not_a_date_time);
+    rent->endRent(now + pt::hours(49));
+    cout << rent->getRentDays() << endl;
+    cout << rent->getRentCost() << endl;
+    vehicle->setBasePrice(10000);
+    cout << rent->getRentCost() << endl;
 
 
 	return 0;
