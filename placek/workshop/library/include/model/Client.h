@@ -1,10 +1,19 @@
-#include <iostream>
+#ifndef CARRENTAL_CLIENT_H
+#define CARRENTAL_CLIENT_H
+
+#include <vector>
+#include "Address.h"
+#include "Rent.h"
+
+class Rent;
 
 class Client{
 private:
     std::string firstName;
     std::string lastName;
     const std::string personalID;
+    Address* address;
+    std::vector<Rent*> currentRents;
 
 public:
     /**
@@ -14,25 +23,39 @@ public:
      * @param firstName client's real first name
      * @param lastName client's real last name
      * @param personalID client's unique identifier
+     * @param address client's real address
      */
-    Client(std::string firstName, std::string lastName, std::string personalID);
+    Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, Address* address);
     ~Client();
 
-    /// \return returns firstName, lastName and personalID
-    std::string getInfo();
+    /// \return returns firstName, lastName, personalID and address
+    const std::string getInfo() const;
+
+    /// \return returns full info about the client: firstName, lastName, personalID, address and all rents
+    const std::string getFullInfo() const;
 
     /// \return returns firstName
-    std::string getFirstName();
+    const std::string &getFirstName() const;
     /// \return returns lastName
-    std::string getLastName();
+    const std::string &getLastName() const;
     /// \return returns lastName
-    std::string getPersonalID();
+    const std::string &getPersonalID() const;
+    /// \return returns address
+    const Address* getAddress() const;
 
     /// \brief sets new value for client's real first name. if the provided value is empty, the first name remains unchanged.
     /// \param firstName - new value of firstName
-    void setFirstName(std::string firstName);
+    void setFirstName(const std::string &firstName);
     /// \brief sets new value for client's real last name. if the provided value is empty, the last name remains unchanged.
     /// \param lastName - new value of lastName
-    void setLastName(std::string lastName);
+    void setLastName(const std::string &lastName);
+    /// \brief sets new value for client's real address. if the provided value is empty, the address remains unchanged.
+    /// \param address - new value of address
+    void setAddress(Address* address);
+    /// \brief adds new real rent to client's data
+    /// \param rent - new client's rent
+    void addRent(Rent* rent);
+
 };
 
+#endif //CARRENTAL_CLIENT_H

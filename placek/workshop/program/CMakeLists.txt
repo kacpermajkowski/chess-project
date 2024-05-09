@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.4)
-
 project(Program)
 
 # Ustaw we własnej zmiennej SOURCE_FILES zbiór plików źródłowych projektu
