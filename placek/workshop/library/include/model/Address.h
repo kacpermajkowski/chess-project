@@ -1,5 +1,5 @@
-#ifndef START_ADDRESS_H
-#define START_ADDRESS_H
+#ifndef CARRENTAL_ADDRESS_H
+#define CARRENTAL_ADDRESS_H
 
 #include <iostream>
 
@@ -10,18 +10,18 @@ private:
     std::string houseNumber;
 
 public:
-    Address(std::string city, std::string street, std::string houseNumber);
+    Address(const std::string &city, const std::string &street, const std::string &houseNumber);
     ~Address();
 
-    std::string getInfo();
+    std::string getInfo(); //const;
 
-    std::string getCity();
-    std::string getStreet();
-    std::string getHouseNumber();
+    const std::string &getCity() const;
+    const std::string &getStreet() const;
+    const std::string &getHouseNumber() const;
 
-    void setCity(std::string city);
-    void setStreet(std::string street);
-    void setHouseNumber(std::string houseNumber);
+    void setCity(const std::string &city);
+    void setStreet(const std::string &street);
+    void setHouseNumber(const std::string &houseNumber);
 };
 
-#endif //START_ADDRESS_H
+#endif //CARRENTAL_ADDRESS_H

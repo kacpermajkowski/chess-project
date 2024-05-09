@@ -10,7 +10,7 @@ BOOST_AUTO_TEST_CASE(TestConstructorAddress){
     BOOST_TEST(address.getHouseNumber()=="17");
 }
 
-/*BOOST_AUTO_TEST_CASE(TestSettersAddress){
+BOOST_AUTO_TEST_CASE(TestSettersAddress){
     address.setCity("Szczecin");
     address.setStreet("Parkowa");
     address.setHouseNumber("21");
@@ -21,6 +21,6 @@ BOOST_AUTO_TEST_CASE(TestConstructorAddress){
     BOOST_TEST(address.getStreet()=="Parkowa");
     BOOST_TEST(address.getHouseNumber()=="21");
 
-}*/
+}
 
 BOOST_AUTO_TEST_SUITE_END()
