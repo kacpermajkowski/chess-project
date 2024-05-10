@@ -11,11 +11,11 @@
 
     Client::~Client(){}
 
-    const std::string Client::getInfo() const{
+    std::string Client::getInfo() const{
         return firstName + " " +  lastName + " " + personalID + " " + address->getInfo();
     }
 
-    const std::string Client::getFullInfo() const{
+    std::string Client::getFullInfo() const{
         std::string fullInfo = getInfo() + "\n";
         for(int i=0; i<currentRents.size(); i++){
             fullInfo += currentRents[i]->getInfo() + "\n";
@@ -35,8 +35,12 @@
     const Address* Client::getAddress() const {
         return Client::address;
     }
+    const std::vector<Rent *> &Client::getCurrentRents() const {
+        return currentRents;
+    }
 
-    void Client::setFirstName(const std::string &firstName){
+
+void Client::setFirstName(const std::string &firstName){
         if(firstName != ""){
             Client::firstName = firstName;
         }
@@ -51,7 +55,7 @@
             Client::address = address;
         }
     }
-
     void Client::addRent(Rent* rent) {
         currentRents.push_back(rent);
     }
+

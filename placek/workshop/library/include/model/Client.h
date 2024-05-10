@@ -29,10 +29,10 @@ public:
     ~Client();
 
     /// \return returns firstName, lastName, personalID and address
-    const std::string getInfo() const;
+    std::string getInfo() const;
 
     /// \return returns full info about the client: firstName, lastName, personalID, address and all rents
-    const std::string getFullInfo() const;
+    std::string getFullInfo() const;
 
     /// \return returns firstName
     const std::string &getFirstName() const;
@@ -42,6 +42,7 @@ public:
     const std::string &getPersonalID() const;
     /// \return returns address
     const Address* getAddress() const;
+    const std::vector<Rent *> &getCurrentRents() const;
 
     /// \brief sets new value for client's real first name. if the provided value is empty, the first name remains unchanged.
     /// \param firstName - new value of firstName

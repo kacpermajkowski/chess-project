@@ -10,7 +10,7 @@ Address::Address(const std::string &city, const std::string &street, const std::
 
 Address::~Address(){}
 
-std::string Address::getInfo(){ //const
+std::string Address::getInfo() const{
     return city + " " +  street + " " + houseNumber;
 }
 
@@ -31,13 +31,11 @@ void Address::setCity(const std::string &city){
         Address::city = city;
     }
 }
-
 void Address::setStreet(const std::string &street){
     if(street != ""){
         Address::street = street;
     }
 }
-
 void Address::setHouseNumber(const std::string &houseNumber){
     if(houseNumber != ""){
         Address::houseNumber = houseNumber;

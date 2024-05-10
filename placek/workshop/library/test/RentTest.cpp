@@ -20,7 +20,6 @@ struct TestSuiteRentFixture{
         delete client;
         delete vehicle;
     }
-
 };
 
 BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
@@ -30,6 +29,20 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
         BOOST_TEST(rent.getId()==rentID);
         BOOST_TEST(rent.getClient()==client);
         BOOST_TEST(rent.getVehicle()==vehicle);
+        BOOST_TEST(vehicle->isRented()==true);
 }
+
+    BOOST_AUTO_TEST_CASE(TestPointerRent){
+    Rent rent(rentID, client, vehicle);
+    bool isPointerAddedToClient = false;
+    for (const Rent* r : client->getCurrentRents()){
+        if (r == &rent) {
+            isPointerAddedToClient = true;
+            break;
+        }
+    }
+        BOOST_TEST(isPointerAddedToClient == true);
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()

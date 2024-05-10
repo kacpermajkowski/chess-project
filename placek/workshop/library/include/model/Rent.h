@@ -15,7 +15,7 @@ private:
 public:
     Rent(const unsigned int id, Client* client, Vehicle* vehicle);
 
-    std::string getInfo();
+    std::string getInfo() const;
 
     const unsigned int getId() const;
     const Client* getClient() const;

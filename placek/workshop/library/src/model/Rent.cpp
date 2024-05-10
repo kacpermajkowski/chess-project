@@ -10,7 +10,7 @@ Rent::Rent(const unsigned int id, Client* client, Vehicle* vehicle):
     vehicle->setRented(true);
 }
 
-std::string Rent::getInfo(){
+std::string Rent::getInfo() const {
     return "NR." + std::to_string(Rent::id) + " CLIENT: " + Rent::client->getInfo() + " VEHICLE: " + Rent::vehicle->getInfo();
 }
 

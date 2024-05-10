@@ -13,10 +13,10 @@ public:
     Vehicle(const std::string &plateNumber, unsigned int basePrice);
     ~Vehicle();
 
-    const std::string getInfo() const;
+    std::string getInfo() const;
 
     const std::string &getPlateNumber() const;
-    const unsigned int getBasePrice() const;
+    unsigned int getBasePrice() const;
 
     bool isRented() const;
 
