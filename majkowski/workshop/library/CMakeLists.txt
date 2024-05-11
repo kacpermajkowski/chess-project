@@ -8,6 +8,10 @@ set(SOURCE_FILES
         src/model/Vehicle.cpp
         include/typedefs.h
         include/typedefs.h
+        src/model/Bicycle.cpp
+        src/model/Car.cpp
+        src/model/Moped.cpp
+        src/model/MotorVehicle.cpp
 )
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(Library ${SOURCE_FILES})
