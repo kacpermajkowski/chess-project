@@ -39,8 +39,7 @@
         return currentRents;
     }
 
-
-void Client::setFirstName(const std::string &firstName){
+    void Client::setFirstName(const std::string &firstName){
         if(firstName != ""){
             Client::firstName = firstName;
         }
@@ -59,3 +58,6 @@ void Client::setFirstName(const std::string &firstName){
         currentRents.push_back(rent);
     }
 
+    void Client::removeRent(Rent* rent) {
+        currentRents.erase(remove(currentRents.begin(), currentRents.end(), rent), currentRents.end());
+    }

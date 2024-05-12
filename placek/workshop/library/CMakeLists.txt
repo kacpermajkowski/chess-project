@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.4)
 project(Library)
 
 set(SOURCE_FILES
-    src/model/Client.cpp
+	src/model/Client.cpp
     src/model/Address.cpp
 	src/model/Vehicle.cpp
 	src/model/Rent.cpp

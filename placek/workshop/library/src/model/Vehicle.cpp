@@ -33,6 +33,6 @@ void Vehicle::setPlateNumber(const std::string &plateNumber){
 void Vehicle::setBasePrice(unsigned int basePrice){
     Vehicle::basePrice = basePrice;
 }
-void Vehicle::setRented(bool rented) {
+void Vehicle::setRented(bool rented){
     Vehicle::rented = rented;
 }

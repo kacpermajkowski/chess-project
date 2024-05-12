@@ -56,6 +56,7 @@ public:
     /// \brief adds new real rent to client's data
     /// \param rent - new client's rent
     void addRent(Rent* rent);
+    void removeRent(Rent* rent);
 
 };
 

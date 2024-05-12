@@ -31,11 +31,13 @@ void Address::setCity(const std::string &city){
         Address::city = city;
     }
 }
+
 void Address::setStreet(const std::string &street){
     if(street != ""){
         Address::street = street;
     }
 }
+
 void Address::setHouseNumber(const std::string &houseNumber){
     if(houseNumber != ""){
         Address::houseNumber = houseNumber;
