@@ -18,7 +18,18 @@ Rent::Rent(const unsigned int id, Client *client, Vehicle *vehicle, pt::ptime be
 }
 
 std::string Rent::getInfo() const {
-    return "NR." + std::to_string(Rent::id) + " CLIENT: " + Rent::client->getInfo() + " VEHICLE: " + Rent::vehicle->getInfo();
+    std::ostringstream ossBegin, ossEnd;
+    ossBegin << beginTime;
+    std::string beginString = ossBegin.str();
+    std::string info = "NR." + std::to_string(id) + " CLIENT: " + client->getInfo() + " VEHICLE: " + vehicle->getInfo() + " BEGIN_TIME: " + beginString + " END_TIME: ";
+
+    if(endTime != pt::not_a_date_time){
+        ossEnd << endTime;
+        std::string endString = ossEnd.str();
+        info += endString;
+    }else info += "the rental is still on";
+
+    return info;
 }
 
 const unsigned int Rent::getId() const {

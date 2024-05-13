@@ -42,6 +42,7 @@ public:
     const std::string &getPersonalID() const;
     /// \return returns address
     const Address* getAddress() const;
+    /// \return returns current rents
     const std::vector<Rent *> &getCurrentRents() const;
 
     /// \brief sets new value for client's real first name. if the provided value is empty, the first name remains unchanged.
@@ -56,6 +57,8 @@ public:
     /// \brief adds new real rent to client's data
     /// \param rent - new client's rent
     void addRent(Rent* rent);
+    /// \brief removes rent from client's data
+    /// \param rent - rent to be removed
     void removeRent(Rent* rent);
 
 };
