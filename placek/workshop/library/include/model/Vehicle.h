@@ -18,10 +18,10 @@ public:
      * @param basePrice vehicle's real base rental price per one day
      */
     Vehicle(const std::string &plateNumber, unsigned int basePrice);
-    ~Vehicle();
+    virtual ~Vehicle();
 
     /// \return returns plateNumber and basePrice
-    std::string getInfo() const;
+    virtual std::string getInfo() const;
 
     /// \return returns plateNumber
     const std::string &getPlateNumber() const;
@@ -41,6 +41,9 @@ public:
     /// \brief changes the vehicle's rental status
     /// \param rented - true if rented, false if not
     void setRented(bool rented);
+
+
+    virtual double getActualRentalPrice() const = 0;
 };
 
 #endif //CARRENTAL_VEHICLE_H

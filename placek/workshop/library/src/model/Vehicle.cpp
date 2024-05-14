@@ -14,11 +14,11 @@ std::string Vehicle::getInfo() const{
 }
 
 const std::string &Vehicle::getPlateNumber() const{
-    return Vehicle::plateNumber;
+    return plateNumber;
 }
 
 unsigned int Vehicle::getBasePrice() const{
-    return Vehicle::basePrice;
+    return basePrice;
 }
 
 bool Vehicle::isRented() const{
@@ -36,3 +36,8 @@ void Vehicle::setBasePrice(unsigned int basePrice){
 void Vehicle::setRented(bool rented){
     Vehicle::rented = rented;
 }
+
+double Vehicle::getActualRentalPrice() const {
+    return getBasePrice();
+}
+

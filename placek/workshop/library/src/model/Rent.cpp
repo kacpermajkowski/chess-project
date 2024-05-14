@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cmath>
 
-Rent::Rent(const unsigned int id, Client *client, Vehicle *vehicle, pt::ptime beginTime) :
+Rent::Rent(const unsigned int id, ClientPtr client, VehiclePtr vehicle, pt::ptime beginTime) :
     id(id),
     client(client),
     vehicle(vehicle)
@@ -35,10 +35,10 @@ std::string Rent::getInfo() const {
 const unsigned int Rent::getId() const {
     return id;
 }
-const Client* Rent::getClient() const {
+const ClientPtr Rent::getClient() const {
     return client;
 }
-const Vehicle* Rent::getVehicle() const {
+const VehiclePtr Rent::getVehicle() const {
     return vehicle;
 }
 
@@ -78,6 +78,6 @@ void Rent::endRent(pt::ptime endTime){
 
         vehicle->setRented(false);
         client->removeRent(this);
-        rentCost = this->getRentDays() * vehicle->getBasePrice();
+        rentCost =  static_cast<double>(this->getRentDays()) * vehicle->getActualRentalPrice();
     }
 }

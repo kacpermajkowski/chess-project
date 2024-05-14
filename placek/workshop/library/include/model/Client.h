@@ -4,6 +4,7 @@
 #include <vector>
 #include "Address.h"
 #include "Rent.h"
+#include "typedefs.h"
 
 class Rent;
 
@@ -12,8 +13,8 @@ private:
     std::string firstName;
     std::string lastName;
     const std::string personalID;
-    Address* address;
-    std::vector<Rent*> currentRents;
+    AddressPtr address;
+    std::vector<RentPtr> currentRents;
 
 public:
     /**
@@ -25,7 +26,7 @@ public:
      * @param personalID client's unique identifier
      * @param address client's real address
      */
-    Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, Address* address);
+    Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, AddressPtr address);
     ~Client();
 
     /// \return returns firstName, lastName, personalID and address
@@ -41,9 +42,9 @@ public:
     /// \return returns lastName
     const std::string &getPersonalID() const;
     /// \return returns address
-    const Address* getAddress() const;
+    const AddressPtr getAddress() const;
     /// \return returns current rents
-    const std::vector<Rent *> &getCurrentRents() const;
+    const std::vector<RentPtr> &getCurrentRents() const;
 
     /// \brief sets new value for client's real first name. if the provided value is empty, the first name remains unchanged.
     /// \param firstName - new value of firstName
@@ -53,13 +54,13 @@ public:
     void setLastName(const std::string &lastName);
     /// \brief sets new value for client's real address. if the provided value is empty, the address remains unchanged.
     /// \param address - new value of address
-    void setAddress(Address* address);
+    void setAddress(AddressPtr address);
     /// \brief adds new real rent to client's data
     /// \param rent - new client's rent
-    void addRent(Rent* rent);
+    void addRent(RentPtr rent);
     /// \brief removes rent from client's data
     /// \param rent - rent to be removed
-    void removeRent(Rent* rent);
+    void removeRent(RentPtr rent);
 
 };
 
