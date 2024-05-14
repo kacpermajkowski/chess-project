@@ -1,7 +1,7 @@
 #include "model/Client.h"
 #include <iostream>
 
-    Client::Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, Address* address)
+    Client::Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, AddressPtr address)
     :
         firstName(firstName),
         lastName(lastName),
@@ -32,10 +32,10 @@
     const std::string &Client::getPersonalID() const{
         return Client::personalID;
     }
-    const Address* Client::getAddress() const {
+    const AddressPtr Client::getAddress() const {
         return Client::address;
     }
-    const std::vector<Rent *> &Client::getCurrentRents() const {
+    const std::vector<RentPtr> &Client::getCurrentRents() const {
         return currentRents;
     }
 
@@ -49,15 +49,15 @@
             Client::lastName = lastName;
         }
     }
-    void Client::setAddress(Address *address) {
+    void Client::setAddress(AddressPtr address) {
         if(address != nullptr){
             Client::address = address;
         }
     }
-    void Client::addRent(Rent* rent) {
+    void Client::addRent(RentPtr rent) {
         currentRents.push_back(rent);
     }
 
-    void Client::removeRent(Rent* rent) {
+    void Client::removeRent(RentPtr rent) {
         currentRents.erase(remove(currentRents.begin(), currentRents.end(), rent), currentRents.end());
     }

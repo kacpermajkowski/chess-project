@@ -5,7 +5,13 @@ set(SOURCE_FILES
 	src/model/Client.cpp
     src/model/Address.cpp
 	src/model/Vehicle.cpp
+		src/model/Bicycle.cpp
+		src/model/MotorVehicle.cpp
+			src/model/Moped.cpp
+			src/model/Car.cpp
 	src/model/Rent.cpp
+
+	include/typedefs.h
 )
 
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł

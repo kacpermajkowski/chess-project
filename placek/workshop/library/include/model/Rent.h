@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Vehicle.h"
 #include "Client.h"
+#include "typedefs.h"
 
 #include <boost/date_time.hpp>
 namespace pt = boost::posix_time;
@@ -14,11 +15,11 @@ class Client;
 class Rent{
 private:
     const unsigned int id;
-    Client* client;
-    Vehicle* vehicle;
+    ClientPtr client;
+    VehiclePtr vehicle;
     pt::ptime beginTime;
     pt::ptime endTime = pt::not_a_date_time;
-    unsigned int rentCost = 0;
+    double rentCost = 0;
 
 
 public:
@@ -31,7 +32,7 @@ public:
      * @param vehicle rented vehicle
      * @param beginTime initial rental time
      */
-    Rent(const unsigned int id, Client *client, Vehicle *vehicle, pt::ptime beginTime);
+    Rent(const unsigned int id, ClientPtr client, VehiclePtr vehicle, pt::ptime beginTime);
 
     /// \return returns id, client, vehicle, beginTime and endTime (or info that the rental is still on)
     std::string getInfo() const;
@@ -39,9 +40,9 @@ public:
     /// \return returns id
     const unsigned int getId() const;
     /// \return returns client
-    const Client* getClient() const;
+    const ClientPtr getClient() const;
     /// \return returns vehicle
-    const Vehicle* getVehicle() const;
+    const VehiclePtr getVehicle() const;
 
     /// \return returns beginTime
     const pt::ptime &getBeginTime() const;
