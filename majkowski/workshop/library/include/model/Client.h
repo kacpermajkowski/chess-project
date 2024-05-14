@@ -8,6 +8,7 @@
 #include "Rent.h"
 #include "typedefs.h"
 #include "Address.h"
+#include "ClientType.h"
 #include <vector>
 
 /// @brief Represents a real-world client
@@ -19,7 +20,7 @@ private:
     const std::string personalID;
     AddressPtr address;
     std::vector<RentPtr> currentRents;
-
+    ClientType* type;
 public:
     /**
      * @brief constructor
@@ -29,7 +30,8 @@ public:
      * @param personalID - unique identifier
      * @param address - physical postal address pointer
      */
-    Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, AddressPtr address);
+    Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, AddressPtr address,
+           ClientType *type);
 
     /// @brief destructor
     ~Client();
@@ -79,6 +81,11 @@ public:
     /// @param rentToRemove - Rent pointer to be removed
     void removeRent(RentPtr rentToRemove);
 
+    void setType(ClientType *type);
+
+    int getMaxVehicles() const;
+
+    double applyDiscount(double price) const;
 };
 
 

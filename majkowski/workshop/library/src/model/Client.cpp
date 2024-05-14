@@ -6,11 +6,14 @@
 #include "model/Client.h"
 #include "model/Address.h"
 
-Client::Client(const std::string & firstName, const std::string & lastName, const std::string & personalID, AddressPtr address) :
+Client::Client(const std::string &firstName, const std::string &lastName, const std::string &personalID,
+               AddressPtr address,
+               ClientType *type) :
     firstName(firstName),
     lastName(lastName),
     personalID(personalID),
-    address(address)
+    address(address),
+    type(type)
 {
     //
 }
@@ -99,4 +102,17 @@ void Client::removeRent(unsigned int rentID) {
 void Client::removeRent(RentPtr rentToRemove) {
     removeRent(rentToRemove->getId());
 }
+
+void Client::setType(ClientType *type) {
+    Client::type = type;
+}
+
+double Client::applyDiscount(double price) const {
+    return type->applyDiscount(price);
+}
+
+int Client::getMaxVehicles() const {
+    return type->getMaxVehicles();
+}
+
 

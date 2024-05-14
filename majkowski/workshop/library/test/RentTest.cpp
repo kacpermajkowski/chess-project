@@ -11,7 +11,7 @@ struct TestSuiteRentFixture{
 
     TestSuiteRentFixture() {
         address = new Address("Łódź", "Piotrkowska", "17");
-        client = new Client("Kacper", "Majkowski", "251578", address);
+        client = new Client("Kacper", "Majkowski", "251578", address, nullptr);
         vehicle = new Vehicle("EZD 10000", 1234);
         rentID = 1;
     }

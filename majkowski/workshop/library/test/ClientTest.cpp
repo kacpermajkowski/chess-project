@@ -31,7 +31,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 
     ///@brief Checks if Client getters return expected values after setting them via constructor.
     BOOST_AUTO_TEST_CASE(ClientConstrutorTests){
-        Client client(testFirstName, testLastName, testPersonalID, testAddress);
+        Client client(testFirstName, testLastName, testPersonalID, testAddress, nullptr);
         BOOST_TEST(client.getFirstName() == testFirstName);
         BOOST_TEST(client.getLastName() == testLastName);
         BOOST_TEST(client.getPersonalID() == testPersonalID);
@@ -40,7 +40,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 
     ///@brief Checks if using setters changes value returned by getters.
     BOOST_AUTO_TEST_CASE(ClientSettersTests){
-        Client client(testFirstName, testLastName, testPersonalID, testAddress);
+        Client client(testFirstName, testLastName, testPersonalID, testAddress, nullptr);
         client.setFirstName(newTestFirstName);
         client.setLastName(newTestLastName);
         client.setAddress(newTestAddress);
@@ -51,7 +51,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 
     ///@brief Checks if getters still return the same value after using setters with empty string param.
     BOOST_AUTO_TEST_CASE(ClientSettersEmptyStringTests){
-        Client client(testFirstName, testLastName, testPersonalID, testAddress);
+        Client client(testFirstName, testLastName, testPersonalID, testAddress, nullptr);
         std::string firstName = client.getFirstName();
         std::string lastName = client.getLastName();
         client.setFirstName("");
@@ -62,7 +62,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 
     ///@brief checks if accessors of vector<RentPtr> currentRents work as expected.
     BOOST_AUTO_TEST_CASE(ClientCurrentRentsAccessorsTests){
-        ClientPtr client = new Client(testFirstName, testLastName, testPersonalID, testAddress);
+        ClientPtr client = new Client(testFirstName, testLastName, testPersonalID, testAddress, nullptr);
         Rent rent(132, client, testVehicle, pt::not_a_date_time);
         client->removeRent(&rent);
         BOOST_TEST(client->getCurrentRents().size() == 0);
