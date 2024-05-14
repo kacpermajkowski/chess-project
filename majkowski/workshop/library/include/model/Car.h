@@ -8,15 +8,23 @@
 
 #include "MotorVehicle.h"
 
+//Fixed precision at 0.1
 enum SegmentType{
-    A, B, C, D, E
+    A = 10,
+    B = 11,
+    C = 12,
+    D = 13,
+    E = 15
 };
 
-class Car : MotorVehicle{
+class Car : public MotorVehicle{
 private:
     SegmentType segment;
 public:
     Car(const std::string &plateNumber, unsigned int basePrice, int engineDisplacement, SegmentType segment);
+
+private:
+    const unsigned int getActualRentalPrice() const override;
 };
 
 

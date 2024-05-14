@@ -8,9 +8,12 @@
 #define CARRENTAL_BICYCLE_H
 
 
-class Bicycle : Vehicle {
+class Bicycle : public Vehicle {
 public:
     Bicycle(const std::string &plateNumber, unsigned int basePrice);
+
+private:
+    const unsigned int getActualRentalPrice() const override;
 };
 
 

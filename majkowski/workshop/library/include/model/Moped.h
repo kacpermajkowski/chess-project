@@ -8,9 +8,10 @@
 
 #include "MotorVehicle.h"
 
-class Moped : MotorVehicle {
+class Moped : public MotorVehicle {
 public:
     Moped(const std::string &plateNumber, unsigned int basePrice, int engineDisplacement);
+    const unsigned int getActualRentalPrice() const override;
 };
 
 

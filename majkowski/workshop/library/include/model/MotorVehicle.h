@@ -8,7 +8,7 @@
 
 #include "Vehicle.h"
 
-class MotorVehicle : Vehicle {
+class MotorVehicle : public Vehicle {
 
 public:
     MotorVehicle(const std::string &plateNumber, unsigned int basePrice, int engineDisplacement);
@@ -17,6 +17,7 @@ private:
     int engineDisplacement;
 public:
     int getEngineDisplacement() const;
+    const unsigned int getActualRentalPrice() const override;
 
     void setEngineDisplacement(int engineDisplacement);
 };

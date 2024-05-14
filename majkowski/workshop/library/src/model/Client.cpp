@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "model/Client.h"
+#include "model/Address.h"
 
 Client::Client(const std::string & firstName, const std::string & lastName, const std::string & personalID, AddressPtr address) :
     firstName(firstName),

@@ -8,3 +8,7 @@ Bicycle::Bicycle(const std::string &plateNumber, unsigned int basePrice) :
     Vehicle(plateNumber, basePrice){
 
 }
+
+const unsigned int Bicycle::getActualRentalPrice() const {
+    return Vehicle::getActualRentalPrice();
+}

@@ -5,14 +5,12 @@
 #ifndef CARRENTAL_CLIENT_H
 #define CARRENTAL_CLIENT_H
 
-#include "Address.h"
 #include "Rent.h"
 #include "typedefs.h"
+#include "Address.h"
 #include <vector>
 
 /// @brief Represents a real-world client
-class Rent;
-
 class Client {
 
 private:
@@ -20,7 +18,7 @@ private:
     std::string lastName;
     const std::string personalID;
     AddressPtr address;
-    std::vector<Rent*> currentRents;
+    std::vector<RentPtr> currentRents;
 
 public:
     /**

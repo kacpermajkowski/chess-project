@@ -40,3 +40,11 @@ void Vehicle::setRented(bool rented) {
 std::string Vehicle::getInfo() const {
     return plateNumber + " " + std::to_string(basePrice);
 }
+
+const unsigned int Vehicle::getActualRentalPrice() const {
+    return getBasePrice();
+}
+
+Vehicle::~Vehicle() {
+
+}

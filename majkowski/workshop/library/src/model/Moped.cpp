@@ -8,3 +8,7 @@ Moped::Moped(const std::string &plateNumber, unsigned int basePrice, int engineD
     MotorVehicle(plateNumber,basePrice,engineDisplacement) {
 
 }
+
+const unsigned int Moped::getActualRentalPrice() const {
+    return MotorVehicle::getActualRentalPrice();
+}

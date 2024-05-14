@@ -15,7 +15,6 @@
 namespace pt = boost::posix_time;
 namespace gr = boost::gregorian;
 
-class Client;
 
 ///@brief Represents a vehicle rent instance to a client
 class Rent {
