@@ -9,17 +9,18 @@
 #include "Vehicle.h"
 
 class MotorVehicle : public Vehicle {
-
-public:
-    MotorVehicle(const std::string &plateNumber, unsigned int basePrice, int engineDisplacement);
-
 private:
     int engineDisplacement;
 public:
-    int getEngineDisplacement() const;
-    const unsigned int getActualRentalPrice() const override;
+    virtual ~MotorVehicle() override;
 
+    MotorVehicle(const std::string &plateNumber, unsigned int basePrice, int engineDisplacement);
+
+    int getEngineDisplacement() const;
     void setEngineDisplacement(int engineDisplacement);
+
+    std::string getInfo() const override;
+    const unsigned int getActualRentalPrice() const override;
 };
 
 

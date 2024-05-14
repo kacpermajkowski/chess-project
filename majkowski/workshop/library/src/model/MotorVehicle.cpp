@@ -2,6 +2,7 @@
 // Created by szindzeks on 11.05.2024.
 //
 
+#include <sstream>
 #include "../../include/model/MotorVehicle.h"
 
 int MotorVehicle::getEngineDisplacement() const {
@@ -31,3 +32,13 @@ const unsigned int MotorVehicle::getActualRentalPrice() const {
 
     return getBasePrice() * multiplier;
 }
+
+std::string MotorVehicle::getInfo() const {
+    std::ostringstream ss;
+    ss << Vehicle::getInfo();
+    ss << "Engine displacement: " << engineDisplacement << "\n";
+    return ss.str();
+}
+
+MotorVehicle::~MotorVehicle() = default;
+

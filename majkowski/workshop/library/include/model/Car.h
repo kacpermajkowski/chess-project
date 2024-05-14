@@ -21,6 +21,8 @@ class Car : public MotorVehicle{
 private:
     SegmentType segment;
 public:
+    std::string getInfo() const override;
+
     Car(const std::string &plateNumber, unsigned int basePrice, int engineDisplacement, SegmentType segment);
 
 private:

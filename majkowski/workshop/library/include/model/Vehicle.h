@@ -32,7 +32,7 @@ public:
     virtual const unsigned int getActualRentalPrice() const;
     ///
     /// @return all field values contatenated into single string
-    std::string getInfo() const;
+    virtual std::string getInfo() const;
     ///
     /// @return whether vehicle is rented or not
     bool isRented() const;

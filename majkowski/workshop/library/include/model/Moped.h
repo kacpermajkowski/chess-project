@@ -10,6 +10,8 @@
 
 class Moped : public MotorVehicle {
 public:
+    std::string getInfo() const override;
+
     Moped(const std::string &plateNumber, unsigned int basePrice, int engineDisplacement);
     const unsigned int getActualRentalPrice() const override;
 };

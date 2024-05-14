@@ -32,7 +32,13 @@ const VehiclePtr Rent::getVehicle() const {
 }
 
 std::string Rent::getInfo() const{
-    return std::to_string(id) + " " + to_iso_string(beginTime) + " " + to_iso_string(endTime) + " " + client->getInfo() + " " + vehicle->getInfo();
+    std::ostringstream ss;
+    ss << "Rent ID: " << id << "\n";
+    ss << "Begin time: " << beginTime << "\n";
+    ss << "End time: " << endTime << "\n";
+    ss << client->getInfo();
+    ss << vehicle->getInfo();
+    return ss.str();
 }
 
 const pt::ptime &Rent::getBeginTime() const {

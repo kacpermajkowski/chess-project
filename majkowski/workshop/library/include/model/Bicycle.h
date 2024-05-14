@@ -13,6 +13,10 @@ public:
     Bicycle(const std::string &plateNumber, unsigned int basePrice);
 
 private:
+public:
+    std::string getInfo() const override;
+
+private:
     const unsigned int getActualRentalPrice() const override;
 };
 

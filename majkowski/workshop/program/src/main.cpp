@@ -48,11 +48,10 @@ int main()
     Vehicle* vehicle = new Vehicle("EZD 10000", 1234);
     pt::ptime now = pt::second_clock::local_time();
     Rent* rent = new Rent(1, client, vehicle, pt::not_a_date_time);
-    rent->endRent(now + pt::hours(49));
-    cout << rent->getRentDays() << endl;
-    cout << rent->getRentCost() << endl;
-    vehicle->setBasePrice(10000);
-    cout << rent->getRentCost() << endl;
+
+    cout << rent->getInfo() << endl;
+    cout << "==============================\n";
+    cout << client->getFullInfo();
 
 
 	return 0;

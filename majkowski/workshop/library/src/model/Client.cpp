@@ -20,17 +20,21 @@ Client::~Client(){
 }
 
 std::string Client::getInfo() const {
-    std::string info = firstName + " " + lastName + " " + personalID + " " + address->getInfo();
-
-    return info;
+    std::ostringstream ss;
+    ss << "First name: " << firstName << "\n";
+    ss << "Last name: " << lastName << "\n";
+    ss << "Personal ID: " << personalID << "\n";
+    ss << address->getInfo();
+    return ss.str();
 }
 
 std::string Client::getFullInfo() const {
-    std::string info = getInfo();
+    std::ostringstream ss;
+    ss << getInfo();
     for(RentPtr r: currentRents){
-        info += " " + r->getInfo();
+        ss << r->getInfo();
     }
-    return std::string();
+    return ss.str();
 }
 
 const std::string &Client::getFirstName() const{
