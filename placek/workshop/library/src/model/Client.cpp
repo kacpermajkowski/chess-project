@@ -1,7 +1,8 @@
 #include "model/Client.h"
 #include <iostream>
 
-    Client::Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, AddressPtr address)
+    Client::Client(const std::string &firstName, const std::string &lastName, const std::string &personalID,
+                   AddressPtr address, ClientType* clientType)
     :
         firstName(firstName),
         lastName(lastName),
@@ -61,3 +62,8 @@
     void Client::removeRent(RentPtr rent) {
         currentRents.erase(remove(currentRents.begin(), currentRents.end(), rent), currentRents.end());
     }
+
+    double Client::applyDiscount(double price) const{
+        return clientType->applyDiscount(price);
+    }
+

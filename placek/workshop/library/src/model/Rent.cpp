@@ -78,6 +78,6 @@ void Rent::endRent(pt::ptime endTime){
 
         vehicle->setRented(false);
         client->removeRent(this);
-        rentCost =  static_cast<double>(this->getRentDays()) * vehicle->getActualRentalPrice();
+        rentCost = (static_cast<double>(this->getRentDays()) * vehicle->getActualRentalPrice());
     }
 }
