@@ -12,6 +12,8 @@ class Gold : public ClientType {
 public:
     explicit Gold();
 
+    ~Gold();
+
 public:
     int getMaxVehicles() const override;
 

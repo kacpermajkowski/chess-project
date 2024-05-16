@@ -2,10 +2,11 @@
 // Created by szindzeks on 14.05.2024.
 //
 
+#include <sstream>
 #include "model/client/Diamond.h"
 
 int Diamond::getMaxVehicles() const {
-    return ClientType::getMaxVehicles();
+    return 10;
 }
 
 double Diamond::applyDiscount(double price) {
@@ -23,9 +24,17 @@ double Diamond::applyDiscount(double price) {
 }
 
 std::string Diamond::getInfo() {
-    return ClientType::getInfo();
+    std::ostringstream ss;
+    ss << "Max vehicles: " << getMaxVehicles() << std::endl;
+    return ss.str();
 }
 
-Diamond::Diamond() : ClientType(10) {
+Diamond::Diamond() {
 
 }
+
+Diamond::~Diamond() {
+
+}
+
+

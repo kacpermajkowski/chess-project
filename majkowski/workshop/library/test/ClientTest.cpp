@@ -1,5 +1,11 @@
 #include <boost/test/unit_test.hpp>
 #include "../include/model/Client.h"
+#include "model/client/Default.h"
+#include "model/client/Bronze.h"
+#include "model/client/Silver.h"
+#include "model/client/Gold.h"
+#include "model/client/Platinum.h"
+#include "model/client/Diamond.h"
 
 struct TestSuiteClientFixture{
     const std::string testFirstName = "Kacper";
@@ -72,6 +78,44 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
         client->removeRent(rent2.getId());
         BOOST_TEST(client->getCurrentRents().size() == 0);
         delete client;
+    }
+
+    BOOST_AUTO_TEST_CASE(ClientTypeTests){
+        ClientType* def = new Default();
+        ClientType* bronze = new Bronze();
+        ClientType* silver = new Silver();
+        ClientType* gold = new Gold();
+        ClientType* platinum = new Platinum();
+        ClientType* diamond = new Diamond();
+
+        Client client(testFirstName, testLastName, testPersonalID, testAddress, def);
+        BOOST_TEST(client.getMaxVehicles() == 1);
+        BOOST_TEST(client.applyDiscount(1000) == 1000);
+
+        client.setType(bronze);
+        BOOST_TEST(client.getMaxVehicles() == 2);
+        BOOST_TEST(client.applyDiscount(1000) == 997);
+
+        client.setType(silver);
+        BOOST_TEST(client.getMaxVehicles() == 3);
+        BOOST_TEST(client.applyDiscount(1000) == 994);
+
+        client.setType(gold);
+        BOOST_TEST(client.getMaxVehicles() == 4);
+        BOOST_TEST(client.applyDiscount(1000) == 1000*0.95);
+
+        client.setType(platinum);
+        BOOST_TEST(client.getMaxVehicles() == 5);
+        BOOST_TEST(client.applyDiscount(1000) == 1000*0.9);
+
+        client.setType(diamond);
+        BOOST_TEST(client.getMaxVehicles() == 10);
+        BOOST_TEST(client.applyDiscount(100) == 90);
+        BOOST_TEST(client.applyDiscount(125) == 112.5);
+        BOOST_TEST(client.applyDiscount(250) == 200);
+        BOOST_TEST(client.applyDiscount(500) == 350);
+        BOOST_TEST(client.applyDiscount(510) == 306);
+
     }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -16,10 +16,16 @@ public:
 
     MotorVehicle(const std::string &plateNumber, unsigned int basePrice, int engineDisplacement);
 
+    ///
+    /// @return engine displacement in mm^3
     int getEngineDisplacement() const;
+    /// @brief sets new engine displacement
+    /// @param engineDisplacement new engine displacement in mm^3
     void setEngineDisplacement(int engineDisplacement);
 
     std::string getInfo() const override;
+    ///
+    /// @return returns actual rent price
     const unsigned int getActualRentalPrice() const override;
 };
 

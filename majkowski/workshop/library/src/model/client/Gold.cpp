@@ -2,10 +2,11 @@
 // Created by szindzeks on 14.05.2024.
 //
 
+#include <sstream>
 #include "model/client/Gold.h"
 
 int Gold::getMaxVehicles() const {
-    return ClientType::getMaxVehicles();
+    return 4;
 }
 
 double Gold::applyDiscount(double price) {
@@ -13,9 +14,15 @@ double Gold::applyDiscount(double price) {
 }
 
 std::string Gold::getInfo() {
-    return ClientType::getInfo();
+    std::ostringstream ss;
+    ss << "Max vehicles: " << getMaxVehicles() << std::endl;
+    return ss.str();
 }
 
-Gold::Gold() : ClientType(4) {
+Gold::Gold() {
+
+}
+
+Gold::~Gold() {
 
 }

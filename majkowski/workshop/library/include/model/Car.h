@@ -25,7 +25,8 @@ public:
 
     Car(const std::string &plateNumber, unsigned int basePrice, int engineDisplacement, SegmentType segment);
 
-private:
+    ///
+    /// @return returns rent cost multiplied ty segment type multiplier
     const unsigned int getActualRentalPrice() const override;
 };
 

@@ -12,6 +12,8 @@ class Platinum : public ClientType {
 public:
     explicit Platinum();
 
+    ~Platinum();
+
 public:
     int getMaxVehicles() const override;
 

@@ -2,10 +2,11 @@
 // Created by szindzeks on 14.05.2024.
 //
 
+#include <sstream>
 #include "model/client/Silver.h"
 
 int Silver::getMaxVehicles() const {
-    return ClientType::getMaxVehicles();
+    return 3;
 }
 
 double Silver::applyDiscount(double price) {
@@ -13,9 +14,15 @@ double Silver::applyDiscount(double price) {
 }
 
 std::string Silver::getInfo() {
-    return ClientType::getInfo();
+    std::ostringstream ss;
+    ss << "Max vehicles: " << getMaxVehicles() << std::endl;
+    return ss.str();
 }
 
-Silver::Silver() : ClientType(3) {
+Silver::Silver() {
+
+}
+
+Silver::~Silver() {
 
 }

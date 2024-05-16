@@ -27,6 +27,7 @@ std::string Client::getInfo() const {
     ss << "First name: " << firstName << "\n";
     ss << "Last name: " << lastName << "\n";
     ss << "Personal ID: " << personalID << "\n";
+    ss << type->getInfo();
     ss << address->getInfo();
     return ss.str();
 }

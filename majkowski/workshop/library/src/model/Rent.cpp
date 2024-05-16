@@ -60,7 +60,7 @@ void Rent::endRent(pt::ptime endTime) {
     }
     vehicle->setRented(false);
     client->removeRent(this);
-    rentCost = getRentDays() * vehicle->getBasePrice();
+    rentCost = getRentDays() * client->applyDiscount(vehicle->getBasePrice());
 }
 
 unsigned int Rent::getRentDays() const {

@@ -12,6 +12,8 @@ class Diamond : public ClientType {
 public:
     explicit Diamond();
 
+    ~Diamond();
+
 public:
     int getMaxVehicles() const override;
 

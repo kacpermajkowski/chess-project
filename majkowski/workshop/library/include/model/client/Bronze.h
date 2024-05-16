@@ -12,7 +12,8 @@ class Bronze : public ClientType {
 public:
     explicit Bronze();
 
-public:
+    ~Bronze();
+
     int getMaxVehicles() const override;
 
     double applyDiscount(double price) override;

@@ -81,6 +81,7 @@ public:
      *
      * Removes pointer to this object from currentRents of Client.
      * Sets vehicle rent status to false (vehicle->setRented(false)).
+     * Calculates and saves rent cost as per time of ending rent
      *
      * @param endTime - time which will be considered moment of ending a rent
      */

@@ -81,10 +81,17 @@ public:
     /// @param rentToRemove - Rent pointer to be removed
     void removeRent(RentPtr rentToRemove);
 
+    /// @brief sets new client type
+    /// @param type  new client type
     void setType(ClientType *type);
 
+    ///
+    /// @return maximum amount of vehicles a client per rent as per client type
     int getMaxVehicles() const;
 
+    ///
+    /// @param price - price to calculate discount for
+    /// @return discounted price as per client type
     double applyDiscount(double price) const;
 };
 

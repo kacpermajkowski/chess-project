@@ -2,10 +2,11 @@
 // Created by szindzeks on 14.05.2024.
 //
 
+#include <sstream>
 #include "model/client/Bronze.h"
 
 int Bronze::getMaxVehicles() const {
-    return ClientType::getMaxVehicles();
+    return 2;
 }
 
 double Bronze::applyDiscount(double price) {
@@ -13,9 +14,12 @@ double Bronze::applyDiscount(double price) {
 }
 
 std::string Bronze::getInfo() {
-    return ClientType::getInfo();
+    std::ostringstream ss;
+    ss << "Max vehicles: " << getMaxVehicles() << std::endl;
+    return ss.str();
 }
 
-Bronze::Bronze() : ClientType(2) {
+Bronze::Bronze() = default;
 
-}
+Bronze::~Bronze() = default;
+

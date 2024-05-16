@@ -12,6 +12,8 @@ class Silver : public ClientType {
 public:
     explicit Silver();
 
+    ~Silver();
+
 public:
     int getMaxVehicles() const override;
 

@@ -49,10 +49,5 @@ int main()
     pt::ptime now = pt::second_clock::local_time();
     Rent* rent = new Rent(1, client, vehicle, pt::not_a_date_time);
 
-    cout << rent->getInfo() << endl;
-    cout << "==============================\n";
-    cout << client->getFullInfo();
-
-
 	return 0;
 }
