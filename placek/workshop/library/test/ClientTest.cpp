@@ -36,7 +36,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 
 /// \brief checks if getter returns correct value
 BOOST_AUTO_TEST_CASE(TestConstructorClient){
-    Client client(firstName1, lastName1, personalID1, address1);
+    Client client(firstName1, lastName1, personalID1, address1, nullptr);
     BOOST_TEST(client.getFirstName()==firstName1);
     BOOST_TEST(client.getLastName()==lastName1);
     BOOST_TEST(client.getPersonalID()==personalID1);
@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(TestConstructorClient){
 /// \brief checks setter sets correct value that cannot be empty
 
     BOOST_AUTO_TEST_CASE(TestSetterClient){
-        Client client(firstName1, lastName1, personalID1, address1);
+        Client client(firstName1, lastName1, personalID1, address1, nullptr);
         client.setFirstName(firstName2);
         client.setLastName(lastName2);
         client.setAddress(address2);

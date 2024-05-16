@@ -25,23 +25,23 @@ private:
 public:
     /**
      *
-     * @brief rent constructor; creates a rental using client and vehicle data and sets the initial rental time
+     * @brief rent constructor; creates a rental using client and bicycle data and sets the initial rental time
      *
      * @param id unique rent identifier
-     * @param client client who rented the vehicle
-     * @param vehicle rented vehicle
+     * @param client client who rented the bicycle
+     * @param vehicle rented bicycle
      * @param beginTime initial rental time
      */
     Rent(const unsigned int id, ClientPtr client, VehiclePtr vehicle, pt::ptime beginTime);
 
-    /// \return returns id, client, vehicle, beginTime and endTime (or info that the rental is still on)
+    /// \return returns id, client, bicycle, beginTime and endTime (or info that the rental is still on)
     std::string getInfo() const;
 
     /// \return returns id
     const unsigned int getId() const;
     /// \return returns client
     const ClientPtr getClient() const;
-    /// \return returns vehicle
+    /// \return returns bicycle
     const VehiclePtr getVehicle() const;
 
     /// \return returns beginTime

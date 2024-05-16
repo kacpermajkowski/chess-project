@@ -2,19 +2,20 @@
 #include "model/Rent.h"
 #include "model/Client.h"
 #include "model/Vehicle.h"
+#include "model/Bicycle.h"
 
 struct TestSuiteRentFixture{
-    Client* client;
-    Address* address;
-    Vehicle* vehicle;
+    ClientPtr client;
+    AddressPtr address;
+    VehiclePtr vehicle;
     unsigned int rentID;
     pt::ptime time1;
     pt::ptime time2;
 
     TestSuiteRentFixture(){
         address = new Address("Poznan", "Ogrodowa", "15");
-        client = new Client("Adam", "Nowak", "123", address);
-        vehicle = new Vehicle("GD12345", 100);
+        client = new Client("Adam", "Nowak", "123", address, nullptr);
+        vehicle = new Bicycle("GD12345", 100);
         rentID = 1;
         time1 = pt::ptime(gr::date(2020,5,13),pt::hours(9)+pt::minutes(25));
         time2 = pt::ptime(gr::date(2024,5,13),pt::hours(9)+pt::minutes(25));
@@ -60,7 +61,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
         BOOST_TEST(rent.getBeginTime() == time1);
     }
 
-    BOOST_AUTO_TEST_CASE(TestEndRent){ //checks if client and vehicle values change correctly due to the end of the rent
+    BOOST_AUTO_TEST_CASE(TestEndRent){ //checks if client and bicycle values change correctly due to the end of the rent
         BOOST_REQUIRE(vehicle->isRented() == false);
         BOOST_REQUIRE(client->getCurrentRents().size() == 0);
 

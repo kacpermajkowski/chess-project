@@ -5,6 +5,7 @@
 #include "Address.h"
 #include "Rent.h"
 #include "typedefs.h"
+#include "ClientType.h"
 
 class Rent;
 
@@ -14,6 +15,7 @@ private:
     std::string lastName;
     const std::string personalID;
     AddressPtr address;
+    ClientType* clientType;
     std::vector<RentPtr> currentRents;
 
 public:
@@ -26,7 +28,7 @@ public:
      * @param personalID client's unique identifier
      * @param address client's real address
      */
-    Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, AddressPtr address);
+    Client(const std::string &firstName, const std::string &lastName, const std::string &personalID, AddressPtr address, ClientType* clientType);
     ~Client();
 
     /// \return returns firstName, lastName, personalID and address
@@ -61,6 +63,8 @@ public:
     /// \brief removes rent from client's data
     /// \param rent - rent to be removed
     void removeRent(RentPtr rent);
+
+    double applyDiscount(double price) const;
 
 };
 

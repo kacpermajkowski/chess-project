@@ -3,6 +3,13 @@ project(Library)
 
 set(SOURCE_FILES
 	src/model/Client.cpp
+		src/model/ClientType.cpp
+			src/model/Default.cpp
+			src/model/Bronze.cpp
+			src/model/Silver.cpp
+			src/model/Gold.cpp
+			src/model/Platinum.cpp
+			src/model/Diamond.cpp
     src/model/Address.cpp
 	src/model/Vehicle.cpp
 		src/model/Bicycle.cpp

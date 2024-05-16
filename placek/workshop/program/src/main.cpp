@@ -15,7 +15,7 @@ int main(){
 
 
     AddressPtr addr = new Address("Poznan", "Ogrodowa", "17");
-    ClientPtr cl1 = new Client("Adam", "Nowak", "123", addr);
+    ClientPtr cl1 = new Client("Adam", "Nowak", "123", addr, nullptr);
     VehiclePtr car = new Car("EL12345", 500, 1500, B);
 
 
