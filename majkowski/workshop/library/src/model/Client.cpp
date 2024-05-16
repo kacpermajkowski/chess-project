@@ -4,12 +4,16 @@
 
 #include <iostream>
 #include "model/Client.h"
+#include "model/Address.h"
 
-Client::Client(const std::string & firstName, const std::string & lastName, const std::string & personalID, Address* address) :
+Client::Client(const std::string &firstName, const std::string &lastName, const std::string &personalID,
+               AddressPtr address,
+               ClientType *type) :
     firstName(firstName),
     lastName(lastName),
     personalID(personalID),
-    address(address)
+    address(address),
+    type(type)
 {
     //
 }
@@ -19,17 +23,22 @@ Client::~Client(){
 }
 
 std::string Client::getInfo() const {
-    std::string info = firstName + " " + lastName + " " + personalID + " " + address->getInfo();
-
-    return info;
+    std::ostringstream ss;
+    ss << "First name: " << firstName << "\n";
+    ss << "Last name: " << lastName << "\n";
+    ss << "Personal ID: " << personalID << "\n";
+    ss << type->getInfo();
+    ss << address->getInfo();
+    return ss.str();
 }
 
 std::string Client::getFullInfo() const {
-    std::string info = getInfo();
-    for(Rent* r: currentRents){
-        info += " " + r->getInfo();
+    std::ostringstream ss;
+    ss << getInfo();
+    for(RentPtr r: currentRents){
+        ss << r->getInfo();
     }
-    return std::string();
+    return ss.str();
 }
 
 const std::string &Client::getFirstName() const{
@@ -44,7 +53,7 @@ const std::string &Client::getPersonalID() const{
     return Client::personalID;
 }
 
-const Address * Client::getAddress() const{
+const AddressPtr Client::getAddress() const{
     return Client::address;
 }
 
@@ -60,19 +69,19 @@ void Client::setLastName(const std::string &lastName){
     }
 }
 
-void Client::setAddress(Address *address) {
+void Client::setAddress(AddressPtr address) {
     if(address != nullptr){
         Client::address = address;
     }
 }
 
-const std::vector<Rent *> &Client::getCurrentRents() const {
+const std::vector<RentPtr> & Client::getCurrentRents() const {
     return currentRents;
 }
 
-void Client::addNewRent(Rent *newRent) {
+void Client::addNewRent(RentPtr newRent) {
     if(newRent->getClient() == this){
-        for(Rent* rent:currentRents){
+        for(RentPtr rent:currentRents){
             if(rent->getId() == newRent->getId())
                 return;
         }
@@ -82,7 +91,7 @@ void Client::addNewRent(Rent *newRent) {
 }
 
 void Client::removeRent(unsigned int rentID) {
-    std::vector<Rent*>::iterator it;
+    std::vector<RentPtr>::iterator it;
     for(it = currentRents.begin(); it != currentRents.end(); it++){
         if((*it)->getId() == rentID) {
             currentRents.erase(it);
@@ -91,7 +100,20 @@ void Client::removeRent(unsigned int rentID) {
     }
 }
 
-void Client::removeRent(Rent *rentToRemove) {
+void Client::removeRent(RentPtr rentToRemove) {
     removeRent(rentToRemove->getId());
 }
+
+void Client::setType(ClientType *type) {
+    Client::type = type;
+}
+
+double Client::applyDiscount(double price) const {
+    return type->applyDiscount(price);
+}
+
+int Client::getMaxVehicles() const {
+    return type->getMaxVehicles();
+}
+
 

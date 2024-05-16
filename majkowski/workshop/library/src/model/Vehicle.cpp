@@ -3,6 +3,7 @@
 //
 
 #include <string>
+#include <sstream>
 #include "model/Vehicle.h"
 
 Vehicle::Vehicle(const std::string &plateNumber, unsigned int basePrice) :
@@ -38,5 +39,17 @@ void Vehicle::setRented(bool rented) {
 }
 
 std::string Vehicle::getInfo() const {
-    return plateNumber + " " + std::to_string(basePrice);
+    std::ostringstream ss;
+    ss << "Plate number: " << plateNumber << "\n";
+    ss << "Base price: " << basePrice << "\n";
+    ss << "Rented: " << (rented ? "yes" : "no") << "\n";
+    return ss.str();
+}
+
+const unsigned int Vehicle::getActualRentalPrice() const {
+    return getBasePrice();
+}
+
+Vehicle::~Vehicle() {
+
 }

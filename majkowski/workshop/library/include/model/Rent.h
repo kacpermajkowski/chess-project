@@ -8,22 +8,22 @@
 
 #include "Vehicle.h"
 #include "Client.h"
+#include "typedefs.h"
 #include <boost/date_time.hpp>
 #include <math.h>
 
 namespace pt = boost::posix_time;
 namespace gr = boost::gregorian;
 
-class Client;
 
 ///@brief Represents a vehicle rent instance to a client
 class Rent {
 private:
     const unsigned int id;
     //TODO: to samo co niżej
-    Client* client;
+    ClientPtr client;
     //TODO: czemu nie zawsze pozwala wywołać funkcje setRented() kiedy jest const Vehicle*
-    Vehicle *vehicle;
+    VehiclePtr vehicle;
     unsigned int rentCost = 0;
     pt::ptime beginTime;
     pt::ptime endTime = pt::not_a_date_time;
@@ -37,16 +37,16 @@ public:
     ///
     /// @brief sets fields of created objects, but also adds pointer to itself to client->currentRents and sets vehicle as rented.
     ///
-    Rent(const unsigned int id, Client *client, Vehicle *vehicle, pt::ptime beginTime);
+    Rent(const unsigned int id, ClientPtr client, VehiclePtr vehicle, pt::ptime beginTime);
 
     /// @return rent ID
     const unsigned int getId() const;
 
     /// @return pointer to Client object to whom vehicle was rented
-    const Client *getClient() const;
+    const ClientPtr getClient() const;
 
     /// @return pointer to rented Vehicle object
-    const Vehicle *getVehicle() const;
+    const VehiclePtr getVehicle() const;
 
     /// @return time at which vehicle was rented
     const pt::ptime &getBeginTime() const;
@@ -81,6 +81,7 @@ public:
      *
      * Removes pointer to this object from currentRents of Client.
      * Sets vehicle rent status to false (vehicle->setRented(false)).
+     * Calculates and saves rent cost as per time of ending rent
      *
      * @param endTime - time which will be considered moment of ending a rent
      */

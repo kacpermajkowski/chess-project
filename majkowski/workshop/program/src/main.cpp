@@ -44,16 +44,10 @@ int main()
 //    cout << c.getFirstName() << endl;
 // eksperyment 4
     Address* address = new Address("Łódź", "Piotrkowska", "17");
-    Client* client = new Client("Kacper", "Majkowski", "251578", address);
+    Client* client = new Client("Kacper", "Majkowski", "251578", address, nullptr);
     Vehicle* vehicle = new Vehicle("EZD 10000", 1234);
     pt::ptime now = pt::second_clock::local_time();
     Rent* rent = new Rent(1, client, vehicle, pt::not_a_date_time);
-    rent->endRent(now + pt::hours(49));
-    cout << rent->getRentDays() << endl;
-    cout << rent->getRentCost() << endl;
-    vehicle->setBasePrice(10000);
-    cout << rent->getRentCost() << endl;
-
 
 	return 0;
 }

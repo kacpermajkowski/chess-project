@@ -2,16 +2,23 @@
 #include "model/Rent.h"
 #include "model/Client.h"
 #include "model/Vehicle.h"
+#include "model/client/Default.h"
+#include "model/client/Bronze.h"
 
 struct TestSuiteRentFixture{
-    Address* address;
-    Client* client;
-    Vehicle* vehicle;
+    AddressPtr address;
+    ClientPtr client;
+    VehiclePtr vehicle;
     unsigned int rentID;
+    ClientType* def;
+    ClientType* bronze;
 
     TestSuiteRentFixture() {
+        def = new Default();
+        bronze = new Bronze();
+
         address = new Address("Łódź", "Piotrkowska", "17");
-        client = new Client("Kacper", "Majkowski", "251578", address);
+        client = new Client("Kacper", "Majkowski", "251578", address, def);
         vehicle = new Vehicle("EZD 10000", 1234);
         rentID = 1;
     }
@@ -38,7 +45,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
         BOOST_TEST(rent.getEndTime().is_not_a_date_time());
 
         bool hasPointerBeenAddedToCurrentRentsOfClient = false;
-        for(Rent* r: client->getCurrentRents()){
+        for(RentPtr r: client->getCurrentRents()){
             if(r->getId() == rentID){
                 hasPointerBeenAddedToCurrentRentsOfClient = true;
                 break;
@@ -152,6 +159,12 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteRent, TestSuiteRentFixture)
         Rent rentForSixHours(rentID, client, vehicle, now);
         rentForSixHours.endRent(now + pt::hours(6));
         BOOST_TEST(rentForSixHours.getRentCost() == vehicle->getBasePrice());
+
+        client->setType(bronze);
+        BOOST_TEST(rentForSixHours.getRentCost() == vehicle->getBasePrice());
+        Rent rentForTenHours(rentID, client, vehicle, now);
+        rentForTenHours.endRent(now + pt::hours(10));
+        BOOST_TEST(rentForTenHours.getRentCost() == vehicle->getBasePrice() - 3);
 
     }
 

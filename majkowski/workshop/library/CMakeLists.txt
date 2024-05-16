@@ -6,6 +6,18 @@ set(SOURCE_FILES
         src/model/Address.cpp
         src/model/Rent.cpp
         src/model/Vehicle.cpp
+        include/typedefs.h
+        src/model/Bicycle.cpp
+        src/model/Car.cpp
+        src/model/Moped.cpp
+        src/model/MotorVehicle.cpp
+        src/model/ClientType.cpp
+        src/model/client/Bronze.cpp
+        src/model/client/Silver.cpp
+        src/model/client/Platinum.cpp
+        src/model/client/Gold.cpp
+        src/model/client/Diamond.cpp
+        src/model/client/Default.cpp
 )
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(Library ${SOURCE_FILES})

@@ -4,7 +4,7 @@
 
 #include "model/Rent.h"
 
-Rent::Rent(const unsigned int id, Client* client, Vehicle* vehicle, pt::ptime beginTime) :
+Rent::Rent(const unsigned int id, ClientPtr client, VehiclePtr vehicle, pt::ptime beginTime) :
     id(id),
     client(client),
     vehicle(vehicle)
@@ -23,16 +23,22 @@ const unsigned int Rent::getId() const {
     return id;
 }
 
-const Client *Rent::getClient() const {
+const ClientPtr Rent::getClient() const {
     return client;
 }
 
-const Vehicle *Rent::getVehicle() const {
+const VehiclePtr Rent::getVehicle() const {
     return vehicle;
 }
 
 std::string Rent::getInfo() const{
-    return std::to_string(id) + " " + to_iso_string(beginTime) + " " + to_iso_string(endTime) + " " + client->getInfo() + " " + vehicle->getInfo();
+    std::ostringstream ss;
+    ss << "Rent ID: " << id << "\n";
+    ss << "Begin time: " << beginTime << "\n";
+    ss << "End time: " << endTime << "\n";
+    ss << client->getInfo();
+    ss << vehicle->getInfo();
+    return ss.str();
 }
 
 const pt::ptime &Rent::getBeginTime() const {
@@ -54,7 +60,7 @@ void Rent::endRent(pt::ptime endTime) {
     }
     vehicle->setRented(false);
     client->removeRent(this);
-    rentCost = getRentDays() * vehicle->getBasePrice();
+    rentCost = getRentDays() * client->applyDiscount(vehicle->getBasePrice());
 }
 
 unsigned int Rent::getRentDays() const {

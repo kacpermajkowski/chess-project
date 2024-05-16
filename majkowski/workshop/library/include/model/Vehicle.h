@@ -5,7 +5,6 @@
 #ifndef CARRENTAL_VEHICLE_H
 #define CARRENTAL_VEHICLE_H
 
-
 #include <string>
 
 /// @brief Represent a rentable vehicle
@@ -20,15 +19,20 @@ public:
     /// @param basePrice base rental price
     ///
     Vehicle(const std::string &plateNumber, unsigned int basePrice);
+
+    virtual ~Vehicle();
+
     ///
     /// @return license plate number
     const std::string &getPlateNumber() const;
     ///
     /// @return base rental price
     const unsigned int getBasePrice() const;
+
+    virtual const unsigned int getActualRentalPrice() const;
     ///
     /// @return all field values contatenated into single string
-    std::string getInfo() const;
+    virtual std::string getInfo() const;
     ///
     /// @return whether vehicle is rented or not
     bool isRented() const;

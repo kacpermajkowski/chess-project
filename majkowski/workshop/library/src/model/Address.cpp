@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <sstream>
 #include "model/Address.h"
 
 
@@ -19,7 +20,11 @@ Address::~Address() {
 }
 
 std::string Address::getInfo() const {
-    return city + ", " + street + " " + number;
+    std::ostringstream ss;
+    ss << "City: " << city << "\n";
+    ss << "Street: " << street << "\n";
+    ss << "Number: " << number << "\n";
+    return ss.str();
 }
 
 const std::string & Address::getCity() const {
