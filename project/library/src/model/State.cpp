@@ -15,13 +15,10 @@ Conclusion State::getConclusion() const {
     return conclusion;
 }
 
-Color State::getTurn() const {
+PlayerColor State::getTurn() const {
     return turn;
 }
 
-bool State::getIsCheck() const {
-    return isCheck;
-}
 
 const std::vector<Unit *> &State::getTakenPieces() const {
     return takenPieces;
@@ -33,5 +30,10 @@ Board *State::getBoard() const {
 
 void State::registerMove(Move *move) {
     moveHistory.push_back(move);
+}
+
+void State::conclude(Conclusion conclusion) {
+    if(this->conclusion == IN_PROGRESS)
+        this->conclusion = conclusion;
 }
 

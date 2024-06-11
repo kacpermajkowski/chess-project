@@ -5,7 +5,7 @@
 
 class Knight : public Unit{
 public:
-    std::vector<Move> getLegalMoves() override;
+    std::vector<Move> getLegalMoves() const override;
 };
 
 

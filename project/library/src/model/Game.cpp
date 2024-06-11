@@ -1,6 +1,5 @@
 #include "model/Game.h"
 
-Game::Game(GameType gameType, UI *ui) : gameType(gameType), ui(ui) {}
 Game::~Game() {}
 
 State *Game::getState() const {

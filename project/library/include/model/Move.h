@@ -5,16 +5,16 @@
 
 class Move {
 private:
-    Position *startingPosition;
-    Position *targetPosition;
-    Color moverColor;
+    PositionPtr startingPosition;
+    PositionPtr targetPosition;
+    PlayerColor moverColor;
 public:
-    Move(Position *startingPosition, Position *targetPosition);
+    Move(PositionPtr startingPosition, PositionPtr targetPosition);
     virtual ~Move();
 
-    Position *getStartingPosition() const;
+    PositionPtr getStartingPosition() const;
 
-    Position *getTargetPosition() const;
+    PositionPtr getTargetPosition() const;
 
 };
 

@@ -2,19 +2,19 @@
 #define CHESSPROJECT_PLAYER_H
 
 
-#include "enum.h"
+#include "typedefs.h"
 #include "model/Move.h"
 
 class Player {
 private:
-    Color color;
+    PlayerColor color;
 
 public:
-    explicit Player(Color color);
+    explicit Player(PlayerColor color);
     virtual ~Player();
 
-    virtual Color getColor() const;
-    virtual void makeAMove(Move move);
+    PlayerColor getColor() const;
+    virtual void makeAMove(Move move) const = 0;
 };
 
 

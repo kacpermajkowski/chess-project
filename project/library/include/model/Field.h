@@ -7,23 +7,20 @@
 class Field {
 
 private:
-    Position* position;
-    Unit* unit;
-    bool isPromotionField;
-
+    PositionPtr position;
+    UnitPtr unit;
 public:
     Field(Position *position, Unit *unit);
     virtual ~Field();
 
-    Position *getPosition() const;
+    PositionPtr getPosition() const;
+    UnitPtr getUnit() const;
 
-    Unit *getUnit() const;
-
-    bool getPromotionField(Color color) const;
+    bool getPromotionField(PlayerColor color) const;
 
     bool isOccupied() const;
 
-    void setUnit(Unit *unit);
+    void setUnit(UnitPtr unit);
 };
 
 

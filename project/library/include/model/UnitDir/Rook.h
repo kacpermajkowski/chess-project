@@ -5,8 +5,8 @@
 
 class Rook : public Unit{
 public:
-    std::vector<Move> getLegalMoves() override;
-    // bool canBeCapturedWithEnPassant();
+    std::vector<Move> getLegalMoves() const override;
+
 };
 
 

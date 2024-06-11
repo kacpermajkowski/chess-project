@@ -3,41 +3,38 @@
 
 #include <vector>
 #include "Move.h"
-#include "enum.h"
+#include "typedefs.h"
 #include "Board.h"
 
 class State {
 private:
-    std::vector<Move*> moveHistory;
+    std::vector<MovePtr> moveHistory;
     unsigned int movesWithoutCapture;
-    Conclusion conclusion;
-    Color turn;
-    bool isCheck;
-    std::vector<Unit*> takenPieces;
-    Board* board;
+    Conclusion conclusion = IN_PROGRESS;
+    PlayerColor turn;
+    bool check;
+    std::vector<UnitPtr> takenPieces;
+    BoardPtr board;
 
 public:
 
-    explicit State(Board *board);
+    explicit State(BoardPtr board);
     virtual ~State();
 
-    const std::vector<Move *> &getMoveHistory() const;
+    std::vector<MovePtr> getLegalMoves() const;
+    void conclude(Conclusion conclusion);
+    void registerMove(MovePtr move);
 
-    unsigned int getMovesWithoutCapture() const;
-
+    bool isCheck() const;
     Conclusion getConclusion() const;
+    PlayerColor getTurn() const;
+    BoardPtr getBoard() const;
+    const std::vector<UnitPtr> &getTakenPieces() const;
+    unsigned int getMovesWithoutCapture() const;
+    const std::vector<MovePtr> &getMoveHistory() const;
 
-    Color getTurn() const;
-
-    bool getIsCheck() const;
-
-    const std::vector<Unit *> &getTakenPieces() const;
-
-    Board *getBoard() const;
-
-    void registerMove(Move* move);
-
-    // isAttacked(Field* field);
+    bool isAttacked(FieldPtr field);
+    bool hasConcluded() const;
 };
 
 

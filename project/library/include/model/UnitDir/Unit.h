@@ -2,19 +2,19 @@
 #define CHESSPROJECT_UNIT_H
 
 #include <vector>
-#include "enum.h"
+#include "typedefs.h"
 #include "model/Move.h"
 
 class Unit {
 private:
-    Color color;
+    PlayerColor color;
 public:
-    explicit Unit(Color color);
+    explicit Unit(PlayerColor color);
     virtual ~Unit();
 
-    virtual Color getColor() const;
+    PlayerColor getColor() const;
 
-    virtual std::vector<Move> getLegalMoves();
+    virtual std::vector<Move> getLegalMoves() const = 0;
 };
 
 

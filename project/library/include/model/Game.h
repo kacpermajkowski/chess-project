@@ -3,33 +3,27 @@
 
 #include "PlayerDir/Player.h"
 #include "State.h"
-#include "enum.h"
-#include "UI.h"
+#include "typedefs.h"
+#include "model/ui/UI.h"
 
 class Game {
 private:
-    Player* whitePlayer;
-    Player* blackPlayer;
-    State* state;
-    UI* ui;
+    PlayerPtr whitePlayer;
+    PlayerPtr blackPlayer;
+    StatePtr state;
+    UIPtr ui;
 
 public:
-    Game(GameType gameType, UI *ui);
+    Game(GameType gameType, UIPtr ui);
     virtual ~Game();
 
-    Player* getPlayer(Color color) const;
+    PlayerPtr getPlayer(PlayerColor color) const;
 
-    State *getState() const;
+    StatePtr getState() const;
 
-    UI *getUi() const;
+    UIPtr getUi() const;
 
-    Board* getBoard() const;
-
-    bool hasEnded();
-
-    void makeAMove();
-
-    Player* getCurrentPlayer() const;
+    BoardPtr getBoard() const;
 };
 
 

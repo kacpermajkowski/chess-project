@@ -1,7 +1,7 @@
 #ifndef CHESSPROJECT_POSITION_H
 #define CHESSPROJECT_POSITION_H
 
-#include "enum.h"
+#include "typedefs.h"
 
 class Position {
 private:

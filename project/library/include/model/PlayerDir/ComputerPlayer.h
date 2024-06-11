@@ -6,11 +6,9 @@
 
 class ComputerPlayer : public Player{
 public:
-    explicit ComputerPlayer(Color color);
-    ~ComputerPlayer() override;
+    explicit ComputerPlayer(PlayerColor color);
 
-    Color getColor() const override;
-    void makeAMove(Move move) override;
+    void makeAMove(Move move) const override;
 };
 
 

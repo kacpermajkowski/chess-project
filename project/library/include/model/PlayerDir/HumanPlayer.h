@@ -5,11 +5,9 @@
 
 class HumanPlayer : public Player{
 public:
-    explicit HumanPlayer(Color color);
-    ~HumanPlayer() override;
+    explicit HumanPlayer(PlayerColor color);
 
-    Color getColor() const override;
-    void makeAMove(Move move) override;
+    void makeAMove(Move move) const override;
 };
 
 

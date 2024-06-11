@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.4)
 project(Library)
 
 set(SOURCE_FILES
-    src/model/UnitDir/Unit.cpp
         src/model/UnitDir/Unit.cpp
         src/model/UnitDir/King.cpp
         src/model/UnitDir/Rook.cpp
@@ -10,7 +9,7 @@ set(SOURCE_FILES
         src/model/UnitDir/Knight.cpp
         src/model/UnitDir/Queen.cpp
         src/model/UnitDir/Bishop.cpp
-    src/model/PlayerDir/Player.cpp
+        src/model/PlayerDir/Player.cpp
         src/model/PlayerDir/HumanPlayer.cpp
         src/model/PlayerDir/ComputerPlayer.cpp
     src/model/State.cpp
@@ -19,7 +18,8 @@ set(SOURCE_FILES
     src/model/Field.cpp
     src/model/Move.cpp
     src/model/Position.cpp
-        src/model/UI.cpp
+        src/model/ui/TextUI.cpp
+        include/model/ui/TextUI.h
 )
 
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
@@ -36,7 +36,7 @@ include_directories(
 )
 
 set(SOURCE_TEST_FILES
-	test/plikTest.cpp
+        test/master.cpp
 )
 
 add_executable (LibraryTester ${SOURCE_TEST_FILES})
@@ -45,7 +45,7 @@ add_executable (LibraryTester ${SOURCE_TEST_FILES})
 target_link_libraries (LibraryTester
         library
         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
-        )
+)
 
 #dodaj test LibraryTest. Instrukcji cmake add_test może być wiele.
 #Dodatkowe parametry wpływają na szczegółowość generowanego raportu. Standardowo znajduje się on w Testing/Temporary.

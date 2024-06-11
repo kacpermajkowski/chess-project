@@ -12,9 +12,6 @@ Unit *Field::getUnit() const {
     return unit;
 }
 
-bool Field::getPromotionField(Color color) const {
-    return isPromotionField;
-}
 
 void Field::setUnit(Unit *unit) {
     Field::unit = unit;
