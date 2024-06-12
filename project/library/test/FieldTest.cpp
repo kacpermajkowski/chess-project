@@ -6,10 +6,10 @@
 
 struct TestSuiteFieldFixture {
 
-    UnitPtr unitWhite = new Queen(WHITE);
-    UnitPtr unitBlack = new Queen(BLACK);
+    UnitPtr unitWhite = std::make_shared<Queen>(WHITE);
+    UnitPtr unitBlack = std::make_shared<Queen>(BLACK);
 
-    PositionPtr position = new Position(A, _5);
+    PositionPtr position = std::make_shared<Position>(A, _5);
 };
 
 BOOST_FIXTURE_TEST_SUITE(TestSuiteField, TestSuiteFieldFixture)

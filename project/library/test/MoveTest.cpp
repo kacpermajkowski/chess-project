@@ -6,14 +6,14 @@
 
 struct TestSuiteMoveFixture {
 
-    UnitPtr unit = new Queen(WHITE);
-    PositionPtr currentPosition = new Position(A, _5);
-    PositionPtr targetPosition = new Position(A, _6);
+    UnitPtr unit = std::make_shared<Queen>(WHITE);
+    PositionPtr currentPosition = std::make_shared<Position>(A, _5);
+    PositionPtr targetPosition = std::make_shared<Position>(A, _6);
 
-    FieldPtr currentField = new Field(currentPosition, unit);
-    FieldPtr targetField = new Field(targetPosition, nullptr);
+    FieldPtr currentField = std::make_shared<Field>(currentPosition, unit);
+    FieldPtr targetField = std::make_shared<Field>(targetPosition, nullptr);
 
-    ActionPtr action_capture = new Action(CAPTURE, targetField);
+    ActionPtr action_capture = std::make_shared<Action>(CAPTURE, targetField);
 
 };
 
