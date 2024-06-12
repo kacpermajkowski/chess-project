@@ -10,7 +10,6 @@ private:
 
 public:
     explicit Board();
-    virtual ~Board();
 
     FieldPtr getField(PositionPtr position) const;
     FieldPtr getField(UnitPtr unit) const;

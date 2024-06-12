@@ -7,10 +7,10 @@
 
 struct TestSuiteStateFixture {
 
-    PlayerPtr firstPlayer = new ComputerPlayer(WHITE);
-    PlayerPtr secondPlayer = new HumanPlayer(BLACK);
+    PlayerPtr firstPlayer = std::make_shared<ComputerPlayer>(WHITE);
+    PlayerPtr secondPlayer = std::make_shared<HumanPlayer>(BLACK);
 
-    PlayerPtr thirdPlayer = new ComputerPlayer(WHITE);
+    PlayerPtr thirdPlayer = std::make_shared<ComputerPlayer>(WHITE);
 
 };
 

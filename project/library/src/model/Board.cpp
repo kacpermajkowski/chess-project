@@ -27,3 +27,4 @@ const std::vector<FieldPtr> &Board::getFields() const {
 Board::Board() {
     //TODO: Initialize fields
 }
+

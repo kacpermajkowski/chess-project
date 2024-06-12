@@ -10,7 +10,8 @@ private:
     PositionPtr position;
     UnitPtr unit;
 public:
-    Field(PositionPtr position, UnitPtr unit);
+
+    Field(const PositionPtr &position, const UnitPtr &unit);
     virtual ~Field();
 
 

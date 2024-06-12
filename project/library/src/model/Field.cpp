@@ -1,6 +1,6 @@
 #include "model/Field.h"
 
-Field::Field(PositionPtr position, UnitPtr unit) {}
+Field::Field(const PositionPtr &position, const UnitPtr &unit) : position(position), unit(unit) {}
 Field::~Field() {}
 
 PositionPtr Field::getPosition() const {
@@ -30,4 +30,10 @@ bool Field::isOccupiedByAlly(PlayerColor color) const {
 bool Field::isOccupiedByAlly(UnitPtr unit) const {
     return isOccupiedByAlly(unit->getColor());
 }
+
+bool Field::isOccupied() const {
+    return false;
+}
+
+
 
