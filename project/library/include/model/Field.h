@@ -4,7 +4,7 @@
 #include "Position.h"
 #include "UnitDir/Unit.h"
 
-class Field {
+class Field : public std::enable_shared_from_this<Field>{
 
 private:
     PositionPtr position;

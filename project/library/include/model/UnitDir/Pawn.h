@@ -11,9 +11,9 @@ public:
 
     std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() const override;
 
-    std::vector<MovePtr> getLegalMoves(StatePtr state) const override;
+    std::vector<MovePtr> getLegalMoves(const StatePtr state) override;
 
-    std::vector<MovePtr> getAttackingMoves(StatePtr state) const override;
+    std::vector<MovePtr> getAttackingMoves(StatePtr state) override;
 };
 
 

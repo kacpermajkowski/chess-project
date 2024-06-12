@@ -3,7 +3,7 @@
 #include "model/UnitDir/Pawn.h"
 
 State::State() {
-    board = new Board();
+    board = std::make_shared<Board>();
 }
 State::~State() {}
 
@@ -40,7 +40,7 @@ void State::registerMove(MovePtr move) {
         ActionPtr action = move->getAction();
         if(action != nullptr){
             if(action->getType() == CAPTURE){
-                FieldPtr actionField = action->getActionField();
+                std::shared_ptr<Field> actionField = action->getActionField();
                 takenPieces.push_back(actionField->getUnit());
                 actionField->setUnit(nullptr);
                 fiftyMoveRuleCounter = 0;
@@ -65,7 +65,7 @@ void State::conclude(Conclusion conclusion) {
 
 bool State::isAttacked(FieldPtr field) {
     for(FieldPtr potentialAttacker : getBoard()->getFields()){
-        std::vector<MovePtr> potentialAttacks = potentialAttacker->getUnit()->getLegalMoves(this);
+        std::vector<MovePtr> potentialAttacks = potentialAttacker->getUnit()->getLegalMoves(shared_from_this());
         for(MovePtr potentialAttack : potentialAttacks){
             if(potentialAttack->getTargetField() == field)
                 return true;
@@ -74,15 +74,15 @@ bool State::isAttacked(FieldPtr field) {
     return false;
 }
 
-std::vector<MovePtr> State::getLegalMoves() const {
+std::vector<MovePtr> State::getLegalMoves() {
     return getLegalMoves(getTurn());
 }
 
-std::vector<MovePtr> State::getLegalMoves(PlayerColor color) const {
+std::vector<MovePtr> State::getLegalMoves(PlayerColor color) {
     std::vector<MovePtr> allLegalMoves;
     for(FieldPtr field : getBoard()->getFields()){
        if(field->isOccupiedByAlly(color)){
-           std::vector<MovePtr> figureLegalMoves = field->getUnit()->getLegalMoves((StatePtr)this);
+           std::vector<MovePtr> figureLegalMoves = field->getUnit()->getLegalMoves(shared_from_this());
            allLegalMoves.insert(std::end(allLegalMoves), std::begin(figureLegalMoves), std::end(figureLegalMoves));
        }
     }

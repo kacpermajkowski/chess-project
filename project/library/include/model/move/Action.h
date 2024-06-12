@@ -8,7 +8,7 @@
 
 #include "typedefs.h"
 
-class Action {
+class Action : public std::enable_shared_from_this<Action> {
 private:
     ActionType type;
     FieldPtr actionField;
@@ -18,7 +18,7 @@ public:
 
     ActionType getType() const;
 
-    const FieldPtr getActionField() const;
+    const FieldPtr getActionField();
 };
 
 

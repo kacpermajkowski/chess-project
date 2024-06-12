@@ -12,10 +12,10 @@ std::vector<std::vector<MoveVectorPtr>> Bishop::getPossibleMoves() const {
     std::vector<MoveVectorPtr> bottomLeft;
 
     for(int i = 1; i <=7; i++) {
-        topRight.push_back(new MoveVector(i, i));
-        topLeft.push_back(new MoveVector(i, (0-i)));
-        bottomRight.push_back(new MoveVector((0-i), i));
-        bottomLeft.push_back(new MoveVector((0-i), (0-i)));
+        topRight.push_back(std::make_shared<MoveVector>(i, i));
+        topLeft.push_back(std::make_shared<MoveVector>(i, (0-i)));
+        bottomRight.push_back(std::make_shared<MoveVector>((0-i), i));
+        bottomLeft.push_back(std::make_shared<MoveVector>((0-i), (0-i)));
     }
 
     moves.push_back(topRight);
@@ -26,10 +26,10 @@ std::vector<std::vector<MoveVectorPtr>> Bishop::getPossibleMoves() const {
     return moves;
 }
 
-std::vector<MovePtr> Bishop::getLegalMoves(StatePtr state) const {
+std::vector<MovePtr> Bishop::getLegalMoves(const StatePtr state) {
     return Unit::getLegalMoves(state);
 }
 
-std::vector<MovePtr> Bishop::getAttackingMoves(StatePtr state) const {
+std::vector<MovePtr> Bishop::getAttackingMoves(StatePtr state) {
     return getLegalMoves(state);
 }

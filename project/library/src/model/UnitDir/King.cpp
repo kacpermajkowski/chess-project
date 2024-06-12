@@ -8,14 +8,14 @@ std::vector<std::vector<MoveVectorPtr>> King::getPossibleMoves() const {
     for(int i = -1; i <=1; i++){
         for(int j = -1; j <=1; j++){
             if(!(i == 0 && j == 0)) {
-                moves.push_back(std::vector<MoveVectorPtr> {new MoveVector(i, j)});
+                moves.push_back(std::vector<MoveVectorPtr> {std::make_shared<MoveVector>(i, j)});
             }
         }
     }
     return moves;
 }
 
-std::vector<MovePtr> King::getLegalMoves(StatePtr state) const {
+std::vector<MovePtr> King::getLegalMoves(const StatePtr state) {
     std::vector<MovePtr> preLegalMoves = Unit::getLegalMoves(state);
     std::vector<MovePtr> legalMoves;
 
@@ -27,6 +27,6 @@ std::vector<MovePtr> King::getLegalMoves(StatePtr state) const {
     return legalMoves;
 }
 
-std::vector<MovePtr> King::getAttackingMoves(StatePtr state) const {
+std::vector<MovePtr> King::getAttackingMoves(StatePtr state) {
     return King::getLegalMoves(state);
 }

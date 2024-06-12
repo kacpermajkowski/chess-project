@@ -1,6 +1,8 @@
 #ifndef CHESSPROJECT_TYPEDEFS_H
 #define CHESSPROJECT_TYPEDEFS_H
 
+#include <memory>
+
 class Unit;
 class Position;
 class State;
@@ -12,16 +14,16 @@ class UI;
 class MoveVector;
 class Action;
 
-typedef Unit* UnitPtr;
-typedef Player* PlayerPtr;
-typedef Board* BoardPtr;
-typedef Field* FieldPtr;
-typedef Move* MovePtr;
-typedef State* StatePtr;
-typedef Position* PositionPtr;
-typedef UI* UIPtr;
-typedef MoveVector* MoveVectorPtr;
-typedef Action* ActionPtr;
+typedef std::shared_ptr<Unit> UnitPtr;
+typedef std::shared_ptr<Player> PlayerPtr;
+typedef std::shared_ptr<Board> BoardPtr;
+typedef std::shared_ptr<Field> FieldPtr;
+typedef std::shared_ptr<Move> MovePtr;
+typedef std::shared_ptr<State> StatePtr;
+typedef std::shared_ptr<Position> PositionPtr;
+typedef std::shared_ptr<UI> UIPtr;
+typedef std::shared_ptr<MoveVector> MoveVectorPtr;
+typedef std::shared_ptr<Action> ActionPtr;
 
 enum ActionType{
     CAPTURE,

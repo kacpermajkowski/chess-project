@@ -4,7 +4,7 @@
 #include "typedefs.h"
 #include "model/move/MoveVector.h"
 
-class Position {
+class Position : public std::enable_shared_from_this<Position>{
 private:
     LetterIndex letterIndex;
     NumberIndex numberIndex;

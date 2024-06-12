@@ -10,6 +10,6 @@ ActionType Action::getType() const {
     return type;
 }
 
-const FieldPtr Action::getActionField() const {
+const FieldPtr Action::getActionField() {
     return actionField;
 }

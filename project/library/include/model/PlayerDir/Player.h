@@ -5,7 +5,7 @@
 #include "typedefs.h"
 #include "model/move/Move.h"
 
-class Player {
+class Player : public std::enable_shared_from_this<Player>{
 private:
     PlayerColor color;
 
