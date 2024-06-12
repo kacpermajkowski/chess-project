@@ -5,6 +5,9 @@
 
 class Bishop : public Unit{
 public:
+
+    explicit Bishop(PlayerColor color) override;
+
     std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() const;
 
     std::vector<MovePtr> getLegalMoves(StatePtr state) const override;

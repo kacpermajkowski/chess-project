@@ -5,6 +5,9 @@
 
 class Queen : public Unit{
 public:
+
+    explicit Queen(PlayerColor color);
+
     std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() const;
 
     std::vector<MovePtr> getLegalMoves(StatePtr state) const override;

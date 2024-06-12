@@ -1,24 +1,32 @@
 #include <boost/test/unit_test.hpp>
 #include "model/Game.h"
 
-//#include "model/PlayerDir/HumanPlayer.h"
-//#include "model/PlayerDir/ComputerPlayer.h"
+#include "model/PlayerDir/ComputerPlayer.h"
+#include "model/PlayerDir/HumanPlayer.h"
 
-BOOST_AUTO_TEST_SUITE(TestSuiteGame)
 
-    Game game(PVP, nullptr);
+struct TestSuiteStateFixture {
 
-    //PlayerPtr whitePlayer = new HumanPlayer(WHITE);
-    //PlayerPtr blackPlayer = new ComputerPlayer(BLACK);
-    //BoardPtr board = new Board();
-    //StatePtr state = new State(board);
+    PlayerPtr firstPlayer = new ComputerPlayer(WHITE);
+    PlayerPtr secondPlayer = new HumanPlayer(BLACK);
+
+    PlayerPtr thirdPlayer = new ComputerPlayer(WHITE);
+
+};
+
+
+BOOST_FIXTURE_TEST_SUITE(TestSuiteGame, TestSuiteStateFixture)
+
 
     BOOST_AUTO_TEST_CASE(TestConstructorGame){
-//        BOOST_TEST(game.getPlayer(WHITE) == whitePlayer);
-//        BOOST_TEST(game.getPlayer(BLACK) == blackPlayer);
-        BOOST_TEST(game.getUi() == nullptr);
-//        BOOST_TEST(game.getState() == state);
-//        BOOST_TEST(game.getBoard() == board);
+        Game valid_game(firstPlayer, secondPlayer, nullptr);
+        BOOST_TEST(valid_game.getPlayer(WHITE) == firstPlayer);
+        BOOST_TEST(valid_game.getPlayer(BLACK) == secondPlayer);
+
+        BOOST_CHECK_THROW(Game invalid_game(firstPlayer, thirdPlayer, nullptr), std::invalid_argument);
     }
+
+    //TODO: getState, getUI
+
 
 BOOST_AUTO_TEST_SUITE_END()

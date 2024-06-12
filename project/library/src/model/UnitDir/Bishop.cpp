@@ -1,6 +1,8 @@
 #include "model/UnitDir/Bishop.h"
 #include "model/State.h"
 
+Bishop::Bishop(PlayerColor color) : Unit(color) {}
+
 std::vector<std::vector<MoveVectorPtr>> Bishop::getPossibleMoves() const {
     std::vector<std::vector<MoveVectorPtr>> moves;
 

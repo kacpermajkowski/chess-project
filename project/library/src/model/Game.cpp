@@ -23,12 +23,11 @@ Game::Game(PlayerPtr firstPlayer, PlayerPtr secondPlayer, UIPtr ui) {
 }
 
 PlayerPtr Game::getPlayer(PlayerColor color) const {
-    if(firstPlayer->getColor() == color)
+    if (firstPlayer->getColor() == color)
         return firstPlayer;
     else
         return secondPlayer;
-BoardPtr Game::getBoard() const {
-    return nullptr;
 }
+
 
 

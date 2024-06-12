@@ -1,6 +1,8 @@
 #include "model/UnitDir/Rook.h"
 #include "model/State.h"
 
+Rook::Rook(PlayerColor color) : Unit(color) {}
+
 std::vector<std::vector<MoveVectorPtr>> Rook::getPossibleMoves() const {
     std::vector<std::vector<MoveVectorPtr>> moves;
 

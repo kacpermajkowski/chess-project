@@ -15,7 +15,7 @@ NumberIndex Position::getNumberIndex() const {
     return numberIndex;
 }
 
-Position *Position::applyMoveVector(MoveVectorPtr vector) const {
+PositionPtr Position::applyMoveVector(MoveVectorPtr vector) const {
     int newColumn = letterIndex + vector->getColumnOffset();
     int newRow = numberIndex + vector->getRowOffset();
     if(newColumn >= 0 && newColumn <= 7){

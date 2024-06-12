@@ -1,6 +1,8 @@
 #include "model/UnitDir/King.h"
 #include "model/State.h"
 
+King::King(PlayerColor color) : Unit(color) {}
+
 std::vector<std::vector<MoveVectorPtr>> King::getPossibleMoves() const {
     std::vector<std::vector<MoveVectorPtr>> moves;
     for(int i = -1; i <=1; i++){

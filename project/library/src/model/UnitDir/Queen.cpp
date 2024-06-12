@@ -1,6 +1,8 @@
 #include "model/UnitDir/Queen.h"
 #include "model/State.h"
 
+Queen::Queen(PlayerColor color) : Unit(color) {}
+
 std::vector<std::vector<MoveVectorPtr>> Queen::getPossibleMoves() const {
     std::vector<std::vector<MoveVectorPtr>> moves;
 

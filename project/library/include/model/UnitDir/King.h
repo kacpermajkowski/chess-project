@@ -5,6 +5,9 @@
 
 class King : public Unit{
 public:
+
+    explicit King(PlayerColor color);
+
     std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() const;
 
     std::vector<MovePtr> getLegalMoves(StatePtr state) const override;

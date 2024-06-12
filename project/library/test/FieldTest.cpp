@@ -1,25 +1,46 @@
 #include <boost/test/unit_test.hpp>
 #include "model/Field.h"
 
-#include "model/UnitDir/Rook.h"
+#include "model/UnitDir/Queen.h"
 
-BOOST_AUTO_TEST_SUITE(TestSuiteField)
+
+struct TestSuiteFieldFixture {
+
+    UnitPtr unitWhite = new Queen(WHITE);
+    UnitPtr unitBlack = new Queen(BLACK);
 
     PositionPtr position = new Position(A, _5);
-    UnitPtr rookBlack = new Rook(BLACK);
-    UnitPtr rookWhite = new Rook(WHITE);
-    Field field(position, rookBlack);
+};
+
+BOOST_FIXTURE_TEST_SUITE(TestSuiteField, TestSuiteFieldFixture)
 
     BOOST_AUTO_TEST_CASE(TestConstructorField){
+        Field field(position, unitWhite);
         BOOST_TEST(field.getPosition() == position);
-        BOOST_TEST(field.getUnit() == rookBlack);
+        BOOST_TEST(field.getUnit() == unitWhite);
     }
 
-    BOOST_AUTO_TEST_CASE(TestSetterField){
-        field.setUnit(rookWhite);
-        BOOST_TEST(field.getUnit() == rookWhite);
+    BOOST_AUTO_TEST_CASE(TestUnitSetterField){
+        Field field(position, unitWhite);
+        BOOST_TEST(field.getUnit() == unitWhite);
+        field.setUnit(unitBlack);
+        BOOST_TEST(field.getUnit() == unitBlack);
     }
 
-    //test for getPromotionField()
+    BOOST_AUTO_TEST_CASE(TestIsOccupiedField){
+        Field field(position, unitWhite);
+        BOOST_TEST(field.isOccupiedByEnemy(WHITE) == false);
+        BOOST_TEST(field.isOccupiedByEnemy(BLACK) == true);
+
+        BOOST_TEST(field.isOccupiedByEnemy(unitWhite) == false);
+        BOOST_TEST(field.isOccupiedByEnemy(unitBlack) == true);
+
+        BOOST_TEST(field.isOccupiedByAlly(WHITE) == true);
+        BOOST_TEST(field.isOccupiedByAlly(BLACK) == false);
+
+        BOOST_TEST(field.isOccupiedByAlly(unitWhite) == true);
+        BOOST_TEST(field.isOccupiedByAlly(unitBlack) == false);
+    }
+
 
 BOOST_AUTO_TEST_SUITE_END()

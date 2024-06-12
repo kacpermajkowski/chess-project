@@ -1,6 +1,8 @@
 #include "model/UnitDir/Knight.h"
 #include "model/State.h"
 
+Knight::Knight(PlayerColor color) : Unit(color) {}
+
 std::vector<std::vector<MoveVectorPtr>> Knight::getPossibleMoves() const {
     return std::vector<std::vector<MoveVectorPtr>>{
             std::vector<MoveVectorPtr> {new MoveVector(2, 1)},

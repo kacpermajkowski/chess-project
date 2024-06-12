@@ -9,4 +9,6 @@ BOOST_AUTO_TEST_SUITE(TestSuitePosition)
         BOOST_TEST(position.getNumberIndex() == _5);
     }
 
+    //TODO: test applyMoveVector - MoveVectorPtr first
+
 BOOST_AUTO_TEST_SUITE_END()

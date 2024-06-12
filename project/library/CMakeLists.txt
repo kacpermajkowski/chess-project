@@ -12,15 +12,16 @@ set(SOURCE_FILES
         src/model/PlayerDir/Player.cpp
         src/model/PlayerDir/HumanPlayer.cpp
         src/model/PlayerDir/ComputerPlayer.cpp
-    src/model/State.cpp
-    src/model/Game.cpp
-    src/model/Board.cpp
-    src/model/Field.cpp
+        src/model/State.cpp
+        src/model/Game.cpp
+        src/model/Board.cpp
+        src/model/Field.cpp
         src/model/move/Move.cpp
-    src/model/Position.cpp
+        src/model/Position.cpp
         src/model/ui/TextUI.cpp
         src/model/move/MoveVector.cpp
-        include/model/move/Action.cpp
+        src/model/move/Action.cpp
+        include/typedefs.h
 )
 
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
@@ -28,7 +29,7 @@ add_library(Library ${SOURCE_FILES})
 
 target_include_directories(Library PUBLIC include)
 
-enable_testing() 
+enable_testing()
 find_package (Boost 1.60.0 COMPONENTS "unit_test_framework" REQUIRED)
 
 include_directories(
@@ -46,7 +47,7 @@ set(SOURCE_TEST_FILES
         test/StateTest.cpp
         test/UnitTest.cpp
         test/PlayerTest.cpp
-        include/model/move/MoveVector.h
+        ${SOURCE_FILES}
 )
 
 add_executable (LibraryTester ${SOURCE_TEST_FILES})
@@ -63,7 +64,7 @@ add_test(LibraryTest LibraryTester
         --report_level=detailed
         --log_level=all
         --color_output=yes
-        )
+)
 
 add_custom_target(check ${CMAKE_COMMAND} -E env CTEST_OUTPUT_ON_FAILURE=1 BOOST_TEST_LOG_LEVEL=all
         ${CMAKE_CTEST_COMMAND} -C $<CONFIGURATION> --verbose

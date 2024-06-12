@@ -5,6 +5,9 @@
 
 class Knight : public Unit{
 public:
+
+    explicit Knight(PlayerColor color);
+
     std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() const;
 
     std::vector<MovePtr> getLegalMoves(StatePtr state) const override;
