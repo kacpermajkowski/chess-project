@@ -5,8 +5,9 @@
 
 class Rook : public Unit{
 public:
-    std::vector<Move> getLegalMoves() const override;
+    Rook(PlayerColor color);
 
+    std::vector<Move> getLegalMoves() const override;
 };
 
 

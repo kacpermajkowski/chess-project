@@ -1,12 +1,9 @@
-//
-// Created by user on 11.06.2024.
-//
-
 #ifndef CHESSPROJECT_TEXTUI_H
 #define CHESSPROJECT_TEXTUI_H
 
+#include "UI.h"
 
-class TextUI {
+class TextUI : UI{
 
 };
 

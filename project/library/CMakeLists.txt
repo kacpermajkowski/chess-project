@@ -19,7 +19,6 @@ set(SOURCE_FILES
     src/model/Move.cpp
     src/model/Position.cpp
         src/model/ui/TextUI.cpp
-        include/model/ui/TextUI.h
 )
 
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
@@ -37,13 +36,21 @@ include_directories(
 
 set(SOURCE_TEST_FILES
         test/master.cpp
+        test/BoardTest.cpp
+        test/FieldTest.cpp
+        test/GameTest.cpp
+        test/MoveTest.cpp
+        test/PositionTest.cpp
+        test/StateTest.cpp
+        test/UnitTest.cpp
+        test/PlayerTest.cpp
 )
 
 add_executable (LibraryTester ${SOURCE_TEST_FILES})
 
 #dołącz bibliotekę z testowanymi klasami oraz bibliotekę boost.test do programu testów
 target_link_libraries (LibraryTester
-        library
+        Library
         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
 )
 

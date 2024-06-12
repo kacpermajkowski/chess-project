@@ -9,7 +9,7 @@
 class State {
 private:
     std::vector<MovePtr> moveHistory;
-    unsigned int movesWithoutCapture;
+    unsigned int movesWithoutCapture = 0;
     Conclusion conclusion = IN_PROGRESS;
     PlayerColor turn;
     bool check;

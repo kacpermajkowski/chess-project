@@ -1,16 +1,24 @@
 #include "model/Game.h"
 
+Game::Game(GameType gameType, UIPtr ui) {
+
+}
+
 Game::~Game() {}
 
-State *Game::getState() const {
+StatePtr Game::getState() const {
     return state;
 }
 
-UI *Game::getUi() const {
+UIPtr Game::getUi() const {
     return ui;
 }
 
-Board *Game::getBoard() const {
+BoardPtr Game::getBoard() const {
+    return nullptr;
+}
+
+PlayerPtr Game::getPlayer(PlayerColor color) const {
     return nullptr;
 }
 

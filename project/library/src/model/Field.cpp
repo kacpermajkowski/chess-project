@@ -1,19 +1,17 @@
 #include "model/Field.h"
 
-
-Field::Field(Position *position, Unit *unit) : position(position), unit(unit) {}
+Field::Field(PositionPtr position, UnitPtr unit) {}
 Field::~Field() {}
 
-Position *Field::getPosition() const {
+PositionPtr Field::getPosition() const {
     return position;
 }
 
-Unit *Field::getUnit() const {
+UnitPtr Field::getUnit() const {
     return unit;
 }
 
-
-void Field::setUnit(Unit *unit) {
+void Field::setUnit(UnitPtr unit) {
     Field::unit = unit;
 }
 
