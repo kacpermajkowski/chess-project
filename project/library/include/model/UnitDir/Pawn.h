@@ -4,8 +4,12 @@
 #include "Unit.h"
 
 class Pawn : public Unit{
+private:
+    NumberIndex promotionRow = _8;
 public:
-    std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() const;
+    explicit Pawn(PlayerColor color);
+
+    std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() const override;
 
     std::vector<MovePtr> getLegalMoves(StatePtr state) const override;
 

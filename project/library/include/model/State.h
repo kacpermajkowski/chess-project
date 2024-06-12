@@ -9,21 +9,22 @@
 class State {
 private:
     std::vector<MovePtr> moveHistory;
-    unsigned int movesWithoutCapture = 0;
+    unsigned int fiftyMoveRuleCounter = 0;
     Conclusion conclusion = IN_PROGRESS;
-    PlayerColor turn;
-    bool check;
+    PlayerColor turn = WHITE;
+    bool check = false;
     std::vector<UnitPtr> takenPieces;
     BoardPtr board;
 
 public:
 
-    explicit State(BoardPtr board);
+    explicit State();
     virtual ~State();
 
-    std::vector<MovePtr> getLegalMoves() const;
     void conclude(Conclusion conclusion);
     void registerMove(MovePtr move);
+    std::vector<MovePtr> getLegalMoves(PlayerColor color) const;
+    std::vector<MovePtr> getLegalMoves() const;
 
     bool isCheck() const;
     Conclusion getConclusion() const;
@@ -35,6 +36,8 @@ public:
 
     bool isAttacked(FieldPtr field);
     bool hasConcluded() const;
+
+
 };
 
 

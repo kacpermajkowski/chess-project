@@ -15,11 +15,11 @@ Move::Move(const UnitPtr movedUnit, const FieldPtr currentField, const FieldPtr 
 
 }
 
-const FieldPtr Move::getStartingPosition() const {
+const FieldPtr Move::getCurrentField() const {
     return currentField;
 }
 
-const FieldPtr Move::getTargetPosition() const {
+const FieldPtr Move::getTargetField() const {
     return targetField;
 }
 

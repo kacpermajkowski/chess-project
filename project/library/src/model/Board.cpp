@@ -19,3 +19,11 @@ FieldPtr Board::getField(UnitPtr unit) const {
     }
     return nullptr;
 }
+
+const std::vector<FieldPtr> &Board::getFields() const {
+    return fields;
+}
+
+Board::Board() {
+    //TODO: Initialize fields
+}

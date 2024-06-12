@@ -18,7 +18,7 @@ public:
 
     ActionType getType() const;
 
-    const Field *getActionField() const;
+    const FieldPtr getActionField() const;
 };
 
 
