@@ -6,13 +6,14 @@
 
 class Board {
 private:
-    Field fields[8][8];
+    std::vector<FieldPtr> fields;
 
 public:
     explicit Board();
     virtual ~Board();
 
-    FieldPtr getField(Position position) const;
+    FieldPtr getField(PositionPtr position) const;
+    FieldPtr getField(UnitPtr unit) const;
 };
 
 

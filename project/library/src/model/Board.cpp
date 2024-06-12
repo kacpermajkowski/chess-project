@@ -1,12 +1,21 @@
 #include "model/Board.h"
 
-//Board::Board() {}
-//
-//Board::~Board() {}
-//
-//FieldPtr Board::getField(Position position) const {
-//    return nullptr;
-//}
+FieldPtr Board::getField(PositionPtr position) const {
+    for(FieldPtr f : fields){
+        if(f->getPosition()->getLetterIndex() == position->getLetterIndex()){
+            if(f->getPosition()->getNumberIndex() == position->getNumberIndex()){
+                return f;
+            }
+        }
+    }
+    return nullptr;
+}
 
-
-
+FieldPtr Board::getField(UnitPtr unit) const {
+    for(FieldPtr f : fields){
+        if(f->getUnit() == unit){
+            return f;
+        }
+    }
+    return nullptr;
+}

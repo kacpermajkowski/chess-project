@@ -3,7 +3,7 @@
 State::State(BoardPtr board) : board(board) {}
 State::~State() {}
 
-const std::vector<MovePtr> &State::getMoveHistory() const {
+const std::vector<MovePtr> & State::getMoveHistory() const {
     return moveHistory;
 }
 
@@ -19,7 +19,8 @@ PlayerColor State::getTurn() const {
     return turn;
 }
 
-const std::vector<UnitPtr> &State::getTakenPieces() const {
+
+const std::vector<UnitPtr> & State::getTakenPieces() const {
     return takenPieces;
 }
 
@@ -37,20 +38,7 @@ void State::conclude(Conclusion conclusion) {
 }
 
 bool State::isAttacked(FieldPtr field) {
+    //TODO: make
     return false;
 }
-
-bool State::hasConcluded() const {
-    if(this->conclusion == IN_PROGRESS) return false;
-    else return true;
-}
-
-std::vector<MovePtr> State::getLegalMoves() const {
-    return std::vector<MovePtr>();
-}
-
-bool State::isCheck() const {
-    return false;
-}
-
 

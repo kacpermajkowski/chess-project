@@ -1,0 +1,24 @@
+//
+// Created by user on 11.06.2024.
+//
+
+#ifndef CHESSPROJECT_MOVEVECTOR_H
+#define CHESSPROJECT_MOVEVECTOR_H
+
+
+class MoveVector {
+private:
+    const int rowOffset;
+    const int columnOffset;
+
+public:
+    MoveVector(const int rowOffset, const int columnOffset);
+
+    int getRowOffset() const;
+
+    int getColumnOffset() const;
+
+};
+
+
+#endif //CHESSPROJECT_MOVEVECTOR_H

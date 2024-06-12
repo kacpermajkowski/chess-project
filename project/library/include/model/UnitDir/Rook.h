@@ -5,9 +5,12 @@
 
 class Rook : public Unit{
 public:
-    Rook(PlayerColor color);
+    std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() const;
 
-    std::vector<Move> getLegalMoves() const override;
+    std::vector<MovePtr> getAttackingMoves(StatePtr state) const override;
+
+    std::vector<MovePtr> getLegalMoves(StatePtr state) const override;
+
 };
 
 
