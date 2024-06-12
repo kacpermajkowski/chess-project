@@ -6,30 +6,28 @@ const UnitPtr Move::getMovedUnit() const {
     return movedUnit;
 }
 
-const UnitPtr Move::getTakenUnit() const {
-    return takenUnit;
-}
 
-void Move::setTakenUnit(const UnitPtr takenUnit) {
-    Move::takenUnit = takenUnit;
-}
-
-void Move::setType(MoveType type) {
-    Move::type = type;
-}
-
-Move::Move(const UnitPtr movedUnit, const FieldPtr startingPosition, const FieldPtr targetPosition) :
-    movedUnit(movedUnit),
-    startingPosition(startingPosition),
-    targetPosition(targetPosition)
+Move::Move(const UnitPtr movedUnit, const FieldPtr currentField, const FieldPtr targetField) :
+        movedUnit(movedUnit),
+        currentField(currentField),
+        targetField(targetField)
 {
 
 }
 
 const FieldPtr Move::getStartingPosition() const {
-    return startingPosition;
+    return currentField;
 }
 
 const FieldPtr Move::getTargetPosition() const {
-    return targetPosition;
+    return targetField;
 }
+
+const ActionPtr Move::getAction() const {
+    return action;
+}
+
+void Move::setAction(const ActionPtr action) {
+    Move::action = action;
+}
+

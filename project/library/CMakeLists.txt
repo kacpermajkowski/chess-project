@@ -20,6 +20,7 @@ set(SOURCE_FILES
     src/model/Position.cpp
         src/model/ui/TextUI.cpp
         src/model/move/MoveVector.cpp
+        include/model/move/Action.cpp
 )
 
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł

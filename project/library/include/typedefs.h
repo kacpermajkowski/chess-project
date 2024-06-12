@@ -10,6 +10,7 @@ class Field;
 class Move;
 class UI;
 class MoveVector;
+class Action;
 
 typedef Unit* UnitPtr;
 typedef Player* PlayerPtr;
@@ -20,14 +21,12 @@ typedef State* StatePtr;
 typedef Position* PositionPtr;
 typedef UI* UIPtr;
 typedef MoveVector* MoveVectorPtr;
+typedef Action* ActionPtr
 
-enum MoveType{
-    REGULAR,
-    EN_PASSANT_TAKE,
-    REGULAR_TAKE,
-    LONG_CASTLE,
-    SHORT_CASTLE,
-
+enum ActionType{
+    NONE,
+    TAKE,
+    CASTLE,
 };
 
 enum PlayerColor{

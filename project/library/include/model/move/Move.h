@@ -2,30 +2,27 @@
 #define CHESSPROJECT_MOVE_H
 
 #include "model/Position.h"
+#include "model/Field.h"
+#include "Action.h"
 
 class Move {
 private:
-    FieldPtr startingPosition;
-    FieldPtr targetPosition;
+    FieldPtr currentField;
+    FieldPtr targetField;
     UnitPtr movedUnit;
-    UnitPtr takenUnit = nullptr;
-    MoveType type = REGULAR;
+    ActionPtr action = nullptr;
 public:
-    Move(const UnitPtr movedUnit, const FieldPtr startingPosition, const FieldPtr targetPosition);
+    Move(const UnitPtr movedUnit, const FieldPtr currentField, const FieldPtr targetField);
 
     virtual ~Move();
 
-    UnitPtr const getMovedUnit() const;
-
-    UnitPtr const getTakenUnit() const;
+    const UnitPtr getMovedUnit() const;
 
     const FieldPtr getStartingPosition() const;
-
     const FieldPtr getTargetPosition() const;
+    const ActionPtr getAction() const;
 
-    void setTakenUnit(const UnitPtr takenUnit);
-
-    void setType(MoveType type);
+    void setAction(const ActionPtr action);
 
 };
 

@@ -19,7 +19,11 @@ public:
     virtual std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() const = 0;
     virtual std::vector<MovePtr> getAttackingMoves(StatePtr state) const = 0;
 
+private:
+    std::vector<MovePtr> getLegalMovesNoCheck(StatePtr state) const;
+    std::vector<MovePtr> getCheckBreakingMoves(StatePtr state) const;
 
+    FieldPtr getCurrentField(StatePtr state) const;
 };
 
 
