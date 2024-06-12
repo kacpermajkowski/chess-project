@@ -22,32 +22,19 @@ std::vector<std::vector<MoveVectorPtr>> Pawn::getPossibleMoves() const {
 }
 
 std::vector<MovePtr> Pawn::getLegalMoves(StatePtr state) const {
+    std::vector<MovePtr> preLegalMoves = Unit::getLegalMoves(state);
     std::vector<MovePtr> legalMoves;
-    if(!state->isCheck()){
-        FieldPtr field = state->getBoard()->getField((UnitPtr)this);
-        PositionPtr curPos = field->getPosition();
-        for(std::vector<MoveVectorPtr> branch : getPossibleMoves()){
-            for(MoveVectorPtr mvp : branch){
-                PositionPtr newPos = curPos->applyMoveVector(mvp);
-                if(newPos != nullptr){
-                    FieldPtr tryToMoveField = state->getBoard()->getField(newPos);
-                    if(mvp->getColumnOffset() == 0){
-                        if(!tryToMoveField->isOccupied()){
-                            legalMoves.push_back(new Move((UnitPtr)this, newPos, curPos));
-                        } else break;
-                    } else {
-                        if(tryToMoveField->isOccupied()){
-                            if(tryToMoveField->getUnit()->getColor() != this->getColor()){
-                                MovePtr move = new Move((UnitPtr)this, newPos, curPos);
-                                move->setTakenUnit(tryToMoveField->getUnit());
-                                move->setType(REGULAR_TAKE);
-                                legalMoves.push_back(move);
-                            }
-                            break;
-                        }
-                    }
-
+    for(MovePtr move : preLegalMoves)
+    {
+        if(move->getTargetPosition()->getPosition()->getLetterIndex() != move->getStartingPosition()->getPosition()->getLetterIndex()){
+            if(move->getTargetPosition()->isOccupied()){
+                if(move->getTargetPosition()->getUnit()->getColor() != getColor()){
+                    legalMoves.push_back(move);
                 }
+            }
+        } else {
+            if(!move->getTargetPosition()->isOccupied()){
+                legalMoves.push_back(move);
             }
         }
     }
@@ -55,32 +42,13 @@ std::vector<MovePtr> Pawn::getLegalMoves(StatePtr state) const {
     return legalMoves;
 }
 
-std::vector<MovePtr> Pawn::getLegalAttackingMoves(StatePtr state) const {
+std::vector<MovePtr> Pawn::getAttackingMoves(StatePtr state) const {
+    std::vector<MovePtr> preLegalMoves = Pawn::getLegalMoves(state);
     std::vector<MovePtr> legalMoves;
-    if(!state->isCheck()){
-        FieldPtr field = state->getBoard()->getField((UnitPtr)this);
-        PositionPtr curPos = field->getPosition();
-        for(std::vector<MoveVectorPtr> branch : getPossibleMoves()){
-            for(MoveVectorPtr mvp : branch){
-                if(mvp->getColumnOffset() != 0){
-                    PositionPtr newPos = curPos->applyMoveVector(mvp);
-                    if(newPos != nullptr){
-                        FieldPtr tryToMoveField = state->getBoard()->getField(newPos);
-                        if(tryToMoveField->isOccupied()){
-                            if(tryToMoveField->getUnit()->getColor() != this->getColor()){
-                                MovePtr move = new Move((UnitPtr)this, newPos, curPos);
-                                move->setTakenUnit(tryToMoveField->getUnit());
-                                move->setType(REGULAR_TAKE);
-                                legalMoves.push_back(move);
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
+    for(MovePtr move : preLegalMoves) {
+        if(move->getTargetPosition()->getPosition()->getLetterIndex() != move->getStartingPosition()->getPosition()->getLetterIndex()){
+            legalMoves.push_back(move);
         }
     }
-
     return legalMoves;
-
 }

@@ -1,18 +1,6 @@
 #include "model/move/Move.h"
 
-Move::Move(UnitPtr movedUnit, PositionPtr targetPosition, PositionPtr startingPosition)
-        : startingPosition(startingPosition),
-          targetPosition(targetPosition) {}
-
 Move::~Move() {}
-
-PositionPtr Move::getStartingPosition() const {
-    return startingPosition;
-}
-
-PositionPtr Move::getTargetPosition() const {
-    return targetPosition;
-}
 
 const UnitPtr Move::getMovedUnit() const {
     return movedUnit;
@@ -28,4 +16,20 @@ void Move::setTakenUnit(const UnitPtr takenUnit) {
 
 void Move::setType(MoveType type) {
     Move::type = type;
+}
+
+Move::Move(const UnitPtr movedUnit, const FieldPtr startingPosition, const FieldPtr targetPosition) :
+    movedUnit(movedUnit),
+    startingPosition(startingPosition),
+    targetPosition(targetPosition)
+{
+
+}
+
+const FieldPtr Move::getStartingPosition() const {
+    return startingPosition;
+}
+
+const FieldPtr Move::getTargetPosition() const {
+    return targetPosition;
 }

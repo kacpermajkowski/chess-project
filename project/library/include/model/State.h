@@ -29,9 +29,9 @@ public:
     Conclusion getConclusion() const;
     PlayerColor getTurn() const;
     BoardPtr getBoard() const;
-    const std::vector<UnitPtr> &getTakenPieces() const;
+    const std::vector<UnitPtr> & getTakenPieces() const;
     unsigned int getMovesWithoutCapture() const;
-    const std::vector<MovePtr> &getMoveHistory() const;
+    const std::vector<MovePtr> & getMoveHistory() const;
 
     bool isAttacked(FieldPtr field);
     bool hasConcluded() const;

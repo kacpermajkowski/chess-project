@@ -3,7 +3,7 @@
 State::State(Board *board) : board(board) {}
 State::~State() {}
 
-const std::vector<Move *> &State::getMoveHistory() const {
+const std::vector<MovePtr> & State::getMoveHistory() const {
     return moveHistory;
 }
 
@@ -20,7 +20,7 @@ PlayerColor State::getTurn() const {
 }
 
 
-const std::vector<Unit *> &State::getTakenPieces() const {
+const std::vector<UnitPtr> & State::getTakenPieces() const {
     return takenPieces;
 }
 

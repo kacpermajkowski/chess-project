@@ -5,21 +5,23 @@
 
 class Move {
 private:
-    PositionPtr startingPosition;
-    PositionPtr targetPosition;
+    FieldPtr startingPosition;
+    FieldPtr targetPosition;
     UnitPtr movedUnit;
     UnitPtr takenUnit = nullptr;
     MoveType type = REGULAR;
 public:
-    Move(UnitPtr movedUnit, PositionPtr targetPosition, PositionPtr startingPosition);
+    Move(const UnitPtr movedUnit, const FieldPtr startingPosition, const FieldPtr targetPosition);
+
     virtual ~Move();
 
     UnitPtr const getMovedUnit() const;
 
     UnitPtr const getTakenUnit() const;
 
-    PositionPtr getStartingPosition() const;
-    PositionPtr getTargetPosition() const;
+    const FieldPtr getStartingPosition() const;
+
+    const FieldPtr getTargetPosition() const;
 
     void setTakenUnit(const UnitPtr takenUnit);
 

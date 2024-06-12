@@ -15,8 +15,9 @@ public:
 
     PlayerColor getColor() const;
 
-    virtual std::vector<MovePtr> getLegalMoves(StatePtr state) const = 0;
-    virtual std::vector<MovePtr> getLegalAttackingMoves(StatePtr state) const = 0;
+    virtual std::vector<MovePtr> getLegalMoves(StatePtr state) const;
+    virtual std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() const = 0;
+    virtual std::vector<MovePtr> getAttackingMoves(StatePtr state) const = 0;
 
 
 };
