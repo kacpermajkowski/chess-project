@@ -7,6 +7,16 @@
 
 
 class MoveVector {
+private:
+    const int rowOffset;
+    const int columnOffset;
+
+public:
+    MoveVector(const int rowOffset, const int columnOffset);
+
+    int getRowOffset() const;
+
+    int getColumnOffset() const;
 
 };
 

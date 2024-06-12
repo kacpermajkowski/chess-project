@@ -2,7 +2,7 @@
 #define CHESSPROJECT_STATE_H
 
 #include <vector>
-#include "Move.h"
+#include "model/move/Move.h"
 #include "typedefs.h"
 #include "Board.h"
 

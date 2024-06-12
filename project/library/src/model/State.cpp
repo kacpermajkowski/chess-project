@@ -37,3 +37,8 @@ void State::conclude(Conclusion conclusion) {
         this->conclusion = conclusion;
 }
 
+bool State::isAttacked(FieldPtr field) {
+    //TODO: make
+    return false;
+}
+

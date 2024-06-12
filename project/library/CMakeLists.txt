@@ -16,10 +16,10 @@ set(SOURCE_FILES
     src/model/Game.cpp
     src/model/Board.cpp
     src/model/Field.cpp
-    src/model/Move.cpp
+        src/model/move/Move.cpp
     src/model/Position.cpp
         src/model/ui/TextUI.cpp
-        include/model/ui/TextUI.h
+        src/model/move/MoveVector.cpp
 )
 
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
@@ -37,6 +37,7 @@ include_directories(
 
 set(SOURCE_TEST_FILES
         test/master.cpp
+        include/model/move/MoveVector.h
 )
 
 add_executable (LibraryTester ${SOURCE_TEST_FILES})

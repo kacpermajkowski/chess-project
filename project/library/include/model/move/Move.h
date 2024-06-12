@@ -1,20 +1,29 @@
 #ifndef CHESSPROJECT_MOVE_H
 #define CHESSPROJECT_MOVE_H
 
-#include "Position.h"
+#include "model/Position.h"
 
 class Move {
 private:
     PositionPtr startingPosition;
     PositionPtr targetPosition;
-    PlayerColor moverColor;
+    UnitPtr movedUnit;
+    UnitPtr takenUnit = nullptr;
+    MoveType type = REGULAR;
 public:
-    Move(PositionPtr startingPosition, PositionPtr targetPosition);
+    Move(UnitPtr movedUnit, PositionPtr targetPosition, PositionPtr startingPosition);
     virtual ~Move();
 
-    PositionPtr getStartingPosition() const;
+    UnitPtr const getMovedUnit() const;
 
+    UnitPtr const getTakenUnit() const;
+
+    PositionPtr getStartingPosition() const;
     PositionPtr getTargetPosition() const;
+
+    void setTakenUnit(const UnitPtr takenUnit);
+
+    void setType(MoveType type);
 
 };
 

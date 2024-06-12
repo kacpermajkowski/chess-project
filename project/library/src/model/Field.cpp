@@ -12,7 +12,6 @@ Unit *Field::getUnit() const {
     return unit;
 }
 
-
 void Field::setUnit(Unit *unit) {
     Field::unit = unit;
 }

@@ -3,7 +3,7 @@
 
 
 #include "typedefs.h"
-#include "model/Move.h"
+#include "model/move/Move.h"
 
 class Player {
 private:

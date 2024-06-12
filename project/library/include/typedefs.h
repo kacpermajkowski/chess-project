@@ -9,6 +9,7 @@ class Board;
 class Field;
 class Move;
 class UI;
+class MoveVector;
 
 typedef Unit* UnitPtr;
 typedef Player* PlayerPtr;
@@ -18,7 +19,16 @@ typedef Move* MovePtr;
 typedef State* StatePtr;
 typedef Position* PositionPtr;
 typedef UI* UIPtr;
+typedef MoveVector* MoveVectorPtr;
 
+enum MoveType{
+    REGULAR,
+    EN_PASSANT_TAKE,
+    REGULAR_TAKE,
+    LONG_CASTLE,
+    SHORT_CASTLE,
+
+};
 
 enum PlayerColor{
     BLACK,
