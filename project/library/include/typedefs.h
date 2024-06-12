@@ -21,12 +21,12 @@ typedef State* StatePtr;
 typedef Position* PositionPtr;
 typedef UI* UIPtr;
 typedef MoveVector* MoveVectorPtr;
-typedef Action* ActionPtr
+typedef Action* ActionPtr;
 
 enum ActionType{
-    NONE,
-    TAKE,
+    CAPTURE,
     CASTLE,
+    PROMOTION
 };
 
 enum PlayerColor{

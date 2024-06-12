@@ -18,8 +18,8 @@ public:
 
     const UnitPtr getMovedUnit() const;
 
-    const FieldPtr getStartingPosition() const;
-    const FieldPtr getTargetPosition() const;
+    const FieldPtr getCurrentField() const;
+    const FieldPtr getTargetField() const;
     const ActionPtr getAction() const;
 
     void setAction(const ActionPtr action);

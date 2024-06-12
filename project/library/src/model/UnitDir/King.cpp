@@ -18,7 +18,7 @@ std::vector<MovePtr> King::getLegalMoves(StatePtr state) const {
     std::vector<MovePtr> legalMoves;
 
     for(MovePtr move : preLegalMoves){
-        if(!state->isAttacked(move->getTargetPosition()))
+        if(!state->isAttacked(move->getTargetField()))
             legalMoves.push_back(move);
     }
 

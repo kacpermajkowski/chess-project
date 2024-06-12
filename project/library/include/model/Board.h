@@ -14,6 +14,8 @@ public:
 
     FieldPtr getField(PositionPtr position) const;
     FieldPtr getField(UnitPtr unit) const;
+
+    const std::vector<FieldPtr> &getFields() const;
 };
 
 

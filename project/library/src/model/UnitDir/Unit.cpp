@@ -8,7 +8,7 @@ PlayerColor Unit::getColor() const {
     return color;
 }
 
-std::vector<MovePtr> Unit::getLegalMoves(StatePtr state) const {
+std::vector<MovePtr> Unit::getLegalMoves(const StatePtr state) const {
     std::vector<MovePtr> legalMoves;
     if(state->isCheck()){
         legalMoves = getCheckBreakingMoves(state);
@@ -19,7 +19,7 @@ std::vector<MovePtr> Unit::getLegalMoves(StatePtr state) const {
     return legalMoves;
 }
 
-std::vector<MovePtr> Unit::getLegalMovesNoCheck(StatePtr state) const{
+std::vector<MovePtr> Unit::getLegalMovesNoCheck(const StatePtr state) const{
     std::vector<MovePtr> legalMoves;
 
     FieldPtr field = getCurrentField(state);
@@ -43,7 +43,7 @@ std::vector<MovePtr> Unit::getLegalMovesNoCheck(StatePtr state) const{
             //Jeżeli jest zajęte, ale przez przeciwnika, to możemy się tam ruszyć i zbić
             if(targetField->isOccupiedByEnemy((UnitPtr) this)){
                 MovePtr move = new Move((UnitPtr)this, field, targetField);
-                move->setAction(new Action(TAKE, targetField));
+                move->setAction(new Action(CAPTURE, targetField));
                 legalMoves.push_back(move);
             }
 
@@ -55,11 +55,11 @@ std::vector<MovePtr> Unit::getLegalMovesNoCheck(StatePtr state) const{
     return legalMoves;
 }
 
-std::vector<MovePtr> Unit::getCheckBreakingMoves(StatePtr state) const {
+std::vector<MovePtr> Unit::getCheckBreakingMoves(const StatePtr state) const {
     return std::vector<MovePtr>();
 }
 
-FieldPtr Unit::getCurrentField(StatePtr state) const{
+FieldPtr Unit::getCurrentField(const StatePtr state) const{
     return state->getBoard()->getField((UnitPtr)this);
 }
 

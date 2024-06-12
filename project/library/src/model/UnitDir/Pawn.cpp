@@ -26,14 +26,14 @@ std::vector<MovePtr> Pawn::getLegalMoves(StatePtr state) const {
     std::vector<MovePtr> legalMoves;
     for(MovePtr move : preLegalMoves)
     {
-        if(move->getTargetPosition()->getPosition()->getLetterIndex() != move->getStartingPosition()->getPosition()->getLetterIndex()){
-            if(move->getTargetPosition()->isOccupied()){
-                if(move->getTargetPosition()->getUnit()->getColor() != getColor()){
+        if(move->getTargetField()->getPosition()->getLetterIndex() != move->getCurrentField()->getPosition()->getLetterIndex()){
+            if(move->getTargetField()->isOccupied()){
+                if(move->getTargetField()->getUnit()->getColor() != getColor()){
                     legalMoves.push_back(move);
                 }
             }
         } else {
-            if(!move->getTargetPosition()->isOccupied()){
+            if(!move->getTargetField()->isOccupied()){
                 legalMoves.push_back(move);
             }
         }
@@ -46,9 +46,13 @@ std::vector<MovePtr> Pawn::getAttackingMoves(StatePtr state) const {
     std::vector<MovePtr> preLegalMoves = Pawn::getLegalMoves(state);
     std::vector<MovePtr> legalMoves;
     for(MovePtr move : preLegalMoves) {
-        if(move->getTargetPosition()->getPosition()->getLetterIndex() != move->getStartingPosition()->getPosition()->getLetterIndex()){
+        if(move->getTargetField()->getPosition()->getLetterIndex() != move->getCurrentField()->getPosition()->getLetterIndex()){
             legalMoves.push_back(move);
         }
     }
     return legalMoves;
+}
+
+Pawn::Pawn(PlayerColor color) : Unit(color) {
+    promotionRow = color == WHITE ? _8 : _1;
 }

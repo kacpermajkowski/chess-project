@@ -8,22 +8,20 @@
 
 class Game {
 private:
-    PlayerPtr whitePlayer;
-    PlayerPtr blackPlayer;
+    PlayerPtr firstPlayer;
+    PlayerPtr secondPlayer;
     StatePtr state;
     UIPtr ui;
 
 public:
-    Game(GameType gameType, UIPtr ui);
+    Game(PlayerPtr firstPlayer, PlayerPtr secondPlayer, UIPtr ui);
     virtual ~Game();
 
     PlayerPtr getPlayer(PlayerColor color) const;
 
     StatePtr getState() const;
 
-    UIPtr getUi() const;
-
-    BoardPtr getBoard() const;
+    UIPtr getUI() const;
 };
 
 
