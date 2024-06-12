@@ -6,7 +6,7 @@
 #include "typedefs.h"
 #include "model/ui/UI.h"
 
-class Game {
+class Game : public std::enable_shared_from_this<Game>{
 private:
     PlayerPtr firstPlayer;
     PlayerPtr secondPlayer;

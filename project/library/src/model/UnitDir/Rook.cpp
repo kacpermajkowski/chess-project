@@ -10,10 +10,10 @@ std::vector<std::vector<MoveVectorPtr>> Rook::getPossibleMoves() const {
     std::vector<MoveVectorPtr> right;
 
     for(int i = 1; i <=7; i++) {
-        up.push_back(new MoveVector(i, 0));
-        right.push_back(new MoveVector(0, i));
-        down.push_back(new MoveVector((0-i), 0));
-        left.push_back(new MoveVector(0, (0-i)));
+        up.push_back(std::make_shared<MoveVector>(i, 0));
+        right.push_back(std::make_shared<MoveVector>(0, i));
+        down.push_back(std::make_shared<MoveVector>((0-i), 0));
+        left.push_back(std::make_shared<MoveVector>(0, (0-i)));
     }
 
     moves.push_back(up);
@@ -24,11 +24,11 @@ std::vector<std::vector<MoveVectorPtr>> Rook::getPossibleMoves() const {
     return moves;
 }
 
-std::vector<MovePtr> Rook::getLegalMoves(StatePtr state) const {
+std::vector<MovePtr> Rook::getLegalMoves(const StatePtr state) {
     //TODO: Add castling
     return Unit::getLegalMoves(state);
 }
 
-std::vector<MovePtr> Rook::getAttackingMoves(StatePtr state) const {
+std::vector<MovePtr> Rook::getAttackingMoves(StatePtr state) {
     return getLegalMoves(state);
 }

@@ -6,7 +6,7 @@
 #include "typedefs.h"
 #include "Board.h"
 
-class State {
+class State : public std::enable_shared_from_this<State> {
 private:
     std::vector<MovePtr> moveHistory;
     unsigned int fiftyMoveRuleCounter = 0;
@@ -23,8 +23,8 @@ public:
 
     void conclude(Conclusion conclusion);
     void registerMove(MovePtr move);
-    std::vector<MovePtr> getLegalMoves(PlayerColor color) const;
-    std::vector<MovePtr> getLegalMoves() const;
+    std::vector<MovePtr> getLegalMoves(PlayerColor color);
+    std::vector<MovePtr> getLegalMoves();
 
     bool isCheck() const;
     Conclusion getConclusion() const;

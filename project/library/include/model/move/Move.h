@@ -5,7 +5,7 @@
 #include "model/Field.h"
 #include "Action.h"
 
-class Move {
+class Move : public std::enable_shared_from_this<Move> {
 private:
     FieldPtr currentField;
     FieldPtr targetField;

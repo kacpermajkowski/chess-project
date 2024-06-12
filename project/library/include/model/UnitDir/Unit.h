@@ -6,7 +6,7 @@
 #include "model/move/Move.h"
 #include "model/move/MoveVector.h"
 
-class Unit {
+class Unit : public std::enable_shared_from_this<Unit>{
 private:
     PlayerColor color;
 public:
@@ -15,15 +15,15 @@ public:
 
     PlayerColor getColor() const;
 
-    virtual std::vector<MovePtr> getLegalMoves(const StatePtr state) const;
+    virtual std::vector<MovePtr> getLegalMoves(const StatePtr state);
     virtual std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() const = 0;
-    virtual std::vector<MovePtr> getAttackingMoves(const StatePtr state) const = 0;
+    virtual std::vector<MovePtr> getAttackingMoves(StatePtr state) = 0;
 
 private:
-    std::vector<MovePtr> getLegalMovesNoCheck(const StatePtr state) const;
+    std::vector<MovePtr> getLegalMovesNoCheck(const StatePtr state);
     std::vector<MovePtr> getCheckBreakingMoves(const StatePtr state) const;
 
-    FieldPtr getCurrentField(const StatePtr state) const;
+    FieldPtr getCurrentField(const StatePtr state);
 };
 
 

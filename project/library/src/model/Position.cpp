@@ -15,12 +15,12 @@ NumberIndex Position::getNumberIndex() const {
     return numberIndex;
 }
 
-Position *Position::applyMoveVector(MoveVectorPtr vector) const {
+PositionPtr Position::applyMoveVector(MoveVectorPtr vector) const {
     int newColumn = letterIndex + vector->getColumnOffset();
     int newRow = numberIndex + vector->getRowOffset();
     if(newColumn >= 0 && newColumn <= 7){
         if(newRow >= 0 && newRow <=7){
-            return new Position(LetterIndex(newColumn), NumberIndex(newRow));
+            return std::make_shared<Position>(LetterIndex(newColumn), NumberIndex(newRow));
         }
     }
     return nullptr;

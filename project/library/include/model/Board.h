@@ -4,7 +4,7 @@
 #include <vector>
 #include "Field.h"
 
-class Board {
+class Board : public std::enable_shared_from_this<Board>{
 private:
     std::vector<FieldPtr> fields;
 

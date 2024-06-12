@@ -6,7 +6,9 @@
 #define CHESSPROJECT_MOVEVECTOR_H
 
 
-class MoveVector {
+#include <memory>
+
+class MoveVector : public std::enable_shared_from_this<MoveVector>{
 private:
     const int rowOffset;
     const int columnOffset;

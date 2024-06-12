@@ -8,7 +8,7 @@ PlayerColor Unit::getColor() const {
     return color;
 }
 
-std::vector<MovePtr> Unit::getLegalMoves(const StatePtr state) const {
+std::vector<MovePtr> Unit::getLegalMoves(const StatePtr state) {
     std::vector<MovePtr> legalMoves;
     if(state->isCheck()){
         legalMoves = getCheckBreakingMoves(state);
@@ -19,11 +19,11 @@ std::vector<MovePtr> Unit::getLegalMoves(const StatePtr state) const {
     return legalMoves;
 }
 
-std::vector<MovePtr> Unit::getLegalMovesNoCheck(const StatePtr state) const{
+std::vector<MovePtr> Unit::getLegalMovesNoCheck(const StatePtr state) {
     std::vector<MovePtr> legalMoves;
 
-    FieldPtr field = getCurrentField(state);
-    PositionPtr currentPosition = field->getPosition();
+    FieldPtr currentField = getCurrentField(state);
+    PositionPtr currentPosition = currentField->getPosition();
 
     //Dla każdej gałęzi ruchów (gałąź ruchu to jeden kierunek, np. wieża może się poruszać w górę, dół, lewo, prawo)
     for(std::vector<MoveVectorPtr> moveVectorsBranch : getPossibleMoves()){
@@ -37,13 +37,13 @@ std::vector<MovePtr> Unit::getLegalMovesNoCheck(const StatePtr state) const{
             //Jeżeli pole nie jest zajęte, to możemy się tam ruszyć
             FieldPtr targetField = state->getBoard()->getField(targetPosition);
             if(!targetField->isOccupied()){
-                legalMoves.push_back(new Move((UnitPtr)this, field, targetField));
+                legalMoves.push_back(std::make_shared<Move>(shared_from_this(), currentField, targetField));
             }
 
             //Jeżeli jest zajęte, ale przez przeciwnika, to możemy się tam ruszyć i zbić
-            if(targetField->isOccupiedByEnemy((UnitPtr) this)){
-                MovePtr move = new Move((UnitPtr)this, field, targetField);
-                move->setAction(new Action(CAPTURE, targetField));
+            if(targetField->isOccupiedByEnemy(shared_from_this())){
+                std::shared_ptr<Move> move = std::make_shared<Move>(shared_from_this(), currentField, targetField);
+                move->setAction(std::make_shared<Action>(CAPTURE, targetField));
                 legalMoves.push_back(move);
             }
 
@@ -59,8 +59,8 @@ std::vector<MovePtr> Unit::getCheckBreakingMoves(const StatePtr state) const {
     return std::vector<MovePtr>();
 }
 
-FieldPtr Unit::getCurrentField(const StatePtr state) const{
-    return state->getBoard()->getField((UnitPtr)this);
+FieldPtr Unit::getCurrentField(const StatePtr state) {
+    return state->getBoard()->getField(shared_from_this());
 }
 
 

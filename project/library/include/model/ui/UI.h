@@ -3,7 +3,7 @@
 
 #include "model/Game.h"
 
-class UI {
+class UI : public std::enable_shared_from_this<UI>{
 public:
     virtual void update(State state) = 0;
     virtual void endGameScreen(State state) = 0;

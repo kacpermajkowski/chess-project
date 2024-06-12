@@ -13,7 +13,7 @@ UIPtr Game::getUI() const {
 }
 
 Game::Game(PlayerPtr firstPlayer, PlayerPtr secondPlayer, UIPtr ui) {
-    state = new State();
+    state = std::make_shared<State>();
     this->ui = ui;
     if(firstPlayer->getColor() != secondPlayer->getColor()){
         this->firstPlayer = firstPlayer;
@@ -23,12 +23,9 @@ Game::Game(PlayerPtr firstPlayer, PlayerPtr secondPlayer, UIPtr ui) {
 }
 
 PlayerPtr Game::getPlayer(PlayerColor color) const {
-    if(firstPlayer->getColor() == color)
+    if (firstPlayer->getColor() == color)
         return firstPlayer;
     else
         return secondPlayer;
-BoardPtr Game::getBoard() const {
-    return nullptr;
 }
-
 
