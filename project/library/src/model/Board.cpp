@@ -28,3 +28,16 @@ Board::Board() {
     //TODO: Initialize fields
 }
 
+Board::Board(std::vector<FieldPtr> fields) {
+    for(int i = 0; i <= 7; i++){
+        for(int j = 0; j <= 7; j++){
+            PositionPtr pos = std::make_shared<Position>(LetterIndex(j), NumberIndex(i));
+            FieldPtr field = getField(pos);
+            if(field == nullptr){
+                fields.push_back(std::make_shared<Field>(pos, nullptr));
+            }
+        }
+    }
+    this->fields = fields;
+}
+

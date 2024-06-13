@@ -3,7 +3,7 @@
 
 Bishop::Bishop(PlayerColor color) : Unit(color) {}
 
-std::vector<std::vector<MoveVectorPtr>> Bishop::getPossibleMoves() const {
+std::vector<std::vector<MoveVectorPtr>> Bishop::getPossibleMoves() {
     std::vector<std::vector<MoveVectorPtr>> moves;
 
     std::vector<MoveVectorPtr> topRight;
@@ -26,7 +26,7 @@ std::vector<std::vector<MoveVectorPtr>> Bishop::getPossibleMoves() const {
     return moves;
 }
 
-std::vector<MovePtr> Bishop::getLegalMoves(const StatePtr state) {
+std::vector<MovePtr> Bishop::getLegalMoves(StatePtr state) {
     return Unit::getLegalMoves(state);
 }
 

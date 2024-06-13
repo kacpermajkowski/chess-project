@@ -8,10 +8,10 @@ PlayerColor Unit::getColor() const {
     return color;
 }
 
-std::vector<MovePtr> Unit::getLegalMoves(const StatePtr state) {
+std::vector<MovePtr> Unit::getLegalMoves(StatePtr state) {
     std::vector<MovePtr> legalMoves;
     if(state->isCheck()){
-        legalMoves = getCheckBreakingMoves(state);
+//        legalMoves = getCheckBreakingMoves(state);
     } else {
         legalMoves = getLegalMovesNoCheck(state);
     }
@@ -19,7 +19,7 @@ std::vector<MovePtr> Unit::getLegalMoves(const StatePtr state) {
     return legalMoves;
 }
 
-std::vector<MovePtr> Unit::getLegalMovesNoCheck(const StatePtr state) {
+std::vector<MovePtr> Unit::getLegalMovesNoCheck(StatePtr state) {
     std::vector<MovePtr> legalMoves;
 
     FieldPtr currentField = getCurrentField(state);
@@ -38,24 +38,26 @@ std::vector<MovePtr> Unit::getLegalMovesNoCheck(const StatePtr state) {
             FieldPtr targetField = state->getBoard()->getField(targetPosition);
             if(!targetField->isOccupied()){
                 legalMoves.push_back(std::make_shared<Move>(shared_from_this(), currentField, targetField));
+                continue;
             }
-
             //Jeżeli jest zajęte, ale przez przeciwnika, to możemy się tam ruszyć i zbić
-            if(targetField->isOccupiedByEnemy(shared_from_this())){
+            else if(targetField->isOccupiedByEnemy(shared_from_this())){
                 std::shared_ptr<Move> move = std::make_shared<Move>(shared_from_this(), currentField, targetField);
                 move->setAction(std::make_shared<Action>(CAPTURE, targetField));
                 legalMoves.push_back(move);
+                break;
             }
-
             //W każdym przypadku, jeżeli pole jest zajęte, to nie możemy już poruszyć się
             //na pola znajdujące się za nim, więc przerywamy badanie gałęzi.
-            if(targetField->isOccupied()) break;
+            else break;
+
+
         }
     }
     return legalMoves;
 }
 
-std::vector<MovePtr> Unit::getCheckBreakingMoves(const StatePtr state) const {
+std::vector<MovePtr> Unit::getCheckBreakingMoves(StatePtr state) {
     return std::vector<MovePtr>();
 }
 

@@ -8,9 +8,9 @@ public:
 
     explicit Bishop(PlayerColor color);
 
-    std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() const;
+    std::vector<std::vector<MoveVectorPtr>> getPossibleMoves();
 
-    std::vector<MovePtr> getLegalMoves(const StatePtr state) override;
+    std::vector<MovePtr> getLegalMoves(StatePtr state) override;
 
     std::vector<MovePtr> getAttackingMoves(StatePtr state) override;
 };

@@ -3,7 +3,7 @@
 
 Knight::Knight(PlayerColor color) : Unit(color) {}
 
-std::vector<std::vector<MoveVectorPtr>> Knight::getPossibleMoves() const {
+std::vector<std::vector<MoveVectorPtr>> Knight::getPossibleMoves() {
     return std::vector<std::vector<MoveVectorPtr>>{
             std::vector<MoveVectorPtr> {std::make_shared<MoveVector>(2, 1)},
             std::vector<MoveVectorPtr> {std::make_shared<MoveVector>(1, 2)},
@@ -16,7 +16,7 @@ std::vector<std::vector<MoveVectorPtr>> Knight::getPossibleMoves() const {
     };
 }
 
-std::vector<MovePtr> Knight::getLegalMoves(const StatePtr state) {
+std::vector<MovePtr> Knight::getLegalMoves(StatePtr state) {
     return Unit::getLegalMoves(state);
 }
 

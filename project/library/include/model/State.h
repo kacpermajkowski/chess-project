@@ -8,6 +8,7 @@
 
 class State : public std::enable_shared_from_this<State> {
 private:
+
     std::vector<MovePtr> moveHistory;
     unsigned int fiftyMoveRuleCounter = 0;
     Conclusion conclusion = IN_PROGRESS;
@@ -38,6 +39,7 @@ public:
     bool hasConcluded() const;
 
 
+    State(std::shared_ptr<Board> board);
 };
 
 
