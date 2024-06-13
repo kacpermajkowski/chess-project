@@ -3,7 +3,7 @@
 
 Rook::Rook(PlayerColor color) : Unit(color) {}
 
-std::vector<std::vector<MoveVectorPtr>> Rook::getPossibleMoves() const {
+std::vector<std::vector<MoveVectorPtr>> Rook::getPossibleMoves() {
     std::vector<std::vector<MoveVectorPtr>> moves;
 
     std::vector<MoveVectorPtr> down;
@@ -26,7 +26,7 @@ std::vector<std::vector<MoveVectorPtr>> Rook::getPossibleMoves() const {
     return moves;
 }
 
-std::vector<MovePtr> Rook::getLegalMoves(const StatePtr state) {
+std::vector<MovePtr> Rook::getLegalMoves(StatePtr state) {
     //TODO: Add castling
     return Unit::getLegalMoves(state);
 }

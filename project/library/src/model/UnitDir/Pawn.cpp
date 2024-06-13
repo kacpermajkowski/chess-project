@@ -1,7 +1,7 @@
 #include "model/UnitDir/Pawn.h"
 #include "model/State.h"
 
-std::vector<std::vector<MoveVectorPtr>> Pawn::getPossibleMoves() const {
+std::vector<std::vector<MoveVectorPtr>> Pawn::getPossibleMoves() {
     std::vector<std::vector<MoveVectorPtr>> moves;
     if(getColor() == WHITE){
         moves.push_back(std::vector<MoveVectorPtr> {
@@ -21,7 +21,7 @@ std::vector<std::vector<MoveVectorPtr>> Pawn::getPossibleMoves() const {
     return moves;
 }
 
-std::vector<MovePtr> Pawn::getLegalMoves(const StatePtr state) {
+std::vector<MovePtr> Pawn::getLegalMoves(StatePtr state) {
     std::vector<MovePtr> preLegalMoves = Unit::getLegalMoves(state);
     std::vector<MovePtr> legalMoves;
     for(MovePtr move : preLegalMoves)

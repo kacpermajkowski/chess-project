@@ -15,15 +15,15 @@ public:
 
     PlayerColor getColor() const;
 
-    virtual std::vector<MovePtr> getLegalMoves(const StatePtr state);
-    virtual std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() const = 0;
+    virtual std::vector<MovePtr> getLegalMoves(StatePtr state);
+    virtual std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() = 0;
     virtual std::vector<MovePtr> getAttackingMoves(StatePtr state) = 0;
 
 private:
-    std::vector<MovePtr> getLegalMovesNoCheck(const StatePtr state);
-    std::vector<MovePtr> getCheckBreakingMoves(const StatePtr state) const;
+    std::vector<MovePtr> getLegalMovesNoCheck(StatePtr state);
+    std::vector<MovePtr> getCheckBreakingMoves(StatePtr state);
 
-    FieldPtr getCurrentField(const StatePtr state);
+    FieldPtr getCurrentField(StatePtr state);
 };
 
 

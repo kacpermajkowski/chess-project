@@ -3,7 +3,7 @@
 
 Queen::Queen(PlayerColor color) : Unit(color) {}
 
-std::vector<std::vector<MoveVectorPtr>> Queen::getPossibleMoves() const {
+std::vector<std::vector<MoveVectorPtr>> Queen::getPossibleMoves() {
     std::vector<std::vector<MoveVectorPtr>> moves;
 
     std::vector<MoveVectorPtr> topRight;
@@ -38,7 +38,7 @@ std::vector<std::vector<MoveVectorPtr>> Queen::getPossibleMoves() const {
     return moves;
 }
 
-std::vector<MovePtr> Queen::getLegalMoves(const StatePtr state) {
+std::vector<MovePtr> Queen::getLegalMoves(StatePtr state) {
     return Unit::getLegalMoves(state);
 
 }

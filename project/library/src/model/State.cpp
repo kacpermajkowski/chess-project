@@ -5,6 +5,9 @@
 State::State() {
     board = std::make_shared<Board>();
 }
+State::State(std::shared_ptr<Board> board){
+    this->board = board;
+}
 State::~State() {}
 
 const std::vector<MovePtr> & State::getMoveHistory() const {
