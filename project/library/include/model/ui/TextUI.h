@@ -4,7 +4,8 @@
 #include "UI.h"
 
 class TextUI : UI{
-
+public:
+    void update(State state) override;
 };
 
 

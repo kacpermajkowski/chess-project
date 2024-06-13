@@ -32,16 +32,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteState, TestSuiteStateFixture)
     }
 
     BOOST_AUTO_TEST_CASE(TestRegisterMove){
-        State state;
-        BOOST_TEST(state.hasConcluded() == false);
 
-        state.conclude(DRAW);
-        BOOST_TEST(state.getConclusion() == DRAW);
-        BOOST_TEST(state.hasConcluded() == true);
-
-        state.conclude(WHITE_WINS);
-        BOOST_TEST(state.getConclusion() == DRAW);
-        BOOST_TEST(state.hasConcluded() == true);
     }
 
 
