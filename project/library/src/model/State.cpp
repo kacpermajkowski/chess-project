@@ -1,6 +1,7 @@
 #include "model/State.h"
 #include <typeinfo>
 #include "model/UnitDir/Pawn.h"
+#include "model/UnitDir/King.h"
 
 State::State() {
     board = std::make_shared<Board>();
@@ -14,7 +15,7 @@ const std::vector<MovePtr> & State::getMoveHistory() const {
     return moveHistory;
 }
 
-unsigned int State::getMovesWithoutCapture() const {
+unsigned int State::getFiftyMovesRuleCounter() const {
     return fiftyMoveRuleCounter;
 }
 
@@ -66,12 +67,15 @@ void State::conclude(Conclusion conclusion) {
         this->conclusion = conclusion;
 }
 
-bool State::isAttacked(FieldPtr field) {
+bool State::isAttacked(FieldPtr field, PlayerColor defender) {
     for(FieldPtr potentialAttacker : getBoard()->getFields()){
-        std::vector<MovePtr> potentialAttacks = potentialAttacker->getUnit()->getLegalMoves(shared_from_this());
-        for(MovePtr potentialAttack : potentialAttacks){
-            if(potentialAttack->getTargetField() == field)
-                return true;
+        if(potentialAttacker->getUnit()->getColor() != defender){
+            std::vector<MovePtr> potentialAttacks = potentialAttacker->getUnit()->getPossibleFutureAttacks(
+                    shared_from_this());
+            for(MovePtr potentialAttack : potentialAttacks){
+                if(potentialAttack->getTargetField() == field)
+                    return true;
+            }
         }
     }
     return false;
@@ -92,12 +96,31 @@ std::vector<MovePtr> State::getLegalMoves(PlayerColor color) {
     return allLegalMoves;
 }
 
-bool State::isCheck() const {
-    //TODO: Is there a check in game
+bool State::isCheck() {
+    for(const FieldPtr& field : board->getFields()){
+        UnitPtr unit = field->getUnit();
+        if(typeid(unit) == typeid(King)){
+            if(unit->getColor() == turn){
+                return isAttacked(field, turn);
+            }
+        }
+    }
     return false;
 }
 
 bool State::hasConcluded() const {
     return conclusion != IN_PROGRESS;
+}
+
+MovePtr State::getLastMove() {
+    return moveHistory.back();
+}
+
+bool State::hasMoved(UnitPtr unit) {
+    for(MovePtr move : moveHistory){
+        if(move->getMovedUnit() == unit)
+            return true;
+    }
+    return false;
 }
 

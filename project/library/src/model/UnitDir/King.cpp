@@ -20,13 +20,14 @@ std::vector<MovePtr> King::getLegalMoves(StatePtr state) {
     std::vector<MovePtr> legalMoves;
 
     for(MovePtr move : preLegalMoves){
-        if(!state->isAttacked(move->getTargetField()))
+        if(!state->isAttacked(move->getTargetField(), getColor()))
             legalMoves.push_back(move);
     }
 
     return legalMoves;
 }
 
-std::vector<MovePtr> King::getAttackingMoves(StatePtr state) {
+std::vector<MovePtr> King::getPossibleFutureAttacks(StatePtr state) {
+    //TODO: this is wrong
     return King::getLegalMoves(state);
 }

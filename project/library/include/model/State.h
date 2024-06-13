@@ -27,15 +27,17 @@ public:
     std::vector<MovePtr> getLegalMoves(PlayerColor color);
     std::vector<MovePtr> getLegalMoves();
 
-    bool isCheck() const;
+    bool isCheck();
     Conclusion getConclusion() const;
     PlayerColor getTurn() const;
     BoardPtr getBoard() const;
     const std::vector<UnitPtr> & getTakenPieces() const;
-    unsigned int getMovesWithoutCapture() const;
+    unsigned int getFiftyMovesRuleCounter() const;
     const std::vector<MovePtr> & getMoveHistory() const;
+    MovePtr getLastMove();
+    bool hasMoved(UnitPtr unit);
 
-    bool isAttacked(FieldPtr field);
+    bool isAttacked(FieldPtr field, PlayerColor defender);
     bool hasConcluded() const;
 
 

@@ -12,7 +12,7 @@ public:
 
     std::vector<MovePtr> getLegalMoves(StatePtr state) override;
 
-    std::vector<MovePtr> getAttackingMoves(StatePtr state) override;
+    std::vector<MovePtr> getPossibleFutureAttacks(StatePtr state) override;
 };
 
 

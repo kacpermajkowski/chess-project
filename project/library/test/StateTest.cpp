@@ -13,7 +13,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteState, TestSuiteStateFixture)
         BoardPtr board = state.getBoard();
         BOOST_TEST(board != nullptr);
         BOOST_TEST(state.getConclusion() == IN_PROGRESS);
-        BOOST_TEST(state.getMovesWithoutCapture() == 0);
+        BOOST_TEST(state.getFiftyMovesRuleCounter() == 0);
         BOOST_TEST(state.getTurn() == WHITE);
         BOOST_TEST(state.isCheck() == false);
     }
