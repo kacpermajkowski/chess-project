@@ -14,6 +14,7 @@
 #include <locale>
 #include <codecvt>
 #include <string>
+#include <map>
 
 void TextUI::update(StatePtr state) {
     std::locale::global(std::locale("en_US.UTF-8")); //nw czy w dobrym miejscu
@@ -72,5 +73,17 @@ void TextUI::update(StatePtr state) {
 }
 
 void TextUI::endGameScreen(StatePtr state) {
-    std::wcout << L"End game screen";
+    std::map<Conclusion, wchar_t*> conclusionNames {
+            {IN_PROGRESS, L"In Progress"},
+            {DRAW, L"Draw"},
+            {STALEMATE, L"Stalemate"},
+            {WHITE_WINS, L"White Won"},
+            {BLACK_WINS, L"Black Won"},
+            {FIFTY_MOVES_DRAW, L"Draw by 50 moves rule"},
+            {INSUFFICIENT_MATERIAL_DRAW, L"Draw by insufficient material"},
+            {AGREED_DRAW, L"Draw by agreement"}
+    };
+
+    std::wcout << L"The game has ended.\nConclusion: ";
+    std::wcout << (conclusionNames[state->getConclusion()]);
 }
