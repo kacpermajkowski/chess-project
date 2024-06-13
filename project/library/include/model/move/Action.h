@@ -14,11 +14,11 @@ private:
     FieldPtr actionField;
 
 public:
-    Action(ActionType type, const FieldPtr actionField);
+    Action(ActionType type, FieldPtr actionField);
 
     ActionType getType() const;
 
-    const FieldPtr getActionField();
+    FieldPtr getActionField();
 };
 
 

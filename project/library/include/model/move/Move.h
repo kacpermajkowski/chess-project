@@ -12,7 +12,7 @@ private:
     UnitPtr movedUnit;
     ActionPtr action = nullptr;
 public:
-    Move(const UnitPtr movedUnit, const FieldPtr currentField, const FieldPtr targetField);
+    Move(const FieldPtr currentField, const FieldPtr targetField);
 
     virtual ~Move();
 

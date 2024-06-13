@@ -1,3 +1,5 @@
+#include <stdexcept>
+#include <iostream>
 #include "model/UnitDir/Unit.h"
 #include "model/State.h"
 
@@ -37,15 +39,20 @@ std::vector<MovePtr> Unit::getLegalMovesNoCheck(StatePtr state) {
             //Jeżeli pole nie jest zajęte, to możemy się tam ruszyć
             FieldPtr targetField = state->getBoard()->getField(targetPosition);
             if(!targetField->isOccupied()){
-                legalMoves.push_back(std::make_shared<Move>(shared_from_this(), currentField, targetField));
+                legalMoves.push_back(std::make_shared<Move>(currentField, targetField));
                 continue;
             }
             //Jeżeli jest zajęte, ale przez przeciwnika, to możemy się tam ruszyć i zbić
             else if(targetField->isOccupiedByEnemy(shared_from_this())){
-                std::shared_ptr<Move> move = std::make_shared<Move>(shared_from_this(), currentField, targetField);
-                move->setAction(std::make_shared<Action>(CAPTURE, targetField));
-                legalMoves.push_back(move);
-                break;
+                try{
+                    //TODO: catch exception from Action
+                    std::shared_ptr<Move> move = std::make_shared<Move>(currentField, targetField);
+                    move->setAction(std::make_shared<Action>(CAPTURE, targetField));
+                    legalMoves.push_back(move);
+                    break;
+                } catch (std::invalid_argument& e ){
+                    std::wcout << e.what() << "hihi";
+                }
             }
             //W każdym przypadku, jeżeli pole jest zajęte, to nie możemy już poruszyć się
             //na pola znajdujące się za nim, więc przerywamy badanie gałęzi.

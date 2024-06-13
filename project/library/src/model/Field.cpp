@@ -16,9 +16,10 @@ void Field::setUnit(UnitPtr unit) {
 }
 
 bool Field::isOccupiedByEnemy(PlayerColor color) {
-    if(getUnit() != nullptr){
+    if(isOccupied()){
         return getUnit()->getColor() != color;
-    } else return false;
+    }
+    return false;
 }
 
 bool Field::isOccupiedByEnemy(UnitPtr unit) {
@@ -26,7 +27,10 @@ bool Field::isOccupiedByEnemy(UnitPtr unit) {
 }
 
 bool Field::isOccupiedByAlly(PlayerColor color) {
-    return getUnit()->getColor() == color;
+    if(isOccupied()){
+        return getUnit()->getColor() == color;
+    }
+    return false;
 }
 
 bool Field::isOccupiedByAlly(UnitPtr unit) {

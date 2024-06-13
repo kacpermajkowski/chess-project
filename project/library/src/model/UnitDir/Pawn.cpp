@@ -1,3 +1,4 @@
+#include <iostream>
 #include "model/UnitDir/Pawn.h"
 #include "model/State.h"
 
@@ -44,10 +45,10 @@ std::vector<MovePtr> Pawn::getLegalMoves(StatePtr state) {
                     int moveRowOffset = currentPosition->getNumberIndex() - targetPosition->getNumberIndex();
                     if(moveRowOffset == 2 | moveRowOffset == -2){
                         if(state->hasMoved(shared_from_this())){
-                            legalMoves.push_back(std::make_shared<Move>(shared_from_this(), currentField, targetField));
+                            legalMoves.push_back(std::make_shared<Move>(currentField, targetField));
                         }
                     } else {
-                        legalMoves.push_back(std::make_shared<Move>(shared_from_this(), currentField, targetField));
+                        legalMoves.push_back(std::make_shared<Move>(currentField, targetField));
                         //Jeżeli pole jest zajęte, to nie możemy już poruszyć się
                         //na nie ani pola znajdujące się za nim, więc przerywamy badanie gałęzi.
                     }
@@ -58,7 +59,7 @@ std::vector<MovePtr> Pawn::getLegalMoves(StatePtr state) {
             else {
                 //Jeżeli bijemy tam gdzie idziemy
                 if(targetField->getUnit() != nullptr){
-                    MovePtr move = std::make_shared<Move>(shared_from_this(), currentField, targetField);
+                    MovePtr move = std::make_shared<Move>(currentField, targetField);
                     move->setAction(std::make_shared<Action>(CAPTURE, targetField));
                     legalMoves.push_back(move);
                 }
@@ -74,20 +75,26 @@ std::vector<MovePtr> Pawn::getLegalMoves(StatePtr state) {
                     );
                     //Jeżeli pod polem, na store się ruszamy jest niepuste pole
                     if(actionField != nullptr){
-                        UnitPtr actionUnit = actionField->getUnit();
-
-                        //Jezeli jest to wrogi pion
-                        if(actionUnit->getColor() != getColor()){
-                            //Jeżeli pod polem znajduje się pion
-                            if(typeid(actionUnit) == typeid(Pawn)){
-                                //Jeżeli pion poruszył się w poprzednim ruchu
-                                if(state->getLastMove()->getMovedUnit() == actionUnit){
-                                    PositionPtr startPos = state->getLastMove()->getCurrentField()->getPosition();
-                                    int moveRowOffset = startPos->getNumberIndex() - actionField->getPosition()->getNumberIndex();
-                                    if(moveRowOffset == 2 || moveRowOffset == -2){
-                                        MovePtr move = std::make_shared<Move>(shared_from_this(), currentField, targetField);
-                                        move->setAction(std::make_shared<Action>(CAPTURE, actionField));
-                                        legalMoves.push_back(move);
+                        if(actionField->isOccupied()){
+                            UnitPtr actionUnit = actionField->getUnit();
+                            //Jezeli jest to wrogi pion
+                            if(actionUnit->getColor() != getColor()){
+                                //Jeżeli pod polem znajduje się pion
+                                if(typeid(actionUnit) == typeid(Pawn)){
+                                    //Jeżeli pion poruszył się w poprzednim ruchu
+                                    if(state->getLastMove()->getMovedUnit() == actionUnit){
+                                        PositionPtr startPos = state->getLastMove()->getCurrentField()->getPosition();
+                                        int moveRowOffset = startPos->getNumberIndex() - actionField->getPosition()->getNumberIndex();
+                                        if(moveRowOffset == 2 || moveRowOffset == -2){
+                                            //TODO: catch exception from Action
+                                            try {
+                                                MovePtr move = std::make_shared<Move>(currentField, targetField);
+                                                move->setAction(std::make_shared<Action>(CAPTURE, actionField));
+                                                legalMoves.push_back(move);
+                                            } catch (std::invalid_argument& e ){
+                                                std::wcout << e.what();
+                                            }
+                                        }
                                     }
                                 }
                             }

@@ -16,7 +16,6 @@
 #include <string>
 
 void TextUI::update(StatePtr state) {
-
     std::locale::global(std::locale("en_US.UTF-8")); //nw czy w dobrym miejscu
     std::wcout.imbue(std::locale());
 

@@ -20,7 +20,7 @@ struct TestSuiteMoveFixture {
 BOOST_FIXTURE_TEST_SUITE(TestSuiteMove, TestSuiteMoveFixture)
 
     BOOST_AUTO_TEST_CASE(TestConstructorMove){
-        Move move(unit, currentField, targetField);
+        Move move(currentField, targetField);
         BOOST_TEST(move.getCurrentField() == currentField);
         BOOST_TEST(move.getTargetField() == targetField);
         BOOST_TEST(move.getMovedUnit() == unit);
@@ -28,7 +28,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteMove, TestSuiteMoveFixture)
     }
 
     BOOST_AUTO_TEST_CASE(TestActionSetterMove){
-        Move move(unit, currentField, targetField);
+        Move move(currentField, targetField);
         BOOST_TEST(move.getAction() == nullptr);
 
         move.setAction(action_capture);

@@ -22,8 +22,9 @@ int main(){
     while (!game.getState()->hasConcluded()){
         textUI->update(game.getState());
         PlayerPtr currentPlayer = firstPlayer->getColor() == game.getState()->getTurn() ? firstPlayer : secondPlayer;
-//        MovePtr move = currentPlayer->makeAMove(game.getState()->getLegalMoves(game.getState()->getTurn()));
-//        game.getState()->registerMove(move);
+        std::vector<MovePtr> legalMoves = game.getState()->getLegalMoves(currentPlayer->getColor());
+        MovePtr move = currentPlayer->makeAMove(legalMoves);
+        game.getState()->registerMove(move);
         getchar();
     }
     textUI->endGameScreen(game.getState());
