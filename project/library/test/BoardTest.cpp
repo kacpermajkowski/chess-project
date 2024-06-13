@@ -11,7 +11,7 @@ struct TestSuiteBoardFixture{
 BOOST_FIXTURE_TEST_SUITE(TestSuiteBoard, TestSuiteBoardFixture)
 
     BOOST_AUTO_TEST_CASE(TestConstructorBoard){
-        BoardPtr board = make_shared<Board>(vector<FieldPtr>());
+        BoardPtr board = make_shared<Board>();
         BOOST_TEST(board->getFields().size() == 64);
     }
 

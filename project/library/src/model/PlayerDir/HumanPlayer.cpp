@@ -2,6 +2,7 @@
 
 HumanPlayer::HumanPlayer(PlayerColor color) : Player(color) {}
 
-void HumanPlayer::makeAMove(Move move) const {
+MovePtr HumanPlayer::makeAMove(std::vector<MovePtr> legalMoves) {
+    //TODO: Get input from player;
+}
 
-};

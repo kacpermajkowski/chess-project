@@ -7,6 +7,8 @@
 class TextUI : public UI{
 public:
     void update(StatePtr state) override;
+
+    void endGameScreen(StatePtr state) override;
 };
 
 

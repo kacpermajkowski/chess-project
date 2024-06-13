@@ -13,18 +13,20 @@ int main(){
 
     UIPtr textUI = std::make_shared<TextUI>();
 
+    //TODO: Select player types
     PlayerPtr firstPlayer = std::make_shared<ComputerPlayer>(WHITE);
     PlayerPtr secondPlayer = std::make_shared<HumanPlayer>(BLACK);
 
     Game game(firstPlayer, secondPlayer, textUI);
 
-
-    textUI->update(game.getState());
-
-
-//    while(!game.getState()->hasConcluded()){
-//
-//    }
+    while (!game.getState()->hasConcluded()){
+        textUI->update(game.getState());
+        PlayerPtr currentPlayer = firstPlayer->getColor() == game.getState()->getTurn() ? firstPlayer : secondPlayer;
+//        MovePtr move = currentPlayer->makeAMove(game.getState()->getLegalMoves(game.getState()->getTurn()));
+//        game.getState()->registerMove(move);
+        getchar();
+    }
+    textUI->endGameScreen(game.getState());
 
     return 0;
 }
