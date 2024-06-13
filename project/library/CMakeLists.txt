@@ -23,6 +23,7 @@ set(SOURCE_FILES
         src/model/move/Action.cpp
         include/typedefs.h
         test/util/util.cpp
+
 )
 
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
