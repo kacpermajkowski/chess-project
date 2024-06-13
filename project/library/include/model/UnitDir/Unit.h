@@ -13,7 +13,7 @@ public:
     explicit Unit(PlayerColor color);
     virtual ~Unit();
 
-    PlayerColor getColor() const;
+    PlayerColor getColor();
 
     virtual std::vector<MovePtr> getLegalMoves(StatePtr state);
     virtual std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() = 0;

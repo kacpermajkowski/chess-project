@@ -6,6 +6,9 @@ ComputerPlayer::ComputerPlayer(PlayerColor color) : Player(color) {
 }
 
 MovePtr ComputerPlayer::makeAMove(std::vector<MovePtr> legalMoves) {
-    int moveNumber = (rand()%legalMoves.size());
-    return legalMoves[moveNumber];
+    if(legalMoves.size() > 0) {
+        int moveNumber = (rand() % legalMoves.size());
+        return legalMoves[moveNumber];
+    } //TODO: Else conclude;
+    return nullptr;
 }

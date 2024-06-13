@@ -1,6 +1,7 @@
 #include "model/State.h"
 #include <typeinfo>
 #include <stdexcept>
+#include <iostream>
 #include "model/UnitDir/Pawn.h"
 #include "model/UnitDir/King.h"
 
@@ -41,10 +42,9 @@ void State::registerMove(MovePtr move) {
         fiftyMoveRuleCounter++;
         if(typeid(*(move->getMovedUnit())) == typeid(Pawn))
             fiftyMoveRuleCounter = 0;
-
         ActionPtr action = move->getAction();
-        if(action != nullptr){
-            if(action->getType() == CAPTURE){
+        if(action != nullptr) {
+            if (action->getType() == CAPTURE) {
                 fiftyMoveRuleCounter = 0;
 
                 std::shared_ptr<Field> actionField = action->getActionField();
@@ -71,12 +71,14 @@ void State::conclude(Conclusion conclusion) {
 
 bool State::isAttacked(FieldPtr field, PlayerColor defender) {
     for(FieldPtr potentialAttacker : getBoard()->getFields()){
-        if(potentialAttacker->getUnit()->getColor() != defender){
-            std::vector<MovePtr> potentialAttacks = potentialAttacker->getUnit()->getPossibleFutureAttacks(
-                    shared_from_this());
-            for(MovePtr potentialAttack : potentialAttacks){
-                if(potentialAttack->getTargetField() == field)
-                    return true;
+        if(potentialAttacker->getUnit() != nullptr) {
+            if (potentialAttacker->getUnit()->getColor() != defender) {
+                std::vector<MovePtr> potentialAttacks = potentialAttacker->getUnit()->getPossibleFutureAttacks(
+                        shared_from_this());
+                for (MovePtr potentialAttack: potentialAttacks) {
+                    if (potentialAttack->getTargetField() == field)
+                        return true;
+                }
             }
         }
     }

@@ -6,7 +6,7 @@
 Unit::Unit(PlayerColor color) : color(color) {};
 Unit::~Unit() {};
 
-PlayerColor Unit::getColor() const {
+PlayerColor Unit::getColor() {
     return color;
 }
 
@@ -31,7 +31,6 @@ std::vector<MovePtr> Unit::getLegalMovesNoCheck(StatePtr state) {
     for(std::vector<MoveVectorPtr> moveVectorsBranch : getPossibleMoves()){
         // Dla każdego ruchu w zadanej gałęzi
         for(MoveVectorPtr moveVector : moveVectorsBranch){
-
             //Jeżeli pozycja istnieje na planszy, czyli nie równa się nullptr
             PositionPtr targetPosition = currentPosition->applyMoveVector(moveVector);
             if(targetPosition == nullptr) continue;
