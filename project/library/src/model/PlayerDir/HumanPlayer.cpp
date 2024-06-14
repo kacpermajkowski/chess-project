@@ -3,7 +3,7 @@
 
 HumanPlayer::HumanPlayer(PlayerColor color) : Player(color) {}
 
-MovePtr HumanPlayer::makeAMove(std::vector<MovePtr> legalMoves) {
+MovePtr HumanPlayer::chooseAMove(std::vector<MovePtr> legalMoves) {
     //TODO: Get input from player;
     if(legalMoves.size() > 0){
         int moveNumber = (rand()%legalMoves.size());

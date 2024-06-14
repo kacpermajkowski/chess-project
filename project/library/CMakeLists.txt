@@ -12,19 +12,19 @@ set(SOURCE_FILES
         src/model/PlayerDir/Player.cpp
         src/model/PlayerDir/HumanPlayer.cpp
         src/model/PlayerDir/ComputerPlayer.cpp
-    src/model/State.cpp
-    src/model/Game.cpp
-    src/model/Board.cpp
-    src/model/Field.cpp
+        src/model/State.cpp
+        src/model/Game.cpp
+        src/model/Board.cpp
+        src/model/Field.cpp
         src/model/move/Move.cpp
-    src/model/Position.cpp
+        src/model/Position.cpp
         src/model/ui/TextUI.cpp
         src/model/move/MoveVector.cpp
         src/model/move/Action.cpp
         include/typedefs.h
-        test/util/util.cpp
-        include/model/exceptions/noMoveToChooseFromException.cpp
-
+        src/model/util/util.cpp
+        src/model/exceptions/NoMoveToChooseFromException.cpp
+        src/model/exceptions/GameAlreadyFinishedException.cpp
 )
 
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
@@ -45,7 +45,7 @@ set(SOURCE_TEST_FILES
         test/BoardTest.cpp
         test/FieldTest.cpp
         test/GameTest.cpp
-        test/MoveTest.cpp
+        test/model/move/MoveTest.cpp
         test/PositionTest.cpp
         test/StateTest.cpp
         test/model/UnitDir/RookTest.cpp
@@ -55,7 +55,8 @@ set(SOURCE_TEST_FILES
         test/model/UnitDir/QueenTest.cpp
         test/model/UnitDir/KnightTest.cpp
         test/model/UnitDir/PawnTest.cpp
-        include/model/exceptions/noMoveToChooseFromException.cpp
+        src/model/exceptions/NoMoveToChooseFromException.cpp
+        src/model/exceptions/GameAlreadyFinishedException.cpp
 )
 
 add_executable (LibraryTester ${SOURCE_TEST_FILES})

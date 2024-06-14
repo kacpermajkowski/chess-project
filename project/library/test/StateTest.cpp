@@ -64,7 +64,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteState, TestSuiteStateFixture)
         BOOST_TEST(state->getFiftyMovesRuleCounter() == 0);
         BOOST_TEST(state->getTurn() == WHITE);
         MovePtr moveWhitePawn = std::make_shared<Move>(board->getField(positionE2), board->getField(positionE3));
-        state->registerMove(moveWhitePawn);
+        state->makeAMove(moveWhitePawn);
         BOOST_TEST(state->getLastMove() == moveWhitePawn);
         BOOST_TEST(state->getBoard()->getField(positionE2)->getUnit() == nullptr);
         BOOST_CHECK(typeid(*state->getBoard()->getField(positionE3)->getUnit()) == typeid(Pawn));
@@ -73,28 +73,28 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteState, TestSuiteStateFixture)
 
         //black pawn e7 to e6
         MovePtr moveBlackPawn = std::make_shared<Move>(board->getField(positionA7), board->getField(positionA6));
-        state->registerMove(moveBlackPawn);
+        state->makeAMove(moveBlackPawn);
         BOOST_TEST(state->getLastMove() == moveBlackPawn);
         BOOST_TEST(state->getFiftyMovesRuleCounter() == 0);
         BOOST_TEST(state->getTurn() == WHITE);
 
         //white bishop f1 to a6 (captures black pawn) - to check action
         MovePtr moveWhiteBishop = std::make_shared<Move>(board->getField(positionF1), board->getField(positionA6));
-        state->registerMove(moveWhiteBishop);
+        state->makeAMove(moveWhiteBishop);
         BOOST_TEST(state->getLastMove() == moveWhiteBishop);
         BOOST_TEST(state->getFiftyMovesRuleCounter() == 0);
         BOOST_TEST(state->getTurn() == BLACK);
 
         //black knight g8 to f6 - to check fiftyMovesRuleCounter ++
         MovePtr moveBlackKnight = std::make_shared<Move>(board->getField(positionG8), board->getField(positionF6));
-        state->registerMove(moveBlackKnight);
+        state->makeAMove(moveBlackKnight);
         BOOST_TEST(state->getLastMove() == moveBlackKnight);
         BOOST_TEST(state->getFiftyMovesRuleCounter() == 1);
         BOOST_TEST(state->getTurn() == WHITE);
 
         //white pawn e3 to e4 - to check if fiftyMovesRuleCounter reset
         MovePtr moveWhitePawnAgain = std::make_shared<Move>(board->getField(positionE3), board->getField(positionE4));
-        state->registerMove(moveWhitePawnAgain);
+        state->makeAMove(moveWhitePawnAgain);
         BOOST_TEST(state->getLastMove() == moveWhitePawnAgain);
         BOOST_TEST(state->getFiftyMovesRuleCounter() == 0);
         BOOST_TEST(state->getTurn() == BLACK);
@@ -102,7 +102,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteState, TestSuiteStateFixture)
         //black knight f6 to e8 - to check if a move can be made when the game is over
         state->conclude(DRAW);
         MovePtr moveBlackKnightAgain = std::make_shared<Move>(board->getField(positionF6), board->getField(positionG8));
-        BOOST_CHECK_THROW(state->registerMove(moveBlackKnightAgain), std::invalid_argument);
+        BOOST_CHECK_THROW(state->makeAMove(moveBlackKnightAgain), std::invalid_argument);
     }
 
 

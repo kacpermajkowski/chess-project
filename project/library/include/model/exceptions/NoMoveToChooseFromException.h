@@ -6,14 +6,15 @@
 #define CHESSPROJECT_NOMOVETOCHOOSEFROMEXCEPTION_H
 
 #include <exception>
+#include <string>
 
-class noMoveToChooseFromException : public std::exception{
+class NoMoveToChooseFromException : public std::exception{
 private:
-    char* message;
+    std::string message;
 public:
-    noMoveToChooseFromException();
+    NoMoveToChooseFromException();
 
-    explicit noMoveToChooseFromException(char *message);
+    explicit NoMoveToChooseFromException(std::string message);
 
     const char *what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW override;
 

@@ -7,7 +7,6 @@
 #include "model/UnitDir/King.h"
 #include "model/UnitDir/Queen.h"
 #include <type_traits>
-#include "../src/model/util/util.cpp"
 
 //test for getField()
 using namespace std;

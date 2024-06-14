@@ -23,10 +23,9 @@ int main(){
         textUI->update(game.getState());
         PlayerPtr currentPlayer = firstPlayer->getColor() == game.getState()->getTurn() ? firstPlayer : secondPlayer;
         std::vector<MovePtr> legalMoves = game.getState()->getLegalMoves(currentPlayer->getColor());
-        if(legalMoves.size() > 0) {
-            MovePtr move = currentPlayer->makeAMove(legalMoves);
-            game.getState()->registerMove(move);
-        } else game.getState()->conclude(STALEMATE);
+
+        MovePtr move = currentPlayer->chooseAMove(legalMoves);
+        game.getState()->makeAMove(move);
     }
     textUI->endGameScreen(game.getState());
 

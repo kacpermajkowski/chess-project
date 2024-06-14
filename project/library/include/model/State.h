@@ -23,7 +23,7 @@ public:
     virtual ~State();
 
     void conclude(Conclusion conclusion);
-    void registerMove(MovePtr move);
+    void makeAMove(const MovePtr& move);
     std::vector<MovePtr> getLegalMoves(PlayerColor color);
     std::vector<MovePtr> getLegalMoves();
 
@@ -37,11 +37,31 @@ public:
     MovePtr getLastMove();
     bool hasMoved(UnitPtr unit);
 
-    bool isAttacked(FieldPtr field, PlayerColor defender);
+    bool isAttacked(const FieldPtr& field, PlayerColor defender);
     bool hasConcluded() const;
 
 
-    State(std::shared_ptr<Board> board);
+    explicit State(std::shared_ptr<Board> board);
+private:
+    void moveUnitBetweenFields();
+
+    void performAction();
+
+    void changeTurn();
+
+    bool isFiftyMoveRuleDraw();
+
+    void concludeIfApplicable();
+
+    bool isDrawByRepetition();
+
+    bool isInsufficientMaterial();
+
+    bool isStalemate();
+
+    bool isCheckmate();
+
+    void captureUnitFromField(const FieldPtr& sharedPtr);
 };
 
 

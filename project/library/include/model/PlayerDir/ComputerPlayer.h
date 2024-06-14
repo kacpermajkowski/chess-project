@@ -8,7 +8,7 @@ class ComputerPlayer : public Player{
 public:
     explicit ComputerPlayer(PlayerColor color);
 
-    MovePtr makeAMove(std::vector<MovePtr> legalMoves) override;
+    MovePtr chooseAMove(std::vector<MovePtr> legalMoves) override;
 };
 
 
