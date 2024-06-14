@@ -15,9 +15,10 @@ public:
     FieldPtr getField(UnitPtr unit) const;
 
     const std::vector<FieldPtr> &getFields() const;
+    std::vector<UnitPtr> getUnits() const;
 private:
     void initlializeWithEmptyFields();
-    std::vector<FieldPtr> fillMissingFields(std::vector<FieldPtr> fields);
+    static std::vector<FieldPtr> fillMissingFields(std::vector<FieldPtr> fieldsToFill) ;
 };
 
 
