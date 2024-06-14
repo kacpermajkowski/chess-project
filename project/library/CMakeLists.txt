@@ -23,6 +23,7 @@ set(SOURCE_FILES
         src/model/move/Action.cpp
         include/typedefs.h
         test/util/util.cpp
+        include/model/exceptions/noMoveToChooseFromException.cpp
 
 )
 
@@ -54,6 +55,7 @@ set(SOURCE_TEST_FILES
         test/model/UnitDir/QueenTest.cpp
         test/model/UnitDir/KnightTest.cpp
         test/model/UnitDir/PawnTest.cpp
+        include/model/exceptions/noMoveToChooseFromException.cpp
 )
 
 add_executable (LibraryTester ${SOURCE_TEST_FILES})

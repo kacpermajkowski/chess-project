@@ -13,8 +13,6 @@ class Move;
 class UI;
 class MoveVector;
 class Action;
-class TextUI;
-
 
 typedef std::shared_ptr<Unit> UnitPtr;
 typedef std::shared_ptr<Player> PlayerPtr;
@@ -24,7 +22,6 @@ typedef std::shared_ptr<Move> MovePtr;
 typedef std::shared_ptr<State> StatePtr;
 typedef std::shared_ptr<Position> PositionPtr;
 typedef std::shared_ptr<UI> UIPtr;
-typedef std::shared_ptr<TextUI> TextUIPtr;
 typedef std::shared_ptr<MoveVector> MoveVectorPtr;
 typedef std::shared_ptr<Action> ActionPtr;
 
