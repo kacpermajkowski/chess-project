@@ -14,7 +14,7 @@ private:
     const int columnOffset;
 
 public:
-    MoveVector(const int rowOffset, const int columnOffset);
+    MoveVector(const int columnOffset, const int rowOffset);
 
     int getRowOffset() const;
 

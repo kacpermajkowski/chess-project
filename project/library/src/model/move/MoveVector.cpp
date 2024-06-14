@@ -12,5 +12,5 @@ int MoveVector::getColumnOffset() const {
     return columnOffset;
 }
 
-MoveVector::MoveVector(const int rowOffset, const int columnOffset) : rowOffset(rowOffset),
+MoveVector::MoveVector(const int columnOffset, const int rowOffset) : rowOffset(rowOffset),
                                                                       columnOffset(columnOffset) {}
