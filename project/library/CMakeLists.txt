@@ -43,7 +43,7 @@ set(SOURCE_TEST_FILES
         test/BoardTest.cpp
         test/FieldTest.cpp
         test/GameTest.cpp
-        test/MoveTest.cpp
+        test/model/move/MoveTest.cpp
         test/PositionTest.cpp
         test/StateTest.cpp
         test/model/UnitDir/RookTest.cpp
