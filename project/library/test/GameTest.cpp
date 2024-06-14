@@ -7,7 +7,7 @@
 #include "model/PlayerDir/HumanPlayer.h"
 
 
-struct TestSuiteStateFixture {
+struct TestSuiteGameFixture {
 
     PlayerPtr firstPlayer = std::make_shared<ComputerPlayer>(WHITE);
     PlayerPtr secondPlayer = std::make_shared<HumanPlayer>(BLACK);
@@ -18,7 +18,7 @@ struct TestSuiteStateFixture {
 };
 
 
-BOOST_FIXTURE_TEST_SUITE(TestSuiteGame, TestSuiteStateFixture)
+BOOST_FIXTURE_TEST_SUITE(TestSuiteGame, TestSuiteGameFixture)
 
 
     BOOST_AUTO_TEST_CASE(TestConstructorGame){
