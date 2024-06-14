@@ -35,7 +35,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteField, TestSuiteFieldFixture)
         BOOST_TEST(field.isOccupied() == false);
         BOOST_TEST(field.isOccupiedByEnemy(WHITE) == false);
         BOOST_TEST(field.isOccupiedByEnemy(BLACK) == false);
-        BOOST_TEST(field.isOccupiedByAlly(WHITE) == true);
+        BOOST_TEST(field.isOccupiedByAlly(WHITE) == false);
         BOOST_TEST(field.isOccupiedByAlly(BLACK) == false);
 
         field.setUnit(unitWhite);
