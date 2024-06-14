@@ -1,6 +1,8 @@
 #include <boost/test/unit_test.hpp>
 #include "model/Game.h"
 
+#include "model/ui/TextUI.h"
+
 #include "model/PlayerDir/ComputerPlayer.h"
 #include "model/PlayerDir/HumanPlayer.h"
 
@@ -12,6 +14,7 @@ struct TestSuiteStateFixture {
 
     PlayerPtr thirdPlayer = std::make_shared<ComputerPlayer>(WHITE);
 
+    UIPtr textUI = std::make_shared<TextUI>();
 };
 
 
@@ -19,14 +22,15 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteGame, TestSuiteStateFixture)
 
 
     BOOST_AUTO_TEST_CASE(TestConstructorGame){
-        Game valid_game(firstPlayer, secondPlayer, nullptr);
+        Game valid_game(firstPlayer, secondPlayer, textUI);
         BOOST_TEST(valid_game.getPlayer(WHITE) == firstPlayer);
         BOOST_TEST(valid_game.getPlayer(BLACK) == secondPlayer);
+        BOOST_TEST(valid_game.getUI() == textUI);
+        StatePtr state = valid_game.getState();
+        BOOST_TEST(state != nullptr);
 
-        BOOST_CHECK_THROW(Game invalid_game(firstPlayer, thirdPlayer, nullptr), std::invalid_argument);
+        BOOST_CHECK_THROW(Game invalid_game(firstPlayer, thirdPlayer, textUI), std::invalid_argument);
     }
-
-    //TODO: getState, getUI
 
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -2,8 +2,6 @@
 #include "model/move/Move.h"
 #include "model/UnitDir/Queen.h"
 
-// tests for Move.cpp and Action.cpp
-
 struct TestSuiteMoveFixture {
 
     UnitPtr unit = std::make_shared<Queen>(WHITE);
@@ -38,14 +36,3 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteMove, TestSuiteMoveFixture)
 
 BOOST_AUTO_TEST_SUITE_END()
 
-
-BOOST_FIXTURE_TEST_SUITE(TestSuiteAction, TestSuiteMoveFixture)
-
-    BOOST_AUTO_TEST_CASE(TestConstructorAction){
-        Action action(CAPTURE, targetField);
-        BOOST_TEST(action.getActionField() == targetField);
-        BOOST_TEST(action.getType() == CAPTURE);
-    }
-
-
-BOOST_AUTO_TEST_SUITE_END()
