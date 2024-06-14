@@ -108,7 +108,7 @@ BOOST_AUTO_TEST_SUITE(TestSuiteBoard)
             UnitPtr unit = field->getUnit();
 
             BOOST_TEST(unit->getColor() == kv.second->getColor());
-            BOOST_TEST(areSameBaseType(unit, kv.second));
+            BOOST_TEST(areSameType(unit, kv.second));
         }
 
         BOOST_TEST(checkContainsNoUnits(emptyBoard));

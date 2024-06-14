@@ -5,6 +5,6 @@
 #include <type_traits>
 
 template<typename T, typename U>
-bool areSameBaseType(const T& t, const U& u) {
-    return std::is_base_of<T, U>::value;
+bool areSameType(const T& t, const U& u) {
+    return std::is_same<T, U>::value;
 }

@@ -12,10 +12,10 @@ BOOST_AUTO_TEST_SUITE(TestSuiteUtils)
 
     BOOST_AUTO_TEST_CASE(TestTypeComparisonWrapper){
 
-        BOOST_TEST(!areSameBaseType(new Base(), new Derived1()));
-        BOOST_TEST(!areSameBaseType(new Base(), new Derived2()));
-        BOOST_TEST(!areSameBaseType(new Derived1(), new Derived1()));
-        BOOST_TEST(areSameBaseType(new Base(), new Base()));
+        BOOST_TEST(!areSameType(new Base(), new Derived1()));
+        BOOST_TEST(!areSameType(new Base(), new Derived2()));
+        BOOST_TEST(!areSameType(new Derived1(), new Derived2()));
+        BOOST_TEST(areSameType(new Derived1(), new Derived1()));
     }
 
 BOOST_AUTO_TEST_SUITE_END()
