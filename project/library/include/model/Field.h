@@ -8,8 +8,9 @@ class Field : public std::enable_shared_from_this<Field>{
 
 private:
     PositionPtr position;
-    UnitPtr unit;
+    UnitPtr unit = nullptr;
 public:
+    explicit Field(PositionPtr position);
 
     Field(const PositionPtr &position, const UnitPtr &unit);
     virtual ~Field();
