@@ -26,3 +26,9 @@ PositionPtr Position::applyMoveVector(MoveVectorPtr vector) const {
     return nullptr;
 }
 
+bool Position::equals(const PositionPtr& position) const noexcept {
+    return
+    position->getNumberIndex() == getNumberIndex()
+        &&
+    position->getLetterIndex() == getLetterIndex();
+}
