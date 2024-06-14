@@ -10,14 +10,18 @@ const UnitPtr Move::getMovedUnit() const {
 
 Move::Move(FieldPtr currentField, FieldPtr targetField)
 {
-    if(currentField != nullptr && targetField != nullptr){
-        if(!currentField->isOccupied()){
-            throw std::invalid_argument("Current field for a move cannot be empty");
-        }
-        this->movedUnit = currentField->getUnit();
-        this->currentField = currentField;
-        this->targetField = targetField;
-    } else throw std::invalid_argument("Pointers to both fields have to be valid");
+    if(currentField == nullptr || targetField == nullptr) {
+        throw std::invalid_argument("Pointers to both fields have to point to a Field object");
+    }
+    if (currentField == targetField){
+        throw std::invalid_argument("Current and target fields cannot be the same");
+    }
+    if(!currentField->isOccupied()){
+        throw std::invalid_argument("Current field for a move must be occupied");
+    }
+    this->movedUnit = currentField->getUnit();
+    this->currentField = currentField;
+    this->targetField = targetField;
 }
 
 const FieldPtr Move::getCurrentField() const {
