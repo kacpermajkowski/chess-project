@@ -16,13 +16,21 @@ NumberIndex Position::getNumberIndex() const {
 }
 
 PositionPtr Position::applyMoveVector(MoveVectorPtr vector) const {
-    int newColumn = letterIndex + vector->getColumnOffset();
-    int newRow = numberIndex + vector->getRowOffset();
-    if(newColumn >= 0 && newColumn <= 7){
-        if(newRow >= 0 && newRow <=7){
-            return std::make_shared<Position>(LetterIndex(newColumn), NumberIndex(newRow));
+    if(vector != nullptr) {
+        int newColumn = letterIndex + vector->getColumnOffset();
+        int newRow = numberIndex + vector->getRowOffset();
+        if (newColumn >= 0 && newColumn <= 7) {
+            if (newRow >= 0 && newRow <= 7) {
+                return std::make_shared<Position>(LetterIndex(newColumn), NumberIndex(newRow));
+            }
         }
     }
     return nullptr;
 }
 
+bool Position::equals(const PositionPtr& position) const noexcept {
+    return
+    position->getNumberIndex() == getNumberIndex()
+        &&
+    position->getLetterIndex() == getLetterIndex();
+}

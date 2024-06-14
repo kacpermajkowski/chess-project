@@ -16,6 +16,8 @@ public:
 
     LetterIndex getLetterIndex() const;
     NumberIndex getNumberIndex() const;
+
+    bool equals(const PositionPtr& position) const noexcept;
 };
 
 

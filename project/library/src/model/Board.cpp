@@ -1,4 +1,5 @@
 #include <map>
+#include <utility>
 #include "model/Board.h"
 #include "model/UnitDir/Rook.h"
 #include "model/UnitDir/Knight.h"
@@ -83,24 +84,39 @@ Board::Board() {
 }
 
 Board::Board(std::vector<FieldPtr> fields) {
-    this->fields = fillMissingFields(fields);
+    this->fields = fillMissingFields(std::move(fields));
 }
 
 void Board::initlializeWithEmptyFields() {
     this->fields = fillMissingFields(std::vector<FieldPtr> ());
 }
 
-std::vector<FieldPtr> Board::fillMissingFields(std::vector<FieldPtr> fields) {
+std::vector<FieldPtr> Board::fillMissingFields(std::vector<FieldPtr> fieldsToFill) {
     for(int i = 0; i <= 7; i++){
         for(int j = 0; j <= 7; j++){
             PositionPtr pos = std::make_shared<Position>(LetterIndex(j), NumberIndex(i));
-            FieldPtr field = getField(pos);
+            FieldPtr field;
+            for(const auto& f : fieldsToFill){
+                if(f->getPosition()->equals(pos)){
+                    field = f;
+                    break;
+                }
+            }
             if(field == nullptr){
-                fields.push_back(std::make_shared<Field>(pos, nullptr));
+                fieldsToFill.push_back(std::make_shared<Field>(pos, nullptr));
             }
         }
     }
-    return fields;
+    return fieldsToFill;
+}
+
+std::vector<UnitPtr> Board::getUnits() const {
+    std::vector<UnitPtr> playingUnits;
+    for(const auto &field : fields){
+        UnitPtr unit = field->getUnit();
+        if(unit != nullptr) playingUnits.push_back(unit);
+    }
+    return playingUnits;
 }
 
 

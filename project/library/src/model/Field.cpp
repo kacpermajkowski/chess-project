@@ -41,5 +41,9 @@ bool Field::isOccupied() {
     return getUnit() != nullptr;
 }
 
+Field::Field(PositionPtr position) : position(std::move(position)) {
+
+}
+
 
 
