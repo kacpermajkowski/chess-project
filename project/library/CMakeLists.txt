@@ -55,6 +55,7 @@ set(SOURCE_TEST_FILES
         test/model/UnitDir/PawnTest.cpp
         test/model/util/UtilTest.cpp
         test/model/move/ActionTest.cpp
+        test/model/move/MoveVectorTest.cpp
 )
 
 add_executable (LibraryTester ${SOURCE_TEST_FILES})
