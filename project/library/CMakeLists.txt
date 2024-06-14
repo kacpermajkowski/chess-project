@@ -22,8 +22,7 @@ set(SOURCE_FILES
         src/model/move/MoveVector.cpp
         src/model/move/Action.cpp
         include/typedefs.h
-        test/util/util.cpp
-
+        src/model/util/util.cpp
 )
 
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
@@ -54,6 +53,7 @@ set(SOURCE_TEST_FILES
         test/model/UnitDir/QueenTest.cpp
         test/model/UnitDir/KnightTest.cpp
         test/model/UnitDir/PawnTest.cpp
+        test/model/util/UtilTest.cpp
 )
 
 add_executable (LibraryTester ${SOURCE_TEST_FILES})
