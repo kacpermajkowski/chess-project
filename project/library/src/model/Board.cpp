@@ -119,4 +119,24 @@ std::vector<UnitPtr> Board::getUnits() const {
     return playingUnits;
 }
 
+FieldPtr Board::getKingField(PlayerColor kingColor) {
+    for(const auto& field : fields){
+        if(field->getUnit()->getColor() == kingColor) {
+            if(areSameType(field->getUnit(), std::make_shared<King>(WHITE))){
+                return field;
+            }
+        }
+    }
+    return nullptr;
+//        return *(std::find_if(fields.begin(), fields.end(),
+//        [&kingColor](const FieldPtr& field){
+//            if(field->getUnit()->getColor() == kingColor){
+//                if(areSameType(field->getUnit(), std::make_shared<King>(WHITE))){
+//                    return true;
+//                }
+//            }
+//            return false;
+//        }));
+}
+
 

@@ -19,17 +19,7 @@ public:
 
     const std::vector<FieldPtr> &getFields() const;
     std::vector<UnitPtr> getUnits() const;
-    FieldPtr getKingField(PlayerColor kingColor){
-        return *(std::find_if(fields.begin(), fields.end(),
-        [&kingColor](const FieldPtr& field){
-            if(field->getUnit()->getColor() == kingColor){
-                if(areSameType(field->getUnit(), std::make_shared<King>(WHITE))){
-                    return true;
-                }
-            }
-            return false;
-        }));
-    }
+    FieldPtr getKingField(PlayerColor kingColor);
 private:
     void initlializeWithEmptyFields();
     static std::vector<FieldPtr> fillMissingFields(std::vector<FieldPtr> fieldsToFill) ;
