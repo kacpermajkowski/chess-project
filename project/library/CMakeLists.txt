@@ -25,6 +25,8 @@ set(SOURCE_FILES
         src/model/util/util.cpp
         src/model/exceptions/NoMoveToChooseFromException.cpp
         src/model/exceptions/GameAlreadyFinishedException.cpp
+        include/model/exceptions/IllegalMoveException.h
+        src/model/exceptions/IllegalMoveException.cpp
 )
 
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł

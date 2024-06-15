@@ -43,6 +43,6 @@ std::vector<MovePtr> Queen::getLegalMoves(StatePtr state) {
 
 }
 
-std::vector<MovePtr> Queen::getPossibleFutureAttacks(StatePtr state) {
+std::vector<MovePtr> Queen::getPossibleAttacks(StatePtr state) {
     return getLegalMoves(state);
 }

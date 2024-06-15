@@ -7,6 +7,8 @@
 #include "model/UnitDir/Pawn.h"
 #include "model/UnitDir/King.h"
 #include "model/exceptions/GameAlreadyFinishedException.h"
+#include "model/exceptions/IllegalMoveException.h"
+#include "model/UnitDir/Queen.h"
 
 State::State() {
     board = std::make_shared<Board>();
@@ -38,13 +40,73 @@ void State::performAction() {
             captureUnitFromField(action->getActionField());
             break;
         case CASTLE:
+            moveRookToCastle(action);
             break;
         case PROMOTION:
+            promotePawn(move);
             break;
     }
 
-    //TODO: Castling and promotion
 }
+
+void State::promotePawn(const MovePtr& move) {
+    UnitPtr promotedPawn = move->getAction()->getActionField()->getUnit();
+    if(areSameType(promotedPawn, make_shared<Pawn>(promotedPawn->getColor()))) {
+        if (promotedPawn == move->getMovedUnit()) {
+            //TODO: choose promotion type
+            move->getAction()->getActionField()->setUnit(make_shared<Queen>(promotedPawn->getColor()));
+        }
+    } else throw IllegalMoveException("Cannot promote a Unit that isn't a Pawn");
+}
+
+void State::moveRookToCastle(const ActionPtr& action) {
+    //TODO: Maybe check if king position is also correct to castle?
+    FieldPtr rookField = action->getActionField();
+
+    FieldPtr rookTargetField = getRookCastleTargetField(rookField);
+
+    rookTargetField->setUnit(rookField->getUnit());
+    rookField->setUnit(nullptr);
+}
+
+FieldPtr State::getRookCastleTargetField(const FieldPtr& rookField) {
+    NumberIndex currentRookRow = rookField->getPosition()->getNumberIndex();
+    LetterIndex shortCastleTargetColumn = D;
+    LetterIndex longCastleTargetColumn = F;
+
+    if(isRookInFieldValidToCastle(rookField)){
+        switch(getCastleTypeByColumn(rookField->getPosition()->getLetterIndex())){
+            case SHORT_CASTLE:
+                return board->getField(std::make_shared<Position>(shortCastleTargetColumn, currentRookRow));
+            case LONG_CASTLE:
+                return board->getField(std::make_shared<Position>(longCastleTargetColumn, currentRookRow));
+            default:
+                throw IllegalMoveException("Unexpected error: castle type not found.");
+        }
+    } else throw IllegalMoveException("Rook is not in correct position to castle.");
+}
+
+bool State::isRookInFieldValidToCastle(const FieldPtr& field) {
+    NumberIndex whiteCastleRow = _1;
+    NumberIndex blackCastleRow = _8;
+    NumberIndex currentRookRow = field->getPosition()->getNumberIndex();
+    PlayerColor rookColor = field->getUnit()->getColor();
+
+    return (currentRookRow == whiteCastleRow && rookColor == WHITE) || (currentRookRow == blackCastleRow && rookColor == BLACK);
+}
+
+CastleType State::getCastleTypeByColumn(LetterIndex column) {
+    LetterIndex longCastleColumn = A;
+    LetterIndex shortCastleColumn = H;
+
+    if(column == longCastleColumn)
+        return LONG_CASTLE;
+    else if(column == shortCastleColumn)
+        return SHORT_CASTLE;
+    else
+        throw IllegalMoveException("Rook is not in correct position to castle.");
+}
+
 
 void State::changeTurn() {
     turn = turn == WHITE ? BLACK : WHITE;
@@ -85,7 +147,7 @@ void State::concludeIfApplicable() {
         conclude(REPETITION_DRAW);
     }
 
-    //TODO: Insufficient Material Conclusion
+    //TODO: insufficient material and draw by repetition conclusions
 }
 
 void State::makeAMove(const MovePtr& move) {
@@ -153,19 +215,17 @@ void State::conclude(Conclusion conclusion) {
 }
 
 bool State::isAttacked(const FieldPtr& field, PlayerColor defender) {
-    //TODO: verify
+    //TODO: this is ok, verify getPossibleAttacks
     if(field == nullptr){
         throw std::invalid_argument("Field cannot be of value nullptr");
     }
 
-    for(const FieldPtr& potentialAttacker : getBoard()->getFields()){
-        if(potentialAttacker->getUnit() != nullptr) {
-            if (potentialAttacker->getUnit()->getColor() != defender) {
-                std::vector<MovePtr> potentialAttacks = potentialAttacker->getUnit()->getPossibleFutureAttacks(shared_from_this());
-                for (const MovePtr& potentialAttack: potentialAttacks) {
-                    if (potentialAttack->getTargetField() == field)
-                        return true;
-                }
+    for(const auto& potentialAttacker : board->getUnits()){
+        if (potentialAttacker->getColor() != defender) {
+            std::vector<MovePtr> potentialAttacks = potentialAttacker->getPossibleAttacks(shared_from_this());
+            for (const MovePtr& potentialAttack: potentialAttacks) {
+                if (potentialAttack->getTargetField() == field)
+                    return true;
             }
         }
     }
@@ -177,9 +237,8 @@ std::vector<MovePtr> State::getLegalMoves() {
 }
 
 std::vector<MovePtr> State::getLegalMoves(PlayerColor color) {
-    //TODO: verify
     std::vector<MovePtr> allLegalMoves;
-    for(const FieldPtr& field : getBoard()->getFields()){
+    for(const auto& field : getBoard()->getFields()){
        if(field->isOccupiedByAlly(color)){
            std::vector<MovePtr> figureLegalMoves = field->getUnit()->getLegalMoves(shared_from_this());
            allLegalMoves.insert(std::end(allLegalMoves), std::begin(figureLegalMoves), std::end(figureLegalMoves));
@@ -229,9 +288,14 @@ bool State::hasConcluded() const {
 }
 
 bool State::hasMoved(UnitPtr unit) {
-    return std::any_of(moveHistory.begin(), moveHistory.end(),[&unit](MovePtr move){
+    //TODO: verify
+    auto test = std::any_of(moveHistory.begin(), moveHistory.end(),[&unit](MovePtr move){
         return move->getMovedUnit() == unit;
     });
+    return test;
 }
+
+
+
 
 

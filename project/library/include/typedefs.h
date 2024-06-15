@@ -32,6 +32,11 @@ enum ActionType{
     PROMOTION
 };
 
+enum CastleType{
+    SHORT_CASTLE,
+    LONG_CASTLE
+};
+
 enum PlayerColor{
     BLACK,
     WHITE

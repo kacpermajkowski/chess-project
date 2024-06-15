@@ -27,7 +27,7 @@ std::vector<MovePtr> King::getLegalMoves(StatePtr state) {
     return legalMoves;
 }
 
-std::vector<MovePtr> King::getPossibleFutureAttacks(StatePtr state) {
+std::vector<MovePtr> King::getPossibleAttacks(StatePtr state) {
     //TODO: this is wrong
 
     return Unit::getLegalMoves(state);

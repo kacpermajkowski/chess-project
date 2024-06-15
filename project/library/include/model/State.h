@@ -62,6 +62,16 @@ private:
     bool isCheckmate();
 
     void captureUnitFromField(const FieldPtr& sharedPtr);
+
+    void moveRookToCastle(const ActionPtr& action);
+
+    static bool isRookInFieldValidToCastle(const FieldPtr& field);
+
+    FieldPtr getRookCastleTargetField(const FieldPtr& rookField);
+
+    static CastleType getCastleTypeByColumn(LetterIndex column);
+
+    static void promotePawn(const MovePtr& move);
 };
 
 

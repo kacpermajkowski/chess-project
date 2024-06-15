@@ -30,6 +30,6 @@ std::vector<MovePtr> Bishop::getLegalMoves(StatePtr state) {
     return Unit::getLegalMoves(state);
 }
 
-std::vector<MovePtr> Bishop::getPossibleFutureAttacks(StatePtr state) {
+std::vector<MovePtr> Bishop::getPossibleAttacks(StatePtr state) {
     return getLegalMoves(state);
 }

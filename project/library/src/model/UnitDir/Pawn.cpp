@@ -126,7 +126,7 @@ std::vector<MovePtr> Pawn::getLegalMoves(StatePtr state) {
 //    return legalMoves;
 }
 
-std::vector<MovePtr> Pawn::getPossibleFutureAttacks(StatePtr state) {
+std::vector<MovePtr> Pawn::getPossibleAttacks(StatePtr state) {
     std::vector<MovePtr> preLegalMoves = Unit::getLegalMoves(state);
     std::vector<MovePtr> legalMoves;
     for(MovePtr move : preLegalMoves) {
