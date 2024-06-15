@@ -100,6 +100,12 @@ BOOST_AUTO_TEST_SUITE(TestSuiteBoard)
         BOOST_TEST(boardWithOneUnit->getUnits()[0] == testField->getUnit());
     }
 
+    BOOST_FIXTURE_TEST_CASE(TestGetKing, TestSuiteBoardFixture){
+        BoardPtr board = make_shared<Board>();
+        BOOST_TEST(board->getKingField(WHITE)->getPosition()->equals(make_shared<Position>(E, _1)));
+        BOOST_TEST(board->getKingField(BLACK)->getPosition()->equals(make_shared<Position>(E, _8)));
+    }
+
     BOOST_FIXTURE_TEST_CASE(TestConstructorsPiecesInitialized, TestSuiteBoardFixture){
         BoardPtr board = make_shared<Board>();
         for(const auto& kv : defaults){
@@ -115,5 +121,7 @@ BOOST_AUTO_TEST_SUITE(TestSuiteBoard)
         BOOST_REQUIRE(!boardWithOneUnit->getUnits().empty());
         BOOST_TEST(boardWithOneUnit->getUnits()[0] == testField->getUnit());
     }
+
+
 
 BOOST_AUTO_TEST_SUITE_END()
