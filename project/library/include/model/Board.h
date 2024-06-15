@@ -4,7 +4,6 @@
 #include <vector>
 #include "Field.h"
 #include "model/UnitDir/King.h"
-#include "../src/model/util/util.cpp"
 #include <algorithm>
 
 class Board : public std::enable_shared_from_this<Board>{

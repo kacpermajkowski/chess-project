@@ -9,6 +9,8 @@
 #include "model/exceptions/GameAlreadyFinishedException.h"
 #include "model/exceptions/IllegalMoveException.h"
 #include "model/UnitDir/Queen.h"
+#include "../src/model/util/util.cpp"
+#include "model/exceptions/StateIntegrityException.h"
 
 State::State() {
     board = std::make_shared<Board>();
@@ -20,8 +22,10 @@ State::~State() = default;
 
 void State::moveUnitBetweenFields() {
     MovePtr move = getLastMove();
-    move->getTargetField()->setUnit(move->getMovedUnit());
-    move->getCurrentField()->setUnit(nullptr);
+    if(!move->getTargetField()->isOccupied()){
+        move->getTargetField()->setUnit(move->getMovedUnit());
+        move->getCurrentField()->setUnit(nullptr);
+    } else throw StateIntegrityException("Field has to be empty after an action is performed");
 }
 
 void State::captureUnitFromField(const FieldPtr& actionField) {
@@ -43,6 +47,7 @@ void State::performAction() {
             moveRookToCastle(action);
             break;
         case PROMOTION:
+            //TODO: fix promotion - the pawn is first promoted, then its moved
             promotePawn(move);
             break;
     }
@@ -51,7 +56,7 @@ void State::performAction() {
 
 void State::promotePawn(const MovePtr& move) {
     UnitPtr promotedPawn = move->getAction()->getActionField()->getUnit();
-    if(areSameType(promotedPawn, make_shared<Pawn>(promotedPawn->getColor()))) {
+    if(isTypeOf<Pawn>(promotedPawn)) {
         if (promotedPawn == move->getMovedUnit()) {
             //TODO: choose promotion type
             move->getAction()->getActionField()->setUnit(make_shared<Queen>(promotedPawn->getColor()));
@@ -119,7 +124,7 @@ bool State::isFiftyMoveRuleDraw() {
     bool fiftyMoveDraw = false;
     fiftyMoveRuleCounter++;
 
-    if(areSameType(move->getMovedUnit(), std::make_shared<Pawn>(WHITE)))
+    if(isTypeOf<Pawn>(move->getMovedUnit()))
         fiftyMoveRuleCounter = 0;
     if(move->getAction() != nullptr)
         if(move->getAction()->getType() == CAPTURE)
@@ -166,8 +171,8 @@ void State::makeAMove(const MovePtr& move) {
 
     moveHistory.push_back(move);
 
-    moveUnitBetweenFields();
     performAction();
+    moveUnitBetweenFields();
 
     concludeIfApplicable();
     if(hasConcluded()) return;
@@ -216,14 +221,14 @@ void State::conclude(Conclusion conclusion) {
 }
 
 bool State::isAttacked(const FieldPtr& field, PlayerColor defender) {
-    //TODO: this is ok, verify getPossibleAttacks
+    //TODO: this is ok, verify getAttackCoverage
     if(field == nullptr){
         throw std::invalid_argument("Field cannot be of value nullptr");
     }
 
     for(const auto& potentialAttacker : board->getUnits()){
         if (potentialAttacker->getColor() != defender) {
-            std::vector<MovePtr> potentialAttacks = potentialAttacker->getPossibleAttacks(shared_from_this());
+            std::vector<MovePtr> potentialAttacks = potentialAttacker->getAttackCoverage(shared_from_this());
             for (const MovePtr& potentialAttack: potentialAttacks) {
                 if (potentialAttack->getTargetField() == field)
                     return true;

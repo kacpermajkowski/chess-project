@@ -17,14 +17,13 @@ public:
 
     virtual std::vector<MovePtr> getLegalMoves(const StatePtr &state);
     virtual std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() = 0;
-    virtual std::vector<MovePtr> getPossibleAttacks(StatePtr state) = 0;
+    virtual std::vector<MovePtr> getAttackCoverage(StatePtr state);
 
-private:
+    std::vector<MovePtr> getCheckBreakingMoves(const StatePtr& state);
+
+    FieldPtr getCurrentField(const StatePtr& state);
+
     std::vector<MovePtr> getLegalMovesNoCheck(const StatePtr& state);
-    std::vector<MovePtr> getCheckBreakingMoves(StatePtr state);
-
-protected:
-    FieldPtr getCurrentField(StatePtr state);
 };
 
 

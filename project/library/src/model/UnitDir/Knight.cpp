@@ -20,6 +20,3 @@ std::vector<MovePtr> Knight::getLegalMoves(const StatePtr &state) {
     return Unit::getLegalMoves(state);
 }
 
-std::vector<MovePtr> Knight::getPossibleAttacks(StatePtr state) {
-    return getLegalMoves(state);
-}

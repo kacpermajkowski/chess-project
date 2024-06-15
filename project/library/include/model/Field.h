@@ -12,7 +12,7 @@ private:
 public:
     explicit Field(PositionPtr position);
 
-    Field(const PositionPtr &position, const UnitPtr &unit);
+    Field(PositionPtr position, UnitPtr unit);
     virtual ~Field();
 
     PositionPtr getPosition();
@@ -20,11 +20,11 @@ public:
 
     bool isOccupied();
     bool isOccupiedByEnemy(PlayerColor color);
-    bool isOccupiedByEnemy(UnitPtr unit);
+    bool isOccupiedByEnemy(const UnitPtr& allyUnit);
     bool isOccupiedByAlly(PlayerColor color);
-    bool isOccupiedByAlly(UnitPtr unit);
+    bool isOccupiedByAlly(const UnitPtr& allyUnit);
 
-    void setUnit(UnitPtr unit);
+    void setUnit(UnitPtr newUnit);
 };
 
 

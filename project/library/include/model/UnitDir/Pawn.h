@@ -13,7 +13,7 @@ public:
 
     std::vector<MovePtr> getLegalMoves(const StatePtr &state) override;
 
-    std::vector<MovePtr> getPossibleAttacks(StatePtr state) override;
+    std::vector<MovePtr> getAttackCoverage(StatePtr state) override;
 };
 
 

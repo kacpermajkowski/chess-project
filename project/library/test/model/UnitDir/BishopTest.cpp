@@ -9,48 +9,100 @@ using namespace std;
 
 struct TestSuiteBishopFixture {
 
-    BoardPtr board = make_shared<Board>(vector<FieldPtr>());
+    BoardPtr board = make_shared<Board>(vector<FieldPtr>{
+            make_shared<Field>(make_shared<Position>(D, _4), make_shared<Bishop>(WHITE)),
+            make_shared<Field>(make_shared<Position>(D, _6), make_shared<Queen>(WHITE)),
+            make_shared<Field>(make_shared<Position>(G, _4), make_shared<Knight>(BLACK)),
+            make_shared<Field>(make_shared<Position>(C, _5), make_shared<Queen>(BLACK)),
+            make_shared<Field>(make_shared<Position>(A, _8), make_shared<King>(BLACK)),
+            make_shared<Field>(make_shared<Position>(A, _1), make_shared<King>(WHITE)),
+    });
+
     StatePtr state = make_shared<State>(board);
 
+    FieldPtr whiteBishopField = state->getBoard()->getField(make_shared<Position>(D, _4));
+    FieldPtr whiteQueenField = state->getBoard()->getField(make_shared<Position>(D, _6));
+    FieldPtr blackKnightField = state->getBoard()->getField(make_shared<Position>(G, _4));
+
+    UnitPtr whiteBishop = whiteBishopField->getUnit();
+    UnitPtr whiteQueen = whiteQueenField->getUnit();
+    UnitPtr blackKnight = blackKnightField->getUnit();
 };
 
 BOOST_FIXTURE_TEST_SUITE(TestSuiteBishop, TestSuiteBishopFixture)
 
-    BOOST_AUTO_TEST_CASE(TestConstructorBishop){
-        UnitPtr whiteBishop = make_shared<Bishop>(WHITE);
+    BOOST_AUTO_TEST_CASE(TestConstructorAndGetterBishop){
         BOOST_TEST(whiteBishop->getColor() == WHITE);
-        UnitPtr blackBishop = make_shared<Bishop>(BLACK);
-        BOOST_TEST(blackBishop->getColor() == BLACK);
+        BOOST_TEST(blackKnight->getColor() == BLACK);
     }
 
-    BOOST_AUTO_TEST_CASE(TestLegalMovesBishop){
-        UnitPtr whiteBishop = make_shared<Bishop>(WHITE);
-        UnitPtr whiteQueen = make_shared<Queen>(WHITE);
-        UnitPtr blackKnight = make_shared<Knight>(BLACK);
+    BOOST_AUTO_TEST_CASE(TestGetPossibleMovesBishop){
+        list<MoveVectorPtr> expectedVectors {
+                make_shared<MoveVector>(1,1),
+                make_shared<MoveVector>(2,2),
+                make_shared<MoveVector>(3,3),
+                make_shared<MoveVector>(4,4),
+                make_shared<MoveVector>(5,5),
+                make_shared<MoveVector>(6,6),
+                make_shared<MoveVector>(7,7),
+                make_shared<MoveVector>(-1,-1),
+                make_shared<MoveVector>(-2,-2),
+                make_shared<MoveVector>(-3,-3),
+                make_shared<MoveVector>(-4,-4),
+                make_shared<MoveVector>(-5,-5),
+                make_shared<MoveVector>(-6,-6),
+                make_shared<MoveVector>(-7,-7),
 
-        FieldPtr whiteBishopField = state->getBoard()->getField(make_shared<Position>(D, _4));
-        FieldPtr whiteQueenField = state->getBoard()->getField(make_shared<Position>(B, _6));
-        FieldPtr blackKnightField = state->getBoard()->getField(make_shared<Position>(G, _7));
+                make_shared<MoveVector>(1,-1),
+                make_shared<MoveVector>(2,-2),
+                make_shared<MoveVector>(3,-3),
+                make_shared<MoveVector>(4,-4),
+                make_shared<MoveVector>(5,-5),
+                make_shared<MoveVector>(6,-6),
+                make_shared<MoveVector>(7,-7),
+                make_shared<MoveVector>(-1,1),
+                make_shared<MoveVector>(-2,2),
+                make_shared<MoveVector>(-3,3),
+                make_shared<MoveVector>(-4,4),
+                make_shared<MoveVector>(-5,5),
+                make_shared<MoveVector>(-6,6),
+                make_shared<MoveVector>(-7,7),
+        };
 
-        BOOST_REQUIRE(whiteBishopField != nullptr);
-        BOOST_REQUIRE(whiteQueenField != nullptr);
-        BOOST_REQUIRE(blackKnightField != nullptr);
-        whiteBishopField->setUnit(whiteBishop);
-        whiteQueenField->setUnit(whiteQueen);
-        blackKnightField->setUnit(blackKnight);
+        auto possibleMoves = whiteBishop->getPossibleMoves();
+        int possibleMovesCummulativeSize = 0;
+        for(const auto& branch : possibleMoves){
+            possibleMovesCummulativeSize +=  branch.size();
+        }
+        BOOST_TEST(possibleMovesCummulativeSize == expectedVectors.size());
+        for(auto possibleVector : expectedVectors){
+            bool contains = false;
+            for(const auto& branch : possibleMoves){
+                for(auto moveVector : branch){
+                    if(moveVector->getColumnOffset() == possibleVector->getColumnOffset() && moveVector->getRowOffset() == possibleVector->getRowOffset()){
+                        contains = true;
+                        break;
+                    }
+                }
+                if(contains) break;
+            }
+            BOOST_TEST(contains);
+        }
+    }
 
+    BOOST_AUTO_TEST_CASE(TestLegalMovesNoCheckBishop){
         vector<MovePtr> moves = whiteBishop->getLegalMoves(state);
         list<PositionPtr> positons {
                 std::make_shared<Position>(C, _5),
                 std::make_shared<Position>(C, _3),
                 std::make_shared<Position>(B, _2),
-                std::make_shared<Position>(A, _1),
-                std::make_shared<Position>(E, _3),
-                std::make_shared<Position>(F, _2),
-                std::make_shared<Position>(G, _1),
                 std::make_shared<Position>(E, _5),
                 std::make_shared<Position>(F, _6),
                 std::make_shared<Position>(G, _7),
+                std::make_shared<Position>(H, _8),
+                std::make_shared<Position>(E, _3),
+                std::make_shared<Position>(F, _2),
+                std::make_shared<Position>(G, _1),
         };
 
         BOOST_TEST(positons.size() == moves.size());
@@ -66,12 +118,10 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteBishop, TestSuiteBishopFixture)
                     }
                 }
             }
-
+            cout << p->getLetterIndex() << " " << p->getNumberIndex() << endl;
             BOOST_TEST(hasCorrespondingMove);
         }
 
     }
-
-
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -7,6 +7,8 @@
 #include "model/UnitDir/King.h"
 #include "model/UnitDir/Queen.h"
 #include "model/UnitDir/Pawn.h"
+#include "model/exceptions/StateIntegrityException.h"
+#include "../src/model/util/util.cpp"
 
 FieldPtr Board::getField(PositionPtr position) const {
     for(FieldPtr f : fields){
@@ -121,13 +123,19 @@ std::vector<UnitPtr> Board::getUnits() const {
 
 FieldPtr Board::getKingField(PlayerColor kingColor) {
     for(const auto& field : fields){
-        if(field->getUnit()->getColor() == kingColor) {
-            if(areSameType(field->getUnit(), std::make_shared<King>(WHITE))){
-                return field;
+        if(field->getUnit() != nullptr){
+            if(field->getUnit()->getColor() == kingColor) {
+                std::shared_ptr<King> king = std::dynamic_pointer_cast<King>(field->getUnit());
+                if(king != nullptr){
+                    return field;
+                }
             }
         }
     }
-    return nullptr;
+    std::string message = "There is no king of color ";
+    message += ((kingColor == WHITE) ? "WHITE" : "BLACK");
+    message += " present on the board";
+    throw StateIntegrityException(message);
 //        return *(std::find_if(fields.begin(), fields.end(),
 //        [&kingColor](const FieldPtr& field){
 //            if(field->getUnit()->getColor() == kingColor){

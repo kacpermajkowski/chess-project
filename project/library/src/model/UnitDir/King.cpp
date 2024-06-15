@@ -16,10 +16,11 @@ std::vector<std::vector<MoveVectorPtr>> King::getPossibleMoves() {
 }
 
 std::vector<MovePtr> King::getLegalMoves(const StatePtr &state) {
-    std::vector<MovePtr> preLegalMoves = Unit::getLegalMoves(state);
+    std::vector<MovePtr> preLegalMoves = Unit::getLegalMovesNoCheck(state);
     std::vector<MovePtr> legalMoves;
 
-    for(MovePtr move : preLegalMoves){
+    //TODO: Add castling
+    for(const MovePtr& move : preLegalMoves){
         if(!state->isAttacked(move->getTargetField(), getColor()))
             legalMoves.push_back(move);
     }
@@ -27,8 +28,3 @@ std::vector<MovePtr> King::getLegalMoves(const StatePtr &state) {
     return legalMoves;
 }
 
-std::vector<MovePtr> King::getPossibleAttacks(StatePtr state) {
-    //TODO: this is wrong
-
-    return Unit::getLegalMoves(state);
-}

@@ -27,6 +27,8 @@ set(SOURCE_FILES
         src/model/exceptions/GameAlreadyFinishedException.cpp
         include/model/exceptions/IllegalMoveException.h
         src/model/exceptions/IllegalMoveException.cpp
+        src/model/exceptions/StateIntegrityException.cpp
+        include/model/exceptions/StateIntegrityException.h
 )
 
 # Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
@@ -59,6 +61,8 @@ set(SOURCE_TEST_FILES
         test/model/UnitDir/PawnTest.cpp
         src/model/exceptions/NoMoveToChooseFromException.cpp
         src/model/exceptions/GameAlreadyFinishedException.cpp
+        test/model/util/UtilTest.cpp
+        test/model/UnitDir/KingTest.cpp
 )
 
 add_executable (LibraryTester ${SOURCE_TEST_FILES})

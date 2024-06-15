@@ -9,8 +9,10 @@
 Action::Action(ActionType type, const FieldPtr& actionField) : type(type) {
     if(actionField != nullptr){
         this->actionField = actionField;
-        if(!actionField->isOccupied()){
-            throw std::invalid_argument("Action field must be occupied");
+        if(type == CAPTURE && !actionField->isOccupied()){
+            throw std::invalid_argument("Action (CAPTURE) field must be occupied");
+        } else if((type == PROMOTION || type == CASTLE) && actionField->isOccupied()){
+            throw std::invalid_argument("Action (PROMOTION or CAPTURE) field must not be occupied");
         }
     } else throw std::invalid_argument("Action must have a field which it affects");
 }

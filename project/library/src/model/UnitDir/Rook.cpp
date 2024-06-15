@@ -31,6 +31,3 @@ std::vector<MovePtr> Rook::getLegalMoves(const StatePtr &state) {
     return Unit::getLegalMoves(state);
 }
 
-std::vector<MovePtr> Rook::getPossibleAttacks(StatePtr state) {
-    return getLegalMoves(state);
-}

@@ -6,18 +6,18 @@ std::vector<std::vector<MoveVectorPtr>> Pawn::getPossibleMoves() {
     std::vector<std::vector<MoveVectorPtr>> moves;
     if(getColor() == WHITE){
         moves.push_back(std::vector<MoveVectorPtr> {
-                std::make_shared<MoveVector>(1,0),
-                std::make_shared<MoveVector>(2,0)
+                std::make_shared<MoveVector>(0,1),
+                std::make_shared<MoveVector>(0,2)
         });
-        moves.push_back(std::vector<MoveVectorPtr> {std::make_shared<MoveVector>(1,-1)});
+        moves.push_back(std::vector<MoveVectorPtr> {std::make_shared<MoveVector>(-1,1)});
         moves.push_back(std::vector<MoveVectorPtr> {std::make_shared<MoveVector>(1,1)});
     } else if(getColor() == BLACK){
         moves.push_back(std::vector<MoveVectorPtr> {
-                std::make_shared<MoveVector>(-1,0),
-                std::make_shared<MoveVector>(-2,0)
+                std::make_shared<MoveVector>(0,-1),
+                std::make_shared<MoveVector>(0,-2)
         });
+        moves.push_back(std::vector<MoveVectorPtr> {std::make_shared<MoveVector>(1,-1)});
         moves.push_back(std::vector<MoveVectorPtr> {std::make_shared<MoveVector>(-1,-1)});
-        moves.push_back(std::vector<MoveVectorPtr> {std::make_shared<MoveVector>(-1,1)});
     }
     return moves;
 }
@@ -37,14 +37,13 @@ std::vector<MovePtr> Pawn::getLegalMoves(const StatePtr &state) {
             PositionPtr targetPosition = currentPosition->applyMoveVector(moveVector);
             if(targetPosition == nullptr) continue;
 
-
             FieldPtr targetField = state->getBoard()->getField(targetPosition);
             //Jeżeli pion idzie do przodu
             if(targetPosition->getLetterIndex() == currentPosition->getLetterIndex()){
                 if(!targetField->isOccupied()){
                     int moveRowOffset = currentPosition->getNumberIndex() - targetPosition->getNumberIndex();
-                    if(moveRowOffset == 2 | moveRowOffset == -2){
-                        if(state->hasMoved(shared_from_this())){
+                    if(moveRowOffset == 2 || moveRowOffset == -2){
+                        if(!state->hasMoved(shared_from_this())){
                             legalMoves.push_back(std::make_shared<Move>(currentField, targetField));
                         }
                     } else {
@@ -126,10 +125,10 @@ std::vector<MovePtr> Pawn::getLegalMoves(const StatePtr &state) {
 //    return legalMoves;
 }
 
-std::vector<MovePtr> Pawn::getPossibleAttacks(StatePtr state) {
-    std::vector<MovePtr> preLegalMoves = Unit::getLegalMoves(state);
+std::vector<MovePtr> Pawn::getAttackCoverage(StatePtr state) {
+    std::vector<MovePtr> preLegalMoves = Unit::getLegalMovesNoCheck(state);
     std::vector<MovePtr> legalMoves;
-    for(MovePtr move : preLegalMoves) {
+    for(const MovePtr& move : preLegalMoves) {
         if(move->getTargetField()->getPosition()->getLetterIndex() != move->getCurrentField()->getPosition()->getLetterIndex()){
             legalMoves.push_back(move);
         }

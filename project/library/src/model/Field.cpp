@@ -1,7 +1,9 @@
 #include "model/Field.h"
 
-Field::Field(const PositionPtr &position, const UnitPtr &unit) : position(position), unit(unit) {}
-Field::~Field() {}
+#include <utility>
+
+Field::Field(PositionPtr position, UnitPtr unit) : position(std::move(position)), unit(std::move(unit)) {}
+Field::~Field() = default;
 
 PositionPtr Field::getPosition() {
     return position;
@@ -11,8 +13,8 @@ UnitPtr Field::getUnit() {
     return unit;
 }
 
-void Field::setUnit(UnitPtr unit) {
-    Field::unit = unit;
+void Field::setUnit(UnitPtr newUnit) {
+    Field::unit = std::move(newUnit);
 }
 
 bool Field::isOccupiedByEnemy(PlayerColor color) {
@@ -22,8 +24,8 @@ bool Field::isOccupiedByEnemy(PlayerColor color) {
     return false;
 }
 
-bool Field::isOccupiedByEnemy(UnitPtr unit) {
-    return isOccupiedByEnemy(unit->getColor());
+bool Field::isOccupiedByEnemy(const UnitPtr& allyUnit) {
+    return isOccupiedByEnemy(allyUnit->getColor());
 }
 
 bool Field::isOccupiedByAlly(PlayerColor color) {
@@ -33,8 +35,8 @@ bool Field::isOccupiedByAlly(PlayerColor color) {
     return false;
 }
 
-bool Field::isOccupiedByAlly(UnitPtr unit) {
-    return isOccupiedByAlly(unit->getColor());
+bool Field::isOccupiedByAlly(const UnitPtr& allyUnit) {
+    return isOccupiedByAlly(allyUnit->getColor());
 }
 
 bool Field::isOccupied() {

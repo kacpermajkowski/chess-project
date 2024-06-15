@@ -2,6 +2,7 @@
 #include <iostream>
 #include "model/UnitDir/Unit.h"
 #include "model/State.h"
+#include "../src/model/util/util.cpp"
 
 Unit::Unit(PlayerColor color) : color(color) {};
 Unit::~Unit() = default;
@@ -45,14 +46,16 @@ std::vector<MovePtr> Unit::getLegalMovesNoCheck(const StatePtr& state) {
             }
             //Jeżeli jest zajęte, ale przez przeciwnika, to możemy się tam ruszyć i zbić
             else if(targetField->isOccupiedByEnemy(shared_from_this())){
-                try{
-                    //TODO: catch exception from Action
-                    std::shared_ptr<Move> move = std::make_shared<Move>(currentField, targetField);
-                    move->setAction(std::make_shared<Action>(CAPTURE, targetField));
-                    legalMoves.push_back(move);
-                    break;
-                } catch (std::invalid_argument& e ){
-                    std::wcout << e.what() << " <-- unit.getLegalMovesNoCheck()";
+                if(!isTypeOf<King>(targetField->getUnit())){
+                    try{
+                        //TODO: catch exception from Action
+                        std::shared_ptr<Move> move = std::make_shared<Move>(currentField, targetField);
+                        move->setAction(std::make_shared<Action>(CAPTURE, targetField));
+                        legalMoves.push_back(move);
+                        break;
+                    } catch (std::invalid_argument& e ){
+                        std::wcout << e.what() << " <-- unit.getLegalMovesNoCheck()";
+                    }
                 }
             }
 
@@ -66,12 +69,16 @@ std::vector<MovePtr> Unit::getLegalMovesNoCheck(const StatePtr& state) {
     return legalMoves;
 }
 
-std::vector<MovePtr> Unit::getCheckBreakingMoves(StatePtr state) {
+std::vector<MovePtr> Unit::getCheckBreakingMoves(const StatePtr& state) {
     return std::vector<MovePtr>();
 }
 
-FieldPtr Unit::getCurrentField(const StatePtr state) {
+FieldPtr Unit::getCurrentField(const StatePtr& state) {
     return state->getBoard()->getField(shared_from_this());
+}
+
+std::vector<MovePtr> Unit::getAttackCoverage(StatePtr state) {
+    return Unit::getLegalMovesNoCheck(state);
 }
 
 
