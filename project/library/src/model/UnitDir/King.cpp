@@ -15,7 +15,7 @@ std::vector<std::vector<MoveVectorPtr>> King::getPossibleMoves() {
     return moves;
 }
 
-std::vector<MovePtr> King::getLegalMoves(StatePtr state) {
+std::vector<MovePtr> King::getLegalMoves(const StatePtr &state) {
     std::vector<MovePtr> preLegalMoves = Unit::getLegalMoves(state);
     std::vector<MovePtr> legalMoves;
 

@@ -26,7 +26,7 @@ std::vector<std::vector<MoveVectorPtr>> Bishop::getPossibleMoves() {
     return moves;
 }
 
-std::vector<MovePtr> Bishop::getLegalMoves(StatePtr state) {
+std::vector<MovePtr> Bishop::getLegalMoves(const StatePtr &state) {
     return Unit::getLegalMoves(state);
 }
 

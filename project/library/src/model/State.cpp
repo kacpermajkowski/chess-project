@@ -109,6 +109,7 @@ CastleType State::getCastleTypeByColumn(LetterIndex column) {
 
 
 void State::changeTurn() {
+    //TODO: make turn system more robust if possible
     turn = turn == WHITE ? BLACK : WHITE;
 }
 

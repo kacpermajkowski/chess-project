@@ -6,7 +6,7 @@
 #include "model/move/Action.h"
 #include "model/Field.h"
 
-Action::Action(ActionType type, FieldPtr actionField) : type(type) {
+Action::Action(ActionType type, const FieldPtr& actionField) : type(type) {
     if(actionField != nullptr){
         this->actionField = actionField;
         if(!actionField->isOccupied()){

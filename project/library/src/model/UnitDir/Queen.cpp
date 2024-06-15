@@ -38,7 +38,7 @@ std::vector<std::vector<MoveVectorPtr>> Queen::getPossibleMoves() {
     return moves;
 }
 
-std::vector<MovePtr> Queen::getLegalMoves(StatePtr state) {
+std::vector<MovePtr> Queen::getLegalMoves(const StatePtr &state) {
     return Unit::getLegalMoves(state);
 
 }

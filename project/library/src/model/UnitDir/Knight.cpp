@@ -16,7 +16,7 @@ std::vector<std::vector<MoveVectorPtr>> Knight::getPossibleMoves() {
     };
 }
 
-std::vector<MovePtr> Knight::getLegalMoves(StatePtr state) {
+std::vector<MovePtr> Knight::getLegalMoves(const StatePtr &state) {
     return Unit::getLegalMoves(state);
 }
 

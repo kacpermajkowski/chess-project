@@ -26,7 +26,7 @@ std::vector<std::vector<MoveVectorPtr>> Rook::getPossibleMoves() {
     return moves;
 }
 
-std::vector<MovePtr> Rook::getLegalMoves(StatePtr state) {
+std::vector<MovePtr> Rook::getLegalMoves(const StatePtr &state) {
     //TODO: Add castling
     return Unit::getLegalMoves(state);
 }

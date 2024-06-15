@@ -14,7 +14,7 @@ private:
     FieldPtr actionField;
 
 public:
-    Action(ActionType type, FieldPtr actionField);
+    Action(ActionType type, const FieldPtr& actionField);
 
     ActionType getType() const;
 

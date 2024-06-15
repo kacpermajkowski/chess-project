@@ -22,7 +22,7 @@ std::vector<std::vector<MoveVectorPtr>> Pawn::getPossibleMoves() {
     return moves;
 }
 
-std::vector<MovePtr> Pawn::getLegalMoves(StatePtr state) {
+std::vector<MovePtr> Pawn::getLegalMoves(const StatePtr &state) {
     std::vector<MovePtr> legalMoves;
 
     FieldPtr currentField = getCurrentField(state);
