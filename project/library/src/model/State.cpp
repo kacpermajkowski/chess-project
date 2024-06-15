@@ -33,8 +33,16 @@ void State::performAction() {
     if(action == nullptr)
         return;
 
-    if (action->getType() == CAPTURE)
-        captureUnitFromField(action->getActionField());
+    switch(action->getType()){
+        case CAPTURE:
+            captureUnitFromField(action->getActionField());
+            break;
+        case CASTLE:
+            break;
+        case PROMOTION:
+            break;
+    }
+
     //TODO: Castling and promotion
 }
 
@@ -115,17 +123,27 @@ bool State::isInsufficientMaterial() {
 }
 
 bool State::isStalemate() {
-    FieldPtr stalematedKingField = board->getKingField(getTurn() == WHITE ? BLACK : WHITE);
-    if(stalematedKingField->getUnit()->getLegalMoves(shared_from_this()).empty()){
-        if(!isAttacked(stalematedKingField, stalematedKingField->getUnit()->getColor())){
-            return true;
+    bool isStalemate = false;
+    PlayerColor stalematedPlayerColor = getTurn() == WHITE ? BLACK : WHITE;
+    if(getLegalMoves(stalematedPlayerColor).empty()){
+        FieldPtr stalematedKingField = board->getKingField(stalematedPlayerColor);
+        if(!isAttacked(stalematedKingField, stalematedPlayerColor)){
+            isStalemate = true;
         }
     }
-    return false;
+    return isStalemate;
 }
 
 bool State::isCheckmate() {
-    return isStalemate() && isAttacked(board->getKingField(getTurn() == WHITE ? WHITE : BLACK));
+    bool isCheckmate = false;
+    PlayerColor checkmatedKingColor = getTurn() == WHITE ? BLACK : WHITE;
+    if(getLegalMoves(checkmatedKingColor).empty()) {
+        FieldPtr checkmatedKingField = board->getKingField(checkmatedKingColor);
+        if(isAttacked(checkmatedKingField, checkmatedKingColor)){
+            isCheckmate = true;
+        }
+    }
+    return isCheckmate;
 }
 
 void State::conclude(Conclusion conclusion) {
@@ -135,6 +153,7 @@ void State::conclude(Conclusion conclusion) {
 }
 
 bool State::isAttacked(const FieldPtr& field, PlayerColor defender) {
+    //TODO: verify
     if(field == nullptr){
         throw std::invalid_argument("Field cannot be of value nullptr");
     }
@@ -142,8 +161,7 @@ bool State::isAttacked(const FieldPtr& field, PlayerColor defender) {
     for(const FieldPtr& potentialAttacker : getBoard()->getFields()){
         if(potentialAttacker->getUnit() != nullptr) {
             if (potentialAttacker->getUnit()->getColor() != defender) {
-                std::vector<MovePtr> potentialAttacks = potentialAttacker->getUnit()->getPossibleFutureAttacks(
-                        shared_from_this());
+                std::vector<MovePtr> potentialAttacks = potentialAttacker->getUnit()->getPossibleFutureAttacks(shared_from_this());
                 for (const MovePtr& potentialAttack: potentialAttacks) {
                     if (potentialAttack->getTargetField() == field)
                         return true;
@@ -159,8 +177,9 @@ std::vector<MovePtr> State::getLegalMoves() {
 }
 
 std::vector<MovePtr> State::getLegalMoves(PlayerColor color) {
+    //TODO: verify
     std::vector<MovePtr> allLegalMoves;
-    for(FieldPtr field : getBoard()->getFields()){
+    for(const FieldPtr& field : getBoard()->getFields()){
        if(field->isOccupiedByAlly(color)){
            std::vector<MovePtr> figureLegalMoves = field->getUnit()->getLegalMoves(shared_from_this());
            allLegalMoves.insert(std::end(allLegalMoves), std::begin(figureLegalMoves), std::end(figureLegalMoves));
@@ -170,6 +189,7 @@ std::vector<MovePtr> State::getLegalMoves(PlayerColor color) {
 }
 
 bool State::isCheck() {
+    //TODO: verify
     for(const FieldPtr& field : board->getFields()){
         UnitPtr unit = field->getUnit();
         if(typeid(unit) == typeid(King)){
