@@ -27,7 +27,7 @@ public:
     std::vector<MovePtr> getLegalMoves(PlayerColor color);
     std::vector<MovePtr> getLegalMoves();
 
-    bool isCheck();
+    bool isCheck(PlayerColor kingColor);
     Conclusion getConclusion() const;
     PlayerColor getTurn() const;
     BoardPtr getBoard() const;

@@ -12,7 +12,7 @@ PlayerColor Unit::getColor() {
 
 std::vector<MovePtr> Unit::getLegalMoves(StatePtr state) {
     std::vector<MovePtr> legalMoves;
-    if(state->isCheck()){
+    if(state->isCheck(color)){
 //        legalMoves = getCheckBreakingMoves(state);
     } else {
         legalMoves = getLegalMovesNoCheck(state);

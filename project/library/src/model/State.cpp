@@ -188,17 +188,12 @@ std::vector<MovePtr> State::getLegalMoves(PlayerColor color) {
     return allLegalMoves;
 }
 
-bool State::isCheck() {
-    //TODO: verify
-    for(const FieldPtr& field : board->getFields()){
-        UnitPtr unit = field->getUnit();
-        if(typeid(unit) == typeid(King)){
-            if(unit->getColor() == turn){
-                return isAttacked(field, turn);
-            }
-        }
-    }
-    return false;
+bool State::isCheck(PlayerColor kingColor) {
+    FieldPtr kingField = board->getKingField(kingColor);
+    if(kingField != nullptr){
+        return isAttacked(kingField, kingColor);
+    } else return false;
+    //TODO: Throw exception, because in State there should always be two kings, one of each on the board
 }
 
 const std::vector<MovePtr> & State::getMoveHistory() const {
