@@ -63,6 +63,7 @@ std::vector<std::vector<PositionPtr>> Unit::generatePositionBranches(const State
 }
 
 std::vector<MovePtr> Unit::getCheckBreakingMoves(const StatePtr& state) {
+    //TODO: implement getCheckBreakingMoves
     return std::vector<MovePtr>();
 }
 
@@ -94,11 +95,9 @@ Unit::getMoveBranchesIncludeOccupiedFields(const StatePtr &state) {
             FieldPtr targetField = state->getBoard()->getField(targetPosition);
 
             if(targetField->isOccupiedByEnemy(shared_from_this())){
-                if(!isTypeOf<King>(targetField->getUnit())){
-                    std::shared_ptr<Move> move = std::make_shared<Move>(currentField, targetField);
-                    move->setAction(std::make_shared<Action>(CAPTURE, targetField));
-                    moveBranch.push_back(move);
-                }
+                std::shared_ptr<Move> move = std::make_shared<Move>(currentField, targetField);
+                move->setAction(std::make_shared<Action>(CAPTURE, targetField));
+                moveBranch.push_back(move);
             } else {
                 moveBranch.push_back(std::make_shared<Move>(currentField, targetField));
             }

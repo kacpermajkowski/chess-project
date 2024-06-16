@@ -221,7 +221,6 @@ void State::conclude(Conclusion conclusion) {
 }
 
 bool State::isAttacked(const FieldPtr& field, PlayerColor defender) {
-    //TODO: this is ok, verify getAttackCoverage
     if(field == nullptr){
         throw std::invalid_argument("Field cannot be of value nullptr");
     }
