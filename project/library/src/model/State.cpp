@@ -22,6 +22,11 @@ State::~State() = default;
 
 void State::moveUnitBetweenFields() {
     MovePtr move = getLastMove();
+    if(move->getAction() != nullptr && move->getAction()->getType() == PROMOTION) {
+        move->getCurrentField()->setUnit(nullptr);
+        return;
+    }
+
     if(!move->getTargetField()->isOccupied()){
         move->getTargetField()->setUnit(move->getMovedUnit());
         move->getCurrentField()->setUnit(nullptr);
@@ -47,7 +52,6 @@ void State::performAction() {
             moveRookToCastle(action);
             break;
         case PROMOTION:
-            //TODO: fix promotion - the pawn is first promoted, then its moved
             promotePawn(move);
             break;
     }
@@ -55,12 +59,10 @@ void State::performAction() {
 }
 
 void State::promotePawn(const MovePtr& move) {
-    UnitPtr promotedPawn = move->getAction()->getActionField()->getUnit();
+    UnitPtr promotedPawn = move->getCurrentField()->getUnit();
     if(isTypeOf<Pawn>(promotedPawn)) {
-        if (promotedPawn == move->getMovedUnit()) {
-            //TODO: choose promotion type
-            move->getAction()->getActionField()->setUnit(make_shared<Queen>(promotedPawn->getColor()));
-        }
+        //TODO: choose promotion type
+        move->getAction()->getActionField()->setUnit(make_shared<Queen>(promotedPawn->getColor()));
     } else throw IllegalMoveException("Cannot promote a Unit that isn't a Pawn");
 }
 
@@ -205,8 +207,8 @@ bool State::isStalemate() {
 bool State::isCheckmate() {
     bool isCheckmate = false;
     PlayerColor checkmatedKingColor = getTurn() == WHITE ? BLACK : WHITE;
-    if(getLegalMoves(checkmatedKingColor).empty()) {
-        FieldPtr checkmatedKingField = board->getKingField(checkmatedKingColor);
+    FieldPtr checkmatedKingField = board->getKingField(checkmatedKingColor);
+    if(checkmatedKingField->getUnit()->getLegalMoves(shared_from_this()).empty()) {
         if(isAttacked(checkmatedKingField, checkmatedKingColor)){
             isCheckmate = true;
         }

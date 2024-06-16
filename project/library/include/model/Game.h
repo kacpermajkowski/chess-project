@@ -22,6 +22,8 @@ public:
     StatePtr getState() const;
 
     UIPtr getUI() const;
+
+    void run();
 };
 
 

@@ -13,6 +13,7 @@ class Move;
 class UI;
 class MoveVector;
 class Action;
+class Game;
 
 typedef std::shared_ptr<Unit> UnitPtr;
 typedef std::shared_ptr<Player> PlayerPtr;
@@ -24,6 +25,7 @@ typedef std::shared_ptr<Position> PositionPtr;
 typedef std::shared_ptr<UI> UIPtr;
 typedef std::shared_ptr<MoveVector> MoveVectorPtr;
 typedef std::shared_ptr<Action> ActionPtr;
+typedef std::shared_ptr<Game> GamePtr;
 
 
 enum ActionType{

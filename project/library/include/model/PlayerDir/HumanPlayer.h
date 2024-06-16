@@ -7,7 +7,7 @@ class HumanPlayer : public Player{
 public:
     explicit HumanPlayer(PlayerColor color);
 
-    MovePtr chooseAMove(std::vector<MovePtr> legalMoves) override;
+    MovePtr chooseAMove(const GamePtr &game) override;
 };
 
 

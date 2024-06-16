@@ -14,7 +14,7 @@ public:
     virtual ~Player();
 
     PlayerColor getColor() const;
-    virtual MovePtr chooseAMove(std::vector<MovePtr> legalMoves) = 0;
+    virtual MovePtr chooseAMove(const GamePtr &game) = 0;
 };
 
 

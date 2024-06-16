@@ -2,12 +2,14 @@
 #include "model/PlayerDir/ComputerPlayer.h"
 #include "model/exceptions/NoMoveToChooseFromException.h"
 #include "model/exceptions/StateIntegrityException.h"
+#include "model/Game.h"
 
 ComputerPlayer::ComputerPlayer(PlayerColor color) : Player(color) {
-    srand(time(NULL));
+    srand(time(nullptr));
 }
 
-MovePtr ComputerPlayer::chooseAMove(std::vector<MovePtr> legalMoves) {
+MovePtr ComputerPlayer::chooseAMove(const GamePtr &game) {
+    std::vector<MovePtr> legalMoves = game->getState()->getLegalMoves(getColor());
     if(!legalMoves.empty()) {
         int moveNumber = (rand() % legalMoves.size());
         return legalMoves[moveNumber];
