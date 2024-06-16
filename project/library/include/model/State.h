@@ -64,7 +64,7 @@ private:
 
     bool isCheckmate();
 
-    void captureUnitFromField(const FieldPtr& sharedPtr);
+    void captureUnit(const MovePtr &move);
 
     void moveRookToCastle(const ActionPtr& action);
 

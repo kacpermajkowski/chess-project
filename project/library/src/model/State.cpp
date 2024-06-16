@@ -20,6 +20,38 @@ State::State(std::shared_ptr<Board> board){
 }
 State::~State() = default;
 
+void State::performAction() {
+    MovePtr move = getLastMove();
+    ActionPtr action = move->getAction();
+    if(action == nullptr)
+        return;
+
+    switch(action->getType()){
+        case CAPTURE:
+            captureUnit(move);
+            break;
+        case CASTLE:
+            moveRookToCastle(action);
+            break;
+        case PROMOTION:
+            promotePawn(move);
+            break;
+    }
+
+}
+
+void State::captureUnit(const MovePtr &move) {
+    takenPieces.push_back(move->getAction()->getActionField()->getUnit());
+    move->getAction()->getActionField()->setUnit(nullptr);
+}
+
+void State::promotePawn(const MovePtr& move) {
+    UnitPtr promotedPawn = move->getCurrentField()->getUnit();
+    if(isTypeOf<Pawn>(promotedPawn)) {
+        move->getAction()->getActionField()->setUnit(make_shared<Queen>(promotedPawn->getColor()));
+    } else throw IllegalMoveException("Cannot promote a Unit that isn't a Pawn");
+}
+
 void State::moveUnitBetweenFields() {
     MovePtr move = getLastMove();
     if(move->getAction() != nullptr && move->getAction()->getType() == PROMOTION) {
@@ -33,41 +65,7 @@ void State::moveUnitBetweenFields() {
     } else throw StateIntegrityException("Field has to be empty after an action is performed");
 }
 
-void State::captureUnitFromField(const FieldPtr& actionField) {
-    takenPieces.push_back(actionField->getUnit());
-    actionField->setUnit(nullptr);
-}
-
-void State::performAction() {
-    MovePtr move = getLastMove();
-    ActionPtr action = move->getAction();
-    if(action == nullptr)
-        return;
-
-    switch(action->getType()){
-        case CAPTURE:
-            captureUnitFromField(action->getActionField());
-            break;
-        case CASTLE:
-            moveRookToCastle(action);
-            break;
-        case PROMOTION:
-            promotePawn(move);
-            break;
-    }
-
-}
-
-void State::promotePawn(const MovePtr& move) {
-    UnitPtr promotedPawn = move->getCurrentField()->getUnit();
-    if(isTypeOf<Pawn>(promotedPawn)) {
-        //TODO: choose promotion type
-        move->getAction()->getActionField()->setUnit(make_shared<Queen>(promotedPawn->getColor()));
-    } else throw IllegalMoveException("Cannot promote a Unit that isn't a Pawn");
-}
-
 void State::moveRookToCastle(const ActionPtr& action) {
-    //TODO: Maybe check if king position is also correct to castle?
     FieldPtr rookField = action->getActionField();
 
     FieldPtr rookTargetField = getRookCastleTargetField(rookField);
@@ -78,8 +76,8 @@ void State::moveRookToCastle(const ActionPtr& action) {
 
 FieldPtr State::getRookCastleTargetField(const FieldPtr& rookField) {
     NumberIndex currentRookRow = rookField->getPosition()->getNumberIndex();
-    LetterIndex shortCastleTargetColumn = D;
-    LetterIndex longCastleTargetColumn = F;
+    LetterIndex shortCastleTargetColumn = F;
+    LetterIndex longCastleTargetColumn = D;
 
     if(isRookInFieldValidToCastle(rookField)){
         switch(getCastleTypeByColumn(rookField->getPosition()->getLetterIndex())){
@@ -114,9 +112,7 @@ CastleType State::getCastleTypeByColumn(LetterIndex column) {
         throw IllegalMoveException("Rook is not in correct position to castle.");
 }
 
-
 void State::changeTurn() {
-    //TODO: make turn system more robust if possible
     turn = turn == WHITE ? BLACK : WHITE;
 }
 
