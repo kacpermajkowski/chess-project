@@ -10,5 +10,6 @@
 # Ignororwane wszystkich folderów o zadanej nazwie
 
 cmake-build-debug
+cmake-build-relase
 exportToHTML
 .idea
