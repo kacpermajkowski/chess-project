@@ -48,9 +48,13 @@ std::vector<MovePtr> Pawn::getLegalMoves(const StatePtr &state) {
                             legalMoves.push_back(std::make_shared<Move>(currentField, targetField));
                         }
                     } else {
+                        MovePtr move = std::make_shared<Move>(currentField, targetField);
+                        if(getColor() == WHITE && targetPosition->getNumberIndex() == _8){
+                            ActionPtr action = std::make_shared<Action>(PROMOTION, targetField);
+                        } else if(getColor() == BLACK && targetPosition->getNumberIndex() == _1){
+                            ActionPtr action = std::make_shared<Action>(PROMOTION, targetField);
+                        }
                         legalMoves.push_back(std::make_shared<Move>(currentField, targetField));
-                        //Jeżeli pole jest zajęte, to nie możemy już poruszyć się
-                        //na nie ani pola znajdujące się za nim, więc przerywamy badanie gałęzi.
                     }
                     continue;
                 } else break;
