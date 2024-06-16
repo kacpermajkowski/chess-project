@@ -1,6 +1,7 @@
 #include <iostream>
 #include "model/UnitDir/Pawn.h"
 #include "model/State.h"
+#include "../src/model/util/util.cpp"
 
 std::vector<std::vector<MoveVectorPtr>> Pawn::getBranchesOfPossibleMoveVectors() {
     std::vector<std::vector<MoveVectorPtr>> moves;
@@ -59,9 +60,11 @@ std::vector<MovePtr> Pawn::getLegalMoves(const StatePtr &state) {
                 //Jeżeli bijemy tam gdzie idziemy
                 if(targetField->getUnit() != nullptr){
                     if(targetField->isOccupiedByEnemy(shared_from_this())) {
-                        MovePtr move = std::make_shared<Move>(currentField, targetField);
-                        move->setAction(std::make_shared<Action>(CAPTURE, targetField));
-                        legalMoves.push_back(move);
+                        if(!isTypeOf<King>(targetField->getUnit())){
+                            MovePtr move = std::make_shared<Move>(currentField, targetField);
+                            move->setAction(std::make_shared<Action>(CAPTURE, targetField));
+                            legalMoves.push_back(move);
+                        }
                     }
                 }
                 //Jeżeli nie bijemy tam, gdzie idziemy, to sprawdzamy, czy ma miejsce bicie w przelocie
@@ -81,7 +84,7 @@ std::vector<MovePtr> Pawn::getLegalMoves(const StatePtr &state) {
                             //Jezeli jest to wrogi pion
                             if(actionUnit->getColor() != getColor()){
                                 //Jeżeli pod polem znajduje się pion
-                                if(typeid(actionUnit) == typeid(Pawn)){
+                                if(isTypeOf<Pawn>(actionUnit)){
                                     //Jeżeli pion poruszył się w poprzednim ruchu
                                     if(state->getLastMove()->getMovedUnit() == actionUnit){
                                         PositionPtr startPos = state->getLastMove()->getCurrentField()->getPosition();

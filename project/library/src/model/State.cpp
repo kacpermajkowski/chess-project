@@ -257,6 +257,11 @@ bool State::isCheck(PlayerColor kingColor) {
     return isAttacked(kingField, kingColor);
 }
 
+bool State::isCheck() {
+    return isCheck(getTurn());
+}
+
+
 const std::vector<MovePtr> & State::getMoveHistory() const {
     return moveHistory;
 }
@@ -296,6 +301,7 @@ bool State::hasMoved(UnitPtr unit) {
     });
     return test;
 }
+
 
 
 

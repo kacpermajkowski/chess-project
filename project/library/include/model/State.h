@@ -6,6 +6,8 @@
 #include "typedefs.h"
 #include "Board.h"
 
+class StateFriend;
+
 class State : public std::enable_shared_from_this<State> {
 private:
 
@@ -28,6 +30,7 @@ public:
     std::vector<MovePtr> getLegalMoves();
 
     bool isCheck(PlayerColor kingColor);
+    bool isCheck();
     Conclusion getConclusion() const;
     PlayerColor getTurn() const;
     BoardPtr getBoard() const;
@@ -72,6 +75,8 @@ private:
     static CastleType getCastleTypeByColumn(LetterIndex column);
 
     static void promotePawn(const MovePtr& move);
+
+    friend StateFriend;
 };
 
 

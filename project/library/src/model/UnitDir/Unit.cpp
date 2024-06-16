@@ -13,10 +13,12 @@ PlayerColor Unit::getColor() {
 
 std::vector<MovePtr> Unit::getLegalMoves(const StatePtr &state) {
     std::vector<MovePtr> legalMoves;
-    if(state->isCheck(color)){
-        legalMoves = getCheckBreakingMoves(state);
-    } else {
-        legalMoves = getLegalMovesAssumeNoCheck(state);
+    if(state->getTurn() == color){
+        if(state->isCheck()){
+            legalMoves = getCheckBreakingMoves(state);
+        } else {
+            legalMoves = getLegalMovesAssumeNoCheck(state);
+        }
     }
 
     return legalMoves;
@@ -32,7 +34,9 @@ std::vector<MovePtr> Unit::getLegalMovesAssumeNoCheck(const StatePtr& state) {
     for(const auto& moveBranch : moveBranches){
         for(const auto& move : moveBranch){
             if(!move->getTargetField()->isOccupiedByAlly(color)){
-                legalMoves.push_back(move);
+                if(!isTypeOf<King>(move->getTargetField()->getUnit())) {
+                    legalMoves.push_back(move);
+                }
             }
         }
     }

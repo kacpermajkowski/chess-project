@@ -66,7 +66,7 @@ void TextUI::update(StatePtr state) {
     std::wcout << std::endl;
     for(int rows = 7; rows >= 0; rows--){
         std::wcout << (wchar_t)(L'1'+rows) << L" ";
-        for(int column = 7; column >= 0; column--){
+        for(int column = 0; column <= 7; column++){
             if((rows + column) % 2 == 0){
                 std::wcout << BLACK_BG;
             } else{

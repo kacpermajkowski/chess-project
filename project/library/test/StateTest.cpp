@@ -1,4 +1,5 @@
 #include <boost/test/unit_test.hpp>
+#include <utility>
 #include "model/State.h"
 #include "model/UnitDir/Pawn.h"
 #include "model/exceptions/GameAlreadyFinishedException.h"
@@ -45,6 +46,17 @@ struct TestSuiteStateFixture {
 
 };
 
+class StateFriend{
+private:
+    StatePtr state;
+
+public:
+    explicit StateFriend(StatePtr state) : state(std::move(state)) {}
+    void changeTurn(){
+        state->changeTurn();
+    }
+};
+
 
 BOOST_FIXTURE_TEST_SUITE(TestSuiteState, TestSuiteStateFixture)
 
@@ -76,6 +88,26 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteState, TestSuiteStateFixture)
         BOOST_TEST(state->hasConcluded() == true);
 
         BOOST_CHECK_THROW(state->conclude(WHITE_WINS), GameAlreadyFinishedException);
+    }
+
+    BOOST_AUTO_TEST_CASE(TestIsCheckState){
+        FieldPtr blackKingField = std::make_shared<Field>(std::make_shared<Position>(D, _1), std::make_shared<King>(WHITE));
+
+        BoardPtr caseBoard = std::make_shared<Board>(std::vector<FieldPtr> {
+            blackKingField,
+            std::make_shared<Field>(std::make_shared<Position>(D, _6), std::make_shared<Queen>(WHITE)),
+            std::make_shared<Field>(std::make_shared<Position>(D, _8), std::make_shared<King>(BLACK)),
+        });
+        StatePtr state = std::make_shared<State>(caseBoard);
+        StateFriend stateFriend(state);
+        BOOST_TEST(state->isCheck(BLACK));
+
+        if(state->getTurn() == WHITE){
+            BOOST_TEST(!state->isCheck());
+            stateFriend.changeTurn();
+        }
+
+        BOOST_TEST(state->isCheck());
     }
 
     BOOST_AUTO_TEST_CASE(TestMoveUnitToEmptyField){
