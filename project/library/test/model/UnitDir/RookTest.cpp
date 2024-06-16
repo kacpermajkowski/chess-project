@@ -1,9 +1,9 @@
 
 #include <boost/test/unit_test.hpp>
-#include "model/UnitDir/Rook.h"
+#include "model/unit/Rook.h"
 #include "model/State.h"
-#include "model/UnitDir/Queen.h"
-#include "model/UnitDir/Knight.h"
+#include "model/unit/Queen.h"
+#include "model/unit/Knight.h"
 
 using namespace std;
 

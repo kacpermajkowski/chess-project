@@ -1,4 +1,4 @@
-#include "model/PlayerDir/Player.h"
+#include "model/player/Player.h"
 
 Player::Player(PlayerColor color) : color(color) {};
 Player::~Player() {};

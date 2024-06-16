@@ -4,11 +4,11 @@
 #include <iostream>
 #include <utility>
 #include <algorithm>
-#include "model/UnitDir/Pawn.h"
-#include "model/UnitDir/King.h"
+#include "model/unit/Pawn.h"
+#include "model/unit/King.h"
 #include "model/exceptions/GameAlreadyFinishedException.h"
 #include "model/exceptions/IllegalMoveException.h"
-#include "model/UnitDir/Queen.h"
+#include "model/unit/Queen.h"
 #include "../src/model/util/util.cpp"
 #include "model/exceptions/StateIntegrityException.h"
 

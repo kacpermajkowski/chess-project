@@ -1,4 +1,4 @@
-#include "model/UnitDir/King.h"
+#include "model/unit/King.h"
 #include "model/State.h"
 
 King::King(PlayerColor color) : Unit(color) {}

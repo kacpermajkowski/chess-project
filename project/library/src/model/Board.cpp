@@ -1,12 +1,12 @@
 #include <map>
 #include <utility>
 #include "model/Board.h"
-#include "model/UnitDir/Rook.h"
-#include "model/UnitDir/Knight.h"
-#include "model/UnitDir/Bishop.h"
-#include "model/UnitDir/King.h"
-#include "model/UnitDir/Queen.h"
-#include "model/UnitDir/Pawn.h"
+#include "model/unit/Rook.h"
+#include "model/unit/Knight.h"
+#include "model/unit/Bishop.h"
+#include "model/unit/King.h"
+#include "model/unit/Queen.h"
+#include "model/unit/Pawn.h"
 #include "model/exceptions/StateIntegrityException.h"
 #include "../src/model/util/util.cpp"
 

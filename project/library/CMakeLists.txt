@@ -2,16 +2,16 @@ cmake_minimum_required(VERSION 3.4)
 project(Library)
 
 set(SOURCE_FILES
-        src/model/UnitDir/Unit.cpp
-        src/model/UnitDir/King.cpp
-        src/model/UnitDir/Rook.cpp
-        src/model/UnitDir/Pawn.cpp
-        src/model/UnitDir/Knight.cpp
-        src/model/UnitDir/Queen.cpp
-        src/model/UnitDir/Bishop.cpp
-        src/model/PlayerDir/Player.cpp
-        src/model/PlayerDir/HumanPlayer.cpp
-        src/model/PlayerDir/ComputerPlayer.cpp
+        src/model/unit/Unit.cpp
+        src/model/unit/King.cpp
+        src/model/unit/Rook.cpp
+        src/model/unit/Pawn.cpp
+        src/model/unit/Knight.cpp
+        src/model/unit/Queen.cpp
+        src/model/unit/Bishop.cpp
+        src/model/player/Player.cpp
+        src/model/player/HumanPlayer.cpp
+        src/model/player/ComputerPlayer.cpp
         src/model/State.cpp
         src/model/Game.cpp
         src/model/Board.cpp

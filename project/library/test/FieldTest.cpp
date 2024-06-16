@@ -1,7 +1,7 @@
 #include <boost/test/unit_test.hpp>
 #include "model/Field.h"
 
-#include "model/UnitDir/Queen.h"
+#include "model/unit/Queen.h"
 
 
 struct TestSuiteFieldFixture {

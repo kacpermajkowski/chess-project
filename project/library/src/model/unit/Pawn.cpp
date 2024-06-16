@@ -1,5 +1,5 @@
 #include <iostream>
-#include "model/UnitDir/Pawn.h"
+#include "model/unit/Pawn.h"
 #include "model/State.h"
 #include "../src/model/util/util.cpp"
 

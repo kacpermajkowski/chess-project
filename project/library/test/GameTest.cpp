@@ -3,8 +3,8 @@
 
 #include "model/ui/TextUI.h"
 
-#include "model/PlayerDir/ComputerPlayer.h"
-#include "model/PlayerDir/HumanPlayer.h"
+#include "model/player/ComputerPlayer.h"
+#include "model/player/HumanPlayer.h"
 
 
 struct TestSuiteGameFixture {

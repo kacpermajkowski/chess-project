@@ -1,4 +1,4 @@
-#include "model/UnitDir/Rook.h"
+#include "model/unit/Rook.h"
 #include "model/State.h"
 
 Rook::Rook(PlayerColor color) : Unit(color) {}

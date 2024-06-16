@@ -1,6 +1,6 @@
 #include <stdexcept>
 #include <iostream>
-#include "model/UnitDir/Unit.h"
+#include "model/unit/Unit.h"
 #include "model/State.h"
 #include "../src/model/util/util.cpp"
 

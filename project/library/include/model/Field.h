@@ -2,7 +2,7 @@
 #define CHESSPROJECT_FIELD_H
 
 #include "Position.h"
-#include "UnitDir/Unit.h"
+#include "unit/Unit.h"
 
 class Field : public std::enable_shared_from_this<Field>{
 

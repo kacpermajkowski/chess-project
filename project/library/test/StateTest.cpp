@@ -1,11 +1,11 @@
 #include <boost/test/unit_test.hpp>
 #include <utility>
 #include "model/State.h"
-#include "model/UnitDir/Pawn.h"
+#include "model/unit/Pawn.h"
 #include "model/exceptions/GameAlreadyFinishedException.h"
 #include "model/move/Move.h"
-#include "model/UnitDir/Queen.h"
-#include "model/UnitDir/Rook.h"
+#include "model/unit/Queen.h"
+#include "model/unit/Rook.h"
 
 struct TestSuiteStateFixture {
 

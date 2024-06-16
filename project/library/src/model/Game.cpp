@@ -2,7 +2,7 @@
 #include <utility>
 #include <iostream>
 #include "model/Game.h"
-#include "model/PlayerDir/HumanPlayer.h"
+#include "model/player/HumanPlayer.h"
 
 Game::~Game() {}
 

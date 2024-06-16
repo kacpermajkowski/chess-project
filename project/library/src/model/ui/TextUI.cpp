@@ -2,16 +2,16 @@
 #include <typeinfo>
 #include "model/ui/TextUI.h"
 
-#include "model/UnitDir/King.h"
-#include "model/UnitDir/Queen.h"
-#include "model/UnitDir/Rook.h"
-#include "model/UnitDir/Bishop.h"
-#include "model/UnitDir/Knight.h"
-#include "model/UnitDir/Pawn.h"
+#include "model/unit/King.h"
+#include "model/unit/Queen.h"
+#include "model/unit/Rook.h"
+#include "model/unit/Bishop.h"
+#include "model/unit/Knight.h"
+#include "model/unit/Pawn.h"
 #include "model/State.h"
 #include "../src/model/util/util.cpp"
-#include "model/PlayerDir/HumanPlayer.h"
-#include "model/PlayerDir/ComputerPlayer.h"
+#include "model/player/HumanPlayer.h"
+#include "model/player/ComputerPlayer.h"
 
 #include <locale>
 #include <codecvt>

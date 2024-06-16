@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "Field.h"
-#include "model/UnitDir/King.h"
+#include "model/unit/King.h"
 #include <algorithm>
 
 class Board : public std::enable_shared_from_this<Board>{

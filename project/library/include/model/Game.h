@@ -1,7 +1,7 @@
 #ifndef CHESSPROJECT_GAME_H
 #define CHESSPROJECT_GAME_H
 
-#include "PlayerDir/Player.h"
+#include "player/Player.h"
 #include "State.h"
 #include "typedefs.h"
 #include "model/ui/UI.h"

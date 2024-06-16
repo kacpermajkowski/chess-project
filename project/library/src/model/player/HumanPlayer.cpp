@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <limits>
-#include "model/PlayerDir/HumanPlayer.h"
+#include "model/player/HumanPlayer.h"
 #include "model/exceptions/StateIntegrityException.h"
 #include "model/Game.h"
 

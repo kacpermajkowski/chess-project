@@ -1,9 +1,9 @@
 //
 //#include <boost/test/unit_test.hpp>
-//#include "model/UnitDir/Knight.h"
+//#include "model/unit/Knight.h"
 //#include "model/State.h"
-//#include "model/UnitDir/Rook.h"
-//#include "model/UnitDir/Rook.h"
+//#include "model/unit/Rook.h"
+//#include "model/unit/Rook.h"
 //
 //using namespace std;
 //

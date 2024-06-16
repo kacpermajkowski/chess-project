@@ -1,5 +1,5 @@
 #include <cstdlib>
-#include "model/PlayerDir/ComputerPlayer.h"
+#include "model/player/ComputerPlayer.h"
 #include "model/exceptions/NoMoveToChooseFromException.h"
 #include "model/exceptions/StateIntegrityException.h"
 #include "model/Game.h"

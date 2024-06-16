@@ -1,4 +1,4 @@
-#include "model/UnitDir/Knight.h"
+#include "model/unit/Knight.h"
 #include "model/State.h"
 
 Knight::Knight(PlayerColor color) : Unit(color) {}

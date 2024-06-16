@@ -3,8 +3,8 @@
 #include <iostream>
 #include "../../library/include/typedefs.h"
 #include "../../library/include/model/Game.h"
-#include "../../library/include/model/PlayerDir/HumanPlayer.h"
-#include "../../library/include/model/PlayerDir/ComputerPlayer.h"
+#include "../../library/include/model/player/HumanPlayer.h"
+#include "../../library/include/model/player/ComputerPlayer.h"
 #include "../../library/include/model/ui/TextUI.h"
 #include "model/exceptions/StateIntegrityException.h"
 

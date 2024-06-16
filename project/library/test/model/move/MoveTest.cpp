@@ -1,7 +1,7 @@
 #include <boost/test/unit_test.hpp>
 #include "model/move/Move.h"
-#include "model/UnitDir/Queen.h"
-#include "model/UnitDir/Bishop.h"
+#include "model/unit/Queen.h"
+#include "model/unit/Bishop.h"
 
 struct TestSuiteMoveFixture {
 
