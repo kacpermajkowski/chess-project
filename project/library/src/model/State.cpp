@@ -228,8 +228,8 @@ bool State::isAttacked(const FieldPtr& field, PlayerColor defender) {
 
     for(const auto& potentialAttacker : board->getUnits()){
         if (potentialAttacker->getColor() != defender) {
-            std::vector<MovePtr> potentialAttacks = potentialAttacker->getAttackCoverage(shared_from_this());
-            for (const MovePtr& potentialAttack: potentialAttacks) {
+            std::vector<MovePtr> attackCoverage = potentialAttacker->getAttackCoverage(shared_from_this());
+            for (const MovePtr& potentialAttack: attackCoverage) {
                 if (potentialAttack->getTargetField() == field)
                     return true;
             }
@@ -255,10 +255,7 @@ std::vector<MovePtr> State::getLegalMoves(PlayerColor color) {
 
 bool State::isCheck(PlayerColor kingColor) {
     FieldPtr kingField = board->getKingField(kingColor);
-    if(kingField != nullptr){
-        return isAttacked(kingField, kingColor);
-    } else return false;
-    //TODO: Throw exception, because in State there should always be two kings, one of each on the board
+    return isAttacked(kingField, kingColor);
 }
 
 const std::vector<MovePtr> & State::getMoveHistory() const {

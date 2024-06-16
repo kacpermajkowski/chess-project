@@ -69,7 +69,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteBishop, TestSuiteBishopFixture)
                 make_shared<MoveVector>(-7,7),
         };
 
-        auto possibleMoves = whiteBishop->getPossibleMoves();
+        auto possibleMoves = whiteBishop->getBranchesOfPossibleMoveVectors();
         int possibleMovesCummulativeSize = 0;
         for(const auto& branch : possibleMoves){
             possibleMovesCummulativeSize +=  branch.size();

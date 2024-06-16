@@ -3,7 +3,7 @@
 
 Queen::Queen(PlayerColor color) : Unit(color) {}
 
-std::vector<std::vector<MoveVectorPtr>> Queen::getPossibleMoves() {
+std::vector<std::vector<MoveVectorPtr>> Queen::getBranchesOfPossibleMoveVectors() {
     std::vector<std::vector<MoveVectorPtr>> moves;
 
     std::vector<MoveVectorPtr> topRight;

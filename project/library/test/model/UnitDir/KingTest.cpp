@@ -53,7 +53,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteKing, TestSuiteKingFixture)
                 make_shared<MoveVector>(0,-1),
         };
 
-        auto possibleMoves = whiteKing->getPossibleMoves();
+        auto possibleMoves = whiteKing->getBranchesOfPossibleMoveVectors();
         int possibleMovesCummulativeSize = 0;
         for(const auto& branch : possibleMoves){
             possibleMovesCummulativeSize +=  branch.size();

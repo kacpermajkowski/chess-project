@@ -9,11 +9,11 @@ private:
 public:
     explicit Pawn(PlayerColor color);
 
-    std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() override;
+    std::vector<std::vector<MoveVectorPtr>> getBranchesOfPossibleMoveVectors() override;
 
     std::vector<MovePtr> getLegalMoves(const StatePtr &state) override;
 
-    std::vector<MovePtr> getAttackCoverage(StatePtr state) override;
+    std::vector<MovePtr> getAttackCoverage(const StatePtr &state) override;
 };
 
 

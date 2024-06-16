@@ -1,15 +1,14 @@
 #include <cstdlib>
 #include "model/PlayerDir/HumanPlayer.h"
+#include "model/exceptions/StateIntegrityException.h"
 
 HumanPlayer::HumanPlayer(PlayerColor color) : Player(color) {}
 
 MovePtr HumanPlayer::chooseAMove(std::vector<MovePtr> legalMoves) {
     //TODO: Get input from player;
-    if(legalMoves.size() > 0){
+    if(!legalMoves.empty()){
         int moveNumber = (rand()%legalMoves.size());
         return legalMoves[moveNumber];
-    } //TODO: else throw
-    //TODO: If legal moves is 0 then conclude stalemate
-    return nullptr;
+    } throw StateIntegrityException("There should be at least one legal move if the game has not concluded yet.");
 }
 

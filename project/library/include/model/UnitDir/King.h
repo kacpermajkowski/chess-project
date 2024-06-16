@@ -8,7 +8,7 @@ public:
 
     explicit King(PlayerColor color);
 
-    std::vector<std::vector<MoveVectorPtr>> getPossibleMoves();
+    std::vector<std::vector<MoveVectorPtr>> getBranchesOfPossibleMoveVectors();
 
     std::vector<MovePtr> getLegalMoves(const StatePtr &state) override;
 

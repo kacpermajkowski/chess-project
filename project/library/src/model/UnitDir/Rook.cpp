@@ -3,7 +3,7 @@
 
 Rook::Rook(PlayerColor color) : Unit(color) {}
 
-std::vector<std::vector<MoveVectorPtr>> Rook::getPossibleMoves() {
+std::vector<std::vector<MoveVectorPtr>> Rook::getBranchesOfPossibleMoveVectors() {
     std::vector<std::vector<MoveVectorPtr>> moves;
 
     std::vector<MoveVectorPtr> down;

@@ -8,7 +8,7 @@ public:
 
     explicit Rook(PlayerColor color);
 
-    std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() override;
+    std::vector<std::vector<MoveVectorPtr>> getBranchesOfPossibleMoveVectors() override;
 
     std::vector<MovePtr> getLegalMoves(const StatePtr &state) override;
 

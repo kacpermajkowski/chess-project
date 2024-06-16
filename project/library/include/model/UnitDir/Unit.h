@@ -16,14 +16,19 @@ public:
     PlayerColor getColor();
 
     virtual std::vector<MovePtr> getLegalMoves(const StatePtr &state);
-    virtual std::vector<std::vector<MoveVectorPtr>> getPossibleMoves() = 0;
-    virtual std::vector<MovePtr> getAttackCoverage(StatePtr state);
+    virtual std::vector<std::vector<MoveVectorPtr>> getBranchesOfPossibleMoveVectors() = 0;
+    virtual std::vector<MovePtr> getAttackCoverage(const StatePtr &state);
 
     std::vector<MovePtr> getCheckBreakingMoves(const StatePtr& state);
 
     FieldPtr getCurrentField(const StatePtr& state);
 
-    std::vector<MovePtr> getLegalMovesNoCheck(const StatePtr& state);
+    std::vector<MovePtr> getLegalMovesAssumeNoCheck(const StatePtr& state);
+
+    std::vector<std::vector<PositionPtr>> generatePositionBranches(const StatePtr &state);
+
+    std::vector<std::vector<MovePtr>>
+    getMoveBranchesIncludeOccupiedFields(const StatePtr &state);
 };
 
 

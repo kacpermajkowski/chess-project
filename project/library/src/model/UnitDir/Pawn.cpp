@@ -2,7 +2,7 @@
 #include "model/UnitDir/Pawn.h"
 #include "model/State.h"
 
-std::vector<std::vector<MoveVectorPtr>> Pawn::getPossibleMoves() {
+std::vector<std::vector<MoveVectorPtr>> Pawn::getBranchesOfPossibleMoveVectors() {
     std::vector<std::vector<MoveVectorPtr>> moves;
     if(getColor() == WHITE){
         moves.push_back(std::vector<MoveVectorPtr> {
@@ -29,7 +29,7 @@ std::vector<MovePtr> Pawn::getLegalMoves(const StatePtr &state) {
     PositionPtr currentPosition = currentField->getPosition();
 
     //Dla każdej gałęzi ruchów (gałąź ruchu to jeden kierunek, np. wieża może się poruszać w górę, dół, lewo, prawo)
-    for(std::vector<MoveVectorPtr> moveVectorsBranch : getPossibleMoves()){
+    for(std::vector<MoveVectorPtr> moveVectorsBranch : getBranchesOfPossibleMoveVectors()){
         // Dla każdego ruchu w zadanej gałęzi
         for(MoveVectorPtr moveVector : moveVectorsBranch){
 
@@ -58,9 +58,11 @@ std::vector<MovePtr> Pawn::getLegalMoves(const StatePtr &state) {
             else {
                 //Jeżeli bijemy tam gdzie idziemy
                 if(targetField->getUnit() != nullptr){
-                    MovePtr move = std::make_shared<Move>(currentField, targetField);
-                    move->setAction(std::make_shared<Action>(CAPTURE, targetField));
-                    legalMoves.push_back(move);
+                    if(targetField->isOccupiedByEnemy(shared_from_this())) {
+                        MovePtr move = std::make_shared<Move>(currentField, targetField);
+                        move->setAction(std::make_shared<Action>(CAPTURE, targetField));
+                        legalMoves.push_back(move);
+                    }
                 }
                 //Jeżeli nie bijemy tam, gdzie idziemy, to sprawdzamy, czy ma miejsce bicie w przelocie
                 else {
@@ -125,15 +127,15 @@ std::vector<MovePtr> Pawn::getLegalMoves(const StatePtr &state) {
 //    return legalMoves;
 }
 
-std::vector<MovePtr> Pawn::getAttackCoverage(StatePtr state) {
-    std::vector<MovePtr> preLegalMoves = Unit::getLegalMovesNoCheck(state);
-    std::vector<MovePtr> legalMoves;
-    for(const MovePtr& move : preLegalMoves) {
+std::vector<MovePtr> Pawn::getAttackCoverage(const StatePtr &state) {
+    std::vector<MovePtr> generalizedAttackCoverage = Unit::getAttackCoverage(state);
+    std::vector<MovePtr> pawnAttackCoverage;
+    for(const MovePtr& move : generalizedAttackCoverage) {
         if(move->getTargetField()->getPosition()->getLetterIndex() != move->getCurrentField()->getPosition()->getLetterIndex()){
-            legalMoves.push_back(move);
+            pawnAttackCoverage.push_back(move);
         }
     }
-    return legalMoves;
+    return pawnAttackCoverage;
 }
 
 Pawn::Pawn(PlayerColor color) : Unit(color) {

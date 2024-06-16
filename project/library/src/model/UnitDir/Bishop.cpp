@@ -3,7 +3,7 @@
 
 Bishop::Bishop(PlayerColor color) : Unit(color) {}
 
-std::vector<std::vector<MoveVectorPtr>> Bishop::getPossibleMoves() {
+std::vector<std::vector<MoveVectorPtr>> Bishop::getBranchesOfPossibleMoveVectors() {
     std::vector<std::vector<MoveVectorPtr>> moves;
 
     std::vector<MoveVectorPtr> topRight;
