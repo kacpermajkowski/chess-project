@@ -95,6 +95,17 @@ void TextUI::endGameScreen(StatePtr state) {
     wcout << (conclusionNames[state->getConclusion()]);
 }
 
+wchar_t TextUI::getFromUser(map<wchar_t, wchar_t> ranges){
+    wchar_t input;
+    while(true){
+        wcin >> input;
+        for(auto kv : ranges)
+            if(input >= kv.first && input <= kv.second)
+                return input;
+        wcout << "Nieprawidlowa wartosc. Wybierz ponownie: ";
+    }
+}
+
 wchar_t TextUI::getFromUser(wchar_t begin, wchar_t end){
     wchar_t input;
     while(true){

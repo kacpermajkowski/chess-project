@@ -4,28 +4,39 @@
 #include "model/player/HumanPlayer.h"
 #include "model/exceptions/StateIntegrityException.h"
 #include "model/Game.h"
+#include <map>
 
 using namespace std;
 
-HumanPlayer::HumanPlayer(PlayerColor color) : Player(color) {}
+HumanPlayer::HumanPlayer(PlayerColor color) : Player(color) {
+    srand(time(nullptr));
+}
 
 LetterIndex getLetterIndexFrom(wchar_t c){
     switch(c){
         case L'A':
+        case L'a':
             return A;
         case L'B':
+        case L'b':
             return B;
         case L'C':
+        case L'c':
             return C;
         case L'D':
+        case L'd':
             return D;
         case L'E':
+        case L'e':
             return E;
         case L'F':
+        case L'f':
             return F;
         case L'G':
+        case L'g':
             return G;
         case L'H':
+        case L'h':
             return H;
         default:
             throw invalid_argument("Provided wchar_t does not correspond to any LetterIndex");
@@ -57,41 +68,38 @@ NumberIndex getNumberIndexFrom(wchar_t c){
 
 MovePtr HumanPlayer::chooseAMove(const GamePtr &game) {
     UIPtr ui = game->getUI();
-    std::vector<MovePtr> legalMoves = game->getState()->getLegalMoves();
+    vector<MovePtr> legalMoves = game->getState()->getLegalMoves();
     if(!legalMoves.empty()){
         while(true){
-            std::wcout << std::endl << L"Grasz jako " << (getColor() == WHITE ? L"BIAŁE" : L"CZARNE") << endl;
-            std::wcout << std::endl << L"Wybierz kolumne, z której chcesz się ruszyć: (A-H): ";
-            wchar_t moveFromColumn = ui->getFromUser(L'A', L'H');
-            LetterIndex moveFromColumnIndex = getLetterIndexFrom(moveFromColumn);
+            int moveNumber = (rand() % legalMoves.size());
+            wchar_t fromLetter = L'A' + legalMoves[moveNumber]->getCurrentField()->getPosition()->getLetterIndex();
+            wchar_t fromNumber = L'1' + legalMoves[moveNumber]->getCurrentField()->getPosition()->getNumberIndex();
+            wchar_t toLetter = L'A' + legalMoves[moveNumber]->getTargetField()->getPosition()->getLetterIndex();
+            wchar_t toNumber = L'1' + legalMoves[moveNumber]->getTargetField()->getPosition()->getNumberIndex();
 
-            std::wcout << L"Wybierz rząd, z którego chcesz się ruszyć: (1-8): ";
-            wchar_t moveFromRow = ui->getFromUser(L'1', L'8');
-            NumberIndex moveFromRowIndex = getNumberIndexFrom(moveFromRow);
+            wcout << endl << L"Grasz jako " << (getColor() == WHITE ? L"BIAŁE" : L"CZARNE") << endl;
+            wcout << L"Wybierz ruch (np. " << fromLetter << fromNumber << toLetter << toNumber << L"): ";
+
+            map<wchar_t,wchar_t> letterRanges = map<wchar_t,wchar_t>{{L'a', L'h'}, {L'A', L'H'}};
+            LetterIndex moveFromColumnIndex = getLetterIndexFrom(ui->getFromUser(letterRanges));
+            NumberIndex moveFromRowIndex = getNumberIndexFrom(ui->getFromUser(L'1', L'8'));
+            LetterIndex moveToColumnIndex = getLetterIndexFrom(ui->getFromUser(letterRanges));
+            NumberIndex moveToRowIndex = getNumberIndexFrom(ui->getFromUser(L'1', L'8'));
+
+            wcin.ignore(numeric_limits<streamsize>::max(), L'\n');
+            wcout << endl;
 
             PositionPtr from = make_shared<Position>(moveFromColumnIndex, moveFromRowIndex);
-
-
-            std::wcout << L"Wybierz kolumne, do której chcesz się ruszyć: (A-H): ";
-            wchar_t moveToColumn = ui->getFromUser(L'A', L'H');
-            LetterIndex moveToColumnIndex = getLetterIndexFrom(moveToColumn);
-
-            std::wcout << L"Wybierz rząd, do którego chcesz się ruszyć: (1-8): ";
-            wchar_t moveToRow = ui->getFromUser(L'1', L'8');
-            NumberIndex moveToRowIndex = getNumberIndexFrom(moveToRow);
-
             PositionPtr to = make_shared<Position>(moveToColumnIndex, moveToRowIndex);
 
-            std::wcin.ignore(std::numeric_limits<std::streamsize>::max(), L'\n');
-
             for(auto move : legalMoves){
-                PositionPtr targetPostion = move->getTargetField()->getPosition();
-                PositionPtr currentPostion = move->getCurrentField()->getPosition();
-                if(currentPostion->equals(from) && targetPostion->equals(to))
+                PositionPtr targetPosition = move->getTargetField()->getPosition();
+                PositionPtr currentPosition = move->getCurrentField()->getPosition();
+                if(currentPosition->equals(from) && targetPosition->equals(to))
                     return move;
             }
 
-            std::wcout << L"Podany ruch nie jest dozwolony. Wybierz inny. ";
+            wcout << L"Podany ruch nie jest dozwolony. Wybierz inny. ";
         }
     } throw StateIntegrityException("There should be at least one legal move if the game has not concluded yet.");
 }
