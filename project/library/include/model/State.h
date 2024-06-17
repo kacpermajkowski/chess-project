@@ -15,7 +15,6 @@ private:
     unsigned int fiftyMoveRuleCounter = 0;
     Conclusion conclusion = IN_PROGRESS;
     PlayerColor turn = WHITE;
-    bool check = false;
     std::vector<UnitPtr> takenPieces;
     BoardPtr board;
 
