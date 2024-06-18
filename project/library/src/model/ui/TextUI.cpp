@@ -9,7 +9,7 @@
 #include "model/unit/Knight.h"
 #include "model/unit/Pawn.h"
 #include "model/State.h"
-#include "../src/model/util/util.cpp"
+#include "../../libpointercomparison/lib.cpp"
 #include "model/player/HumanPlayer.h"
 #include "model/player/ComputerPlayer.h"
 

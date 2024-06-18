@@ -9,7 +9,7 @@
 #include "model/exceptions/GameAlreadyFinishedException.h"
 #include "model/exceptions/IllegalMoveException.h"
 #include "model/unit/Queen.h"
-#include "../src/model/util/util.cpp"
+#include "../../libpointercomparison/lib.cpp"
 #include "model/exceptions/StateIntegrityException.h"
 
 State::State() {
@@ -290,7 +290,10 @@ BoardPtr State::getBoard() const {
 }
 
 MovePtr State::getLastMove() {
-    return moveHistory.back();
+    if(!moveHistory.empty())
+        return moveHistory.back();
+    else
+        return nullptr;
 }
 
 bool State::hasConcluded() const {

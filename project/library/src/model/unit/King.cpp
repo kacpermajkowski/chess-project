@@ -2,7 +2,7 @@
 #include "model/unit/King.h"
 #include "model/State.h"
 #include "model/unit/Rook.h"
-#include "../src/model/util/util.cpp"
+#include "../../libpointercomparison/lib.cpp"
 
 King::King(PlayerColor color) : Unit(color) {}
 
