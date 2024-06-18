@@ -67,35 +67,20 @@ std::vector<MovePtr> Pawn::getLegalMoves(const StatePtr &state) {
                 }
                 //Jeżeli nie bijemy tam, gdzie idziemy, to sprawdzamy, czy ma miejsce bicie w przelocie
                 else {
-                    int enPassantRowOffset = (getColor() == WHITE) ? -1 : 1;
-
-                    FieldPtr actionField = state->getBoard()->getField(
-                            std::make_shared<Position>(
-                                    currentPosition->getLetterIndex(),
-                                    NumberIndex(currentPosition->getNumberIndex()+enPassantRowOffset)
-                            )
-                    );
-                    //Jeżeli pod polem, na które się ruszamy jest niepuste pole
-                    if(actionField != nullptr){
-                        if(actionField->isOccupied()){
-                            UnitPtr actionUnit = actionField->getUnit();
-                            //Jezeli jest to wrogi pion
-                            if(actionUnit->getColor() != getColor()){
-                                //Jeżeli pod polem znajduje się pion
-                                if(isTypeOf<Pawn>(actionUnit)){
-                                    //Jeżeli pion poruszył się w poprzednim ruchu
-                                    if(state->getLastMove()->getMovedUnit() == actionUnit){
-                                        PositionPtr startPos = state->getLastMove()->getCurrentField()->getPosition();
-                                        int moveRowOffset = startPos->getNumberIndex() - actionField->getPosition()->getNumberIndex();
-                                        if(moveRowOffset == 2 || moveRowOffset == -2){
-                                            //TODO: catch exception from Action
-                                            try {
-                                                MovePtr move = std::make_shared<Move>(currentField, targetField);
-                                                move->setAction(std::make_shared<Action>(CAPTURE, actionField));
-                                                legalMoves.push_back(move);
-                                            } catch (std::invalid_argument& e ){
-                                                std::wcout << e.what();
-                                            }
+                    int enPassantRowOffset = (getColor() == WHITE ? -1: 1);
+                    MovePtr lastMoveInGame = state->getLastMove();
+                    if(lastMoveInGame != nullptr) {
+                        if (isTypeOf<Pawn>(lastMoveInGame->getMovedUnit())) {
+                            if (lastMoveInGame->getMovedUnit()->getColor() != getColor()) {
+                                PositionPtr enemyPawnPos = lastMoveInGame->getTargetField()->getPosition();
+                                if (enemyPawnPos->getNumberIndex() == (getColor() == WHITE ? _5 : _4)) {
+                                    if (enemyPawnPos->getLetterIndex() == targetPosition->getLetterIndex()) {
+                                        if (targetPosition->getNumberIndex() + enPassantRowOffset ==
+                                            enemyPawnPos->getNumberIndex()) {
+                                            MovePtr move = std::make_shared<Move>(currentField, targetField);
+                                            move->setAction(std::make_shared<Action>(CAPTURE,
+                                                                                     lastMoveInGame->getTargetField()));
+                                            legalMoves.push_back(move);
                                         }
                                     }
                                 }

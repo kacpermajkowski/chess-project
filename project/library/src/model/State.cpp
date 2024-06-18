@@ -290,7 +290,10 @@ BoardPtr State::getBoard() const {
 }
 
 MovePtr State::getLastMove() {
-    return moveHistory.back();
+    if(!moveHistory.empty())
+        return moveHistory.back();
+    else
+        return nullptr;
 }
 
 bool State::hasConcluded() const {
