@@ -24,7 +24,6 @@ public:
      * @brief Applies a move vector to the current position and returns a new position
      * @param vector Pointer to the move vector to apply
      * @return Pointer to the new Position object
-     * @check
      */
     PositionPtr applyMoveVector(MoveVectorPtr vector) const;
 
@@ -42,7 +41,6 @@ public:
      * @brief Checks if this position is equal to another position
      * @param position Pointer to the position to compare against
      * @return true if the positions are equal, false otherwise
-     * @check
      */
     bool equals(const PositionPtr& position) const noexcept;
 };
