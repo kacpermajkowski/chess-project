@@ -3,6 +3,7 @@
 
 #include <memory>
 
+// Forward declarations for classes used in shared pointers
 class Unit;
 class Position;
 class State;
@@ -15,6 +16,7 @@ class MoveVector;
 class Action;
 class Game;
 
+// Shared pointer typedefs for various classes
 typedef std::shared_ptr<Unit> UnitPtr;
 typedef std::shared_ptr<Player> PlayerPtr;
 typedef std::shared_ptr<Board> BoardPtr;
@@ -28,22 +30,26 @@ typedef std::shared_ptr<Action> ActionPtr;
 typedef std::shared_ptr<Game> GamePtr;
 
 
+// Enum defining different types of actions
 enum ActionType{
     CAPTURE,
     CASTLE,
     PROMOTION
 };
 
+// Enum defining types of castle moves
 enum CastleType{
     SHORT_CASTLE,
     LONG_CASTLE
 };
 
+// Enum defining player colors
 enum PlayerColor{
     BLACK,
     WHITE
 };
 
+// Enum defining types of promotion during a pawn promotion
 enum PromotionType{
     KNIGHT,
     ROOK,
@@ -51,6 +57,7 @@ enum PromotionType{
     BISHOP
 };
 
+// Enum defining different game conclusions
 enum Conclusion{
     IN_PROGRESS,
     DRAW,
@@ -63,6 +70,7 @@ enum Conclusion{
     AGREED_DRAW
 };
 
+// Enum defining letter indices for chess board columns
 enum LetterIndex{
     A = 0,
     B = 1,
@@ -74,6 +82,7 @@ enum LetterIndex{
     H = 7
 };
 
+// Enum defining number indices for chess board rows
 enum NumberIndex{
     _1 = 0,
     _2 = 1,
@@ -85,11 +94,5 @@ enum NumberIndex{
     _8 = 7
 };
 
-
-enum GameType{
-    PVP,
-    PVE,
-    EVE
-};
 
 #endif //CHESSPROJECT_TYPEDEFS_H
