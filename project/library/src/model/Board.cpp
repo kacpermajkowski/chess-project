@@ -8,7 +8,7 @@
 #include "model/unit/Queen.h"
 #include "model/unit/Pawn.h"
 #include "model/exceptions/StateIntegrityException.h"
-#include "../src/model/util/util.cpp"
+#include "../../libpointercomparison/lib.cpp"
 
 FieldPtr Board::getField(PositionPtr position) const {
     for(FieldPtr f : fields){

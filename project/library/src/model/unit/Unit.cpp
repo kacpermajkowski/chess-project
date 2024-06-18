@@ -2,7 +2,7 @@
 #include <iostream>
 #include "model/unit/Unit.h"
 #include "model/State.h"
-#include "../src/model/util/util.cpp"
+#include "../../libpointercomparison/lib.cpp"
 
 Unit::Unit(PlayerColor color) : color(color) {};
 Unit::~Unit() = default;

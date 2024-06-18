@@ -22,7 +22,6 @@ set(SOURCE_FILES
         src/model/move/MoveVector.cpp
         src/model/move/Action.cpp
         include/typedefs.h
-        src/model/util/util.cpp
         src/model/exceptions/NoMoveToChooseFromException.cpp
         src/model/exceptions/GameAlreadyFinishedException.cpp
         include/model/exceptions/IllegalMoveException.h
@@ -61,7 +60,6 @@ set(SOURCE_TEST_FILES
         test/model/UnitDir/PawnTest.cpp
         src/model/exceptions/NoMoveToChooseFromException.cpp
         src/model/exceptions/GameAlreadyFinishedException.cpp
-        test/model/util/UtilTest.cpp
         test/model/UnitDir/KingTest.cpp
 )
 
@@ -71,6 +69,7 @@ add_executable (LibraryTester ${SOURCE_TEST_FILES})
 target_link_libraries (LibraryTester
         Library
         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+        LibPointerComparison
 )
 
 #dodaj test LibraryTest. Instrukcji cmake add_test może być wiele.

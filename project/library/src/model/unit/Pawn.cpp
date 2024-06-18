@@ -1,7 +1,7 @@
 #include <iostream>
 #include "model/unit/Pawn.h"
 #include "model/State.h"
-#include "../src/model/util/util.cpp"
+#include "../../libpointercomparison/lib.cpp"
 
 std::vector<std::vector<MoveVectorPtr>> Pawn::getBranchesOfPossibleMoveVectors() {
     std::vector<std::vector<MoveVectorPtr>> moves;
