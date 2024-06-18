@@ -77,6 +77,8 @@ private:
     static void promotePawn(const MovePtr& move);
 
     friend StateFriend;
+
+    static bool isPawnPromotion(const MovePtr& move);
 };
 
 

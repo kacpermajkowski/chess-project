@@ -33,11 +33,7 @@ void State::performAction() {
         case CASTLE:
             moveRookToCastle(action);
             break;
-        case PROMOTION:
-            promotePawn(move);
-            break;
     }
-
 }
 
 void State::captureUnit(const MovePtr &move) {
@@ -45,23 +41,32 @@ void State::captureUnit(const MovePtr &move) {
     move->getAction()->getActionField()->setUnit(nullptr);
 }
 
+bool State::isPawnPromotion(const MovePtr& move){
+    if(isTypeOf<Pawn>(move->getMovedUnit())){
+        if(move->getTargetField()->getPosition()->getNumberIndex() == _8 && move->getMovedUnit()->getColor() == WHITE)
+            return true;
+        else if(move->getTargetField()->getPosition()->getNumberIndex() == _1 && move->getMovedUnit()->getColor() == BLACK)
+            return true;
+    }
+    return false;
+}
+
 void State::promotePawn(const MovePtr& move) {
-    UnitPtr promotedPawn = move->getCurrentField()->getUnit();
+    UnitPtr promotedPawn = move->getTargetField()->getUnit();
     if(isTypeOf<Pawn>(promotedPawn)) {
-        move->getAction()->getActionField()->setUnit(make_shared<Queen>(promotedPawn->getColor()));
+        move->getTargetField()->setUnit(make_shared<Queen>(promotedPawn->getColor()));
     } else throw IllegalMoveException("Cannot promote a Unit that isn't a Pawn");
 }
 
 void State::moveUnitBetweenFields() {
     MovePtr move = getLastMove();
-    if(move->getAction() != nullptr && move->getAction()->getType() == PROMOTION) {
-        move->getCurrentField()->setUnit(nullptr);
-        return;
-    }
 
     if(!move->getTargetField()->isOccupied()){
         move->getTargetField()->setUnit(move->getMovedUnit());
         move->getCurrentField()->setUnit(nullptr);
+        if(isPawnPromotion(move)){
+            promotePawn(move);
+        }
     } else throw StateIntegrityException("Field has to be empty after an action is performed");
 }
 

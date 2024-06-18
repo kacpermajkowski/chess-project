@@ -30,8 +30,7 @@ typedef std::shared_ptr<Game> GamePtr;
 
 enum ActionType{
     CAPTURE,
-    CASTLE,
-    PROMOTION
+    CASTLE
 };
 
 enum CastleType{
