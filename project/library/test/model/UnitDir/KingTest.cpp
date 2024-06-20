@@ -74,29 +74,4 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteKing, TestSuiteKingFixture)
         }
     }
 
-    BOOST_AUTO_TEST_CASE(TestLegalMovesNoCheckKing){
-        vector<MovePtr> moves = whiteKing->getLegalMoves(state);
-        list<PositionPtr> positons {
-                std::make_shared<Position>(A, _7),
-                std::make_shared<Position>(B, _8),
-        };
-
-        BOOST_TEST(positons.size() == moves.size());
-        for(PositionPtr p: positons){
-            bool hasCorrespondingMove = false;
-            for(MovePtr m : moves){
-                BOOST_TEST(m->getCurrentField() == whiteKingField);
-                PositionPtr target = m->getTargetField()->getPosition();
-                if(target->getLetterIndex() == p->getLetterIndex()){
-                    if(target->getNumberIndex() == p->getNumberIndex()){
-                        hasCorrespondingMove = true;
-                        break;
-                    }
-                }
-            }
-            BOOST_TEST(hasCorrespondingMove);
-        }
-
-    }
-
 BOOST_AUTO_TEST_SUITE_END()

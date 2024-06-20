@@ -6,7 +6,7 @@
 #include "model/Position.h"
 #include "model/Field.h"
 #include "model/move/Action.h"
-#include "model/UnitDir/Rook.h"
+#include "model/unit/Rook.h"
 
 using namespace std;
 
